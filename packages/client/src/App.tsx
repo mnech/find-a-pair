@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+import './App.scss'
+import { Profile } from './pages/Profile'
 
 function App() {
   useEffect(() => {
@@ -13,7 +14,9 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return <div className="App">
+    {/*TODO это должно быть в роуте <Profile/>*/}
+  </div>
 }
 
 export default App
