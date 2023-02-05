@@ -1,0 +1,15 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .btn {
+    &.danger {
+      color: #dc3545;
+
+      :hover {
+        color: #bb2d3b;
+      }
+    }
+  }
+}
