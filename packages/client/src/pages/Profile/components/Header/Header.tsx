@@ -24,7 +24,7 @@ const Header = ({ avatar, name }: HeaderProps) => {
       const formData = new FormData();
       formData.set('avatar', file, file.name);
 
-      await UsersController.avatar(formData);
+      await UsersController.updateAvatar(formData);
     }
   };
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import UsersController from '../../../../controllers/UsersController';
-import { Password } from '../../../../types/interfaces';
+import { Password } from '../../../../models/User';
 import { regexpTest } from '../../../../utils/validate';
 
 export interface EditPasswordFormProps {
@@ -34,7 +34,7 @@ const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
     if (!Object.values(validated).every(item => item)) return;
 
     const data = Object.fromEntries(new FormData(form));
-    await UsersController.password(data as unknown as Password);
+    await UsersController.updatePassword(data as unknown as Password);
 
     setIsEditPassword(false);
   };

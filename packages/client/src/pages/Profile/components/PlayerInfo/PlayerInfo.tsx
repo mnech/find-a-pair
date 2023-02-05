@@ -1,5 +1,5 @@
 import { Group } from './components';
-import { UserData } from '../../../../types/interfaces';
+import { UserData } from '../../../../models/User';
 
 export interface PlayerInfoProps {
   data: UserData;

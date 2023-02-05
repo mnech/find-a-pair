@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { UserData } from '../../../../types/interfaces';
+import { UserData } from '../../../../models/User';
 import UsersController from '../../../../controllers/UsersController';
 import { regexpTest } from '../../../../utils/validate';
 
@@ -36,7 +36,7 @@ const EditDataForm = ({ data, setIsEditData }: EditDataFormProps) => {
     if (!Object.values(validated).every(item => item)) return;
 
     const data = Object.fromEntries(new FormData(form));
-    await UsersController.profile(data as unknown as UserData);
+    await UsersController.updateProfile(data as unknown as UserData);
 
     setIsEditData(false);
   };

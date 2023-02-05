@@ -1,22 +1,21 @@
 import UsersAPI from '../api/UsersAPI';
-import { Password, UserData } from '../types/interfaces';
+import { Password, UserData } from '../models/User';
 import ResourcesController from './ResourcesController';
 
 class UsersController {
   private readonly api = new UsersAPI();
 
-  public async profile(data: UserData) {
+  public async updateProfile(data: UserData) {
     await this.request(async () => {
-      const user = await this.api.profile(data);
+      const user = await this.api.updateProfile(data);
 
-      console.log(user);
       // TODO Здесь должены данные пользователя записываться в стор (редакс в будущем)
     });
   }
 
-  public async avatar(data: FormData) {
+  public async updateAvatar(data: FormData) {
     await this.request(async () => {
-      const user = await this.api.avatar(data);
+      const user = await this.api.updateAvatar(data);
 
       // TODO Здесь должены данные пользователя записываться в стор (редакс в будущем)
 
@@ -27,17 +26,17 @@ class UsersController {
     });
   }
 
-  public async password(data: Password) {
+  public async updatePassword(data: Password) {
     await this.request(async () => {
-      await this.api.password(data);
+      await this.api.updatePassword(data);
     });
   }
 
-  public async fetchUser(id: number) {
+  public async requestUser(id: number) {
     await this.api.request({ id });
   }
 
-  public async search(login: string) {
+  public async searchUser(login: string) {
     const users = await this.api.search({ login });
     return users;
   }

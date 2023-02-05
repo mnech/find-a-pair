@@ -1,7 +1,7 @@
 import BaseAPI from './BaseAPI';
 import {
   User, Password, Login, UserData
-} from '../types/interfaces';
+} from '../models/User';
 import { Methods } from './consts';
 
 export default class UsersAPI extends BaseAPI {
@@ -9,7 +9,7 @@ export default class UsersAPI extends BaseAPI {
     super('/user');
   }
 
-  public profile(data: UserData): Promise<User> {
+  public updateProfile(data: UserData): Promise<User> {
     return this.axios({
       method: Methods.Put,
       url: `${this.endpoint}/profile`,
@@ -17,7 +17,7 @@ export default class UsersAPI extends BaseAPI {
     });
   }
 
-  public avatar(data: FormData): Promise<User> {
+  public updateAvatar(data: FormData): Promise<User> {
     return this.axios({
       method: Methods.Put,
       url: `${this.endpoint}/profile/avatar`,
@@ -25,7 +25,7 @@ export default class UsersAPI extends BaseAPI {
     });
   }
 
-  public password(data: Password) {
+  public updatePassword(data: Password) {
     return this.axios({
       method: Methods.Put,
       url: `${this.endpoint}/password`,

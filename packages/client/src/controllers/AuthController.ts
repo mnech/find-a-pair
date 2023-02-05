@@ -1,5 +1,5 @@
 import AuthAPI from '../api/AuthAPI';
-import { SigninData, SignupData } from '../types/interfaces';
+import { SigninData, SignupData } from '../models/User';
 
 class AuthController {
   private readonly api = new AuthAPI();

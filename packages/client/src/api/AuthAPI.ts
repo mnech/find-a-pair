@@ -1,5 +1,5 @@
 import BaseAPI from './BaseAPI';
-import { SigninData, SignupData, User } from '../types/interfaces';
+import { SigninData, SignupData, User } from '../models/User';
 import { Methods } from './consts';
 
 export default class AuthAPI extends BaseAPI {

@@ -24,20 +24,20 @@ const Profile = () => {
     {isEditData && (
       <EditDataForm
         data={testUser}
-        setIsEditData={(state) => setIsEditData(state)}
+        setIsEditData={(state: boolean) => setIsEditData(state)}
       />
     )}
     {isEditPassword && (
       <EditPasswordForm
-        setIsEditPassword={(state) => setIsEditPassword(state)}
+        setIsEditPassword={(state: boolean) => setIsEditPassword(state)}
       />
     )}
     {!isEditData && !isEditPassword && (
       <>
         <PlayerInfo data={testUser} />
         <Footer
-          setIsEditData={(state) => setIsEditData(state)}
-          setIsEditPassword={(state) => setIsEditPassword(state)}
+          setIsEditData={(state: boolean) => setIsEditData(state)}
+          setIsEditPassword={(state: boolean) => setIsEditPassword(state)}
         />
       </>
     )}
