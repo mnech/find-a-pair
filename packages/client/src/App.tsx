@@ -1,7 +1,8 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss'
 import { Profile } from './pages/Profile'
+import SignUp from './pages/SignUp/SignUp'
 
 function App() {
   useEffect(() => {
@@ -14,8 +15,9 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">
+  return <div className="App h-100">
     {/*TODO это должно быть в роуте <Profile/>*/}
+    {/*TODO <SignUp />*/}
   </div>
 }
 
