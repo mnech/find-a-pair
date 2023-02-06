@@ -3,15 +3,15 @@ import { Routes, Route } from "react-router-dom";
 
 import Spinner from "../spinner/Spinner";
 
-const Page404 = lazy(() => import("../../pages/page404/Page404"));
+const Page404 = lazy(() => import("../../pages/Page404/Page404"));
 const Profile = lazy(() => import("../../pages/Profile/Profile"));
-const Game = lazy(() => import("../../pages/game/Game"));
+const Game = lazy(() => import("../../pages/Game/Game"));
+const Leaderboard = lazy(() => import("../../pages/Leaderboard/Leaderboard"));
+const Forum = lazy(() => import("../../pages/Forum/Forum"));
 
 //пути к папкам нужно поменять, когда будут готовы страницы
 const Signin = lazy(() => import("../../pages/Profile/Profile"));
 const Signup = lazy(() => import("../../pages/Profile/Profile"));
-const Leaderboard = lazy(() => import("../../pages/Profile/Profile"));
-const Forum = lazy(() => import("../../pages/Profile/Profile"));
 
 function AppRouter() {
   return (
