@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss'
-import { Profile } from './pages/Profile'
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from './components/router/AppRouter';
 
 function App() {
   useEffect(() => {
@@ -14,9 +15,14 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">
-    {/*TODO это должно быть в роуте <Profile/>*/}
-  </div>
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <AppRouter />
+      </div>
+    </BrowserRouter>
+  )
+  
 }
 
 export default App
