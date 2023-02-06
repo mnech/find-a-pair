@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import AuthController from '../../controllers/AuthController'
+import { Simulate } from 'react-dom/test-utils'
+import error = Simulate.error
 
-export const Auth = () => {
+export const EndGameScreen = () => {
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string>('')
@@ -15,15 +17,12 @@ export const Auth = () => {
     setPassword(value)
   }
 
-  const handleError = (value: string) => {
-    setError(value)
-  }
-
   const handleClickSubmit = async (event: React.FormEvent) => {
     event.stopPropagation()
     event.preventDefault()
-    setError('')
-    await AuthController.signin({ login, password }, handleError)
+    const response = await AuthController.signin({ login, password })
+    console.log(response)
+    //TODO Добавить редирект
   }
 
   const handleClickSignIn = () => {
@@ -37,7 +36,7 @@ export const Auth = () => {
         onSubmit={handleClickSubmit}>
         {error !== '' && (
           <div className="alert alert-danger" role="alert">
-            {error}
+            This is a danger alert—check it out!
           </div>
         )}
         <div className="form-outline">
