@@ -7,12 +7,12 @@ export const Auth = () => {
   const [password, setPassword] = useState<string>('')
   const [error, setError] = useState<string>('')
 
-  const handleChangeLogin = ({ currentTarget: { value } }) => {
-    setLogin(value)
+  const handleChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setLogin(event.currentTarget.value)
   }
 
-  const handleChangePasword = ({ currentTarget: { value } }) => {
-    setPassword(value)
+  const handleChangePasword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.currentTarget.value)
   }
 
   const handleError = (value: string) => {
