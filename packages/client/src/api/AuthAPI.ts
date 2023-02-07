@@ -1,7 +1,3 @@
-import BaseAPI from './BaseAPI'
-import { SigninData, SignupData, User } from '../models/User'
-import { Methods } from './consts'
-
 import BaseAPI from './BaseAPI';
 import { SigninData, SignupData, User } from '../models/User';
 import { Methods } from './consts';
