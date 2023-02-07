@@ -5,7 +5,6 @@ import AuthController from '../../controllers/AuthController'
 export const Auth = () => {
   const [login, setLogin] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const [error, setError] = useState<string>('')
 
   const handleChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.currentTarget.value)
@@ -15,15 +14,8 @@ export const Auth = () => {
     setPassword(event.currentTarget.value)
   }
 
-  const handleError = (value: string) => {
-    setError(value)
-  }
-
   const handleClickSubmit = async (event: React.FormEvent) => {
-    event.stopPropagation()
-    event.preventDefault()
-    setError('')
-    await AuthController.signin({ login, password }, handleError)
+    await AuthController.signin({ login, password })
   }
 
   const handleClickSignIn = () => {
@@ -35,11 +27,6 @@ export const Auth = () => {
       <Form
         className="row d-flex justify-content-center col-lg-4 offset-lg-4 shadow-sm p-5 rounded needs-validation"
         onSubmit={handleClickSubmit}>
-        {error !== '' && (
-          <div className="alert alert-danger" role="alert">
-            {error}
-          </div>
-        )}
         <div className="form-outline">
           <input
             type="text"
@@ -70,9 +57,9 @@ export const Auth = () => {
           Войти
         </Button>
         <div className="text-center">
-          <a href="" onClick={handleClickSignIn}>
+          <Button variant="link" onClick={handleClickSignIn}>
             Нет аккаунта?
-          </a>
+          </Button>
         </div>
       </Form>
     </div>
