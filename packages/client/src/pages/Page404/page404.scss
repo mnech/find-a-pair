@@ -2,18 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 3rem;
+  padding-top: 40px;
 
   &__text {
-    margin-top: 3rem;
+    margin-top: 40px;
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 28px;
   }
 
-  a {
-    margin-top: 0.8rem;
+  &__link {
+    margin-top: 12px;
     color: var(--primary);
     font-weight: 500;
-    font-size: 1.2rem;
+    font-size: 16px;
   }
 }

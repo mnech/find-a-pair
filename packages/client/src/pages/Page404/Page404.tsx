@@ -8,7 +8,7 @@ function Page404() {
     <div className="page404">
       <ErrorMessage />
       <p className="page404__text">Такой страницы не существует</p>
-      <Link to="/">Перейти на главную</Link>
+      <Link to="/" className="page404_link">Перейти на главную</Link>
     </div>
   );
 }

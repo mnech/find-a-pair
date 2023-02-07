@@ -1,21 +1,18 @@
-import { lazy, Suspense} from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Spinner from "../spinner/Spinner";
+import Page404 from "../../pages/Page404/Page404";
 
-const Page404 = lazy(() => import("../../pages/Page404/Page404"));
-const Profile = lazy(() => import("../../pages/Profile/Profile"));
-const Game = lazy(() => import("../../pages/Game/Game"));
-const Leaderboard = lazy(() => import("../../pages/Leaderboard/Leaderboard"));
-const Forum = lazy(() => import("../../pages/Forum/Forum"));
+import Profile from "../../pages/Profile/Profile";
+import Game from "../../pages/Game/Game";
+import Leaderboard from "../../pages/Leaderboard/Leaderboard";
+import Forum from "../../pages/Forum/Forum";
 
 //пути к папкам нужно поменять, когда будут готовы страницы
-const Signin = lazy(() => import("../../pages/Profile/Profile"));
-const Signup = lazy(() => import("../../pages/Profile/Profile"));
+import Signin from "../../pages/Profile/Profile";
+import Signup from "../../pages/Profile/Profile";
 
 function AppRouter() {
   return (
-    <Suspense fallback={<Spinner/>}>
       <Routes>
         <Route path="/">
           <Route 
@@ -62,7 +59,6 @@ function AppRouter() {
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
-    </Suspense>
   );
 }
 
