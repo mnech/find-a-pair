@@ -6,16 +6,16 @@ import { IUserRate, paginationMin } from '../../models/Leaderboard'
 
 const data: IUserRate[] = [{
     "name": "User",
-    "rateFindAPair": 1
+    "rate": 1
   },{
     "name": "Jane",
-    "rateFindAPair": 2
+    "rate": 2
   },{
     "name": "James",
-    "rateFindAPair": 7
+    "rate": 7
   },{
     "name": "Luis",
-    "rateFindAPair": 10
+    "rate": 10
   }];
 export const Leaderboard = () => {
 
@@ -27,15 +27,11 @@ export const Leaderboard = () => {
       <tr key={row.name}>
         <td>{idx + 1}</td>
         <td>{row.name}</td>
-        <td>{row.rateFindAPair}</td>
+        <td>{row.rate}</td>
       </tr>
     )
   }
 
-  const handlePageChange = (page: number) => {
-    setIsActivPage(page)
-  }
-  
   return (
     <div className="container-md overflow-auto mt-5 w-50 h-auto container">
       <div className="h3 pb-3">LeaderBoard</div>
@@ -51,7 +47,7 @@ export const Leaderboard = () => {
           {data?.map((userRate, idx) => renderRow(userRate, idx))}
         </tbody>
       </Table>
-      <Pagination page={isActivPage} onChange={handlePageChange}/>
+      <Pagination page={isActivPage} onChange={setIsActivPage}/>
     </div>
   )
 }
