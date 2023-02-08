@@ -18,7 +18,6 @@ function App() {
   return <div className="App">
     {/*TODO это должно быть в роуте <Profile/>*/}
     {/*TODO это должно быть в роуте <Leaderboard/>*/}
-    <Leaderboard/>
   </div>
 }
 
