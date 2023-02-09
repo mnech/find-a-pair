@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.scss'
 import { Profile } from './pages/Profile'
 import { Auth } from './pages/Auth/Auth'
+import { Leaderboard } from './pages/Leaderboard/Leaderboard'
 
 function App() {
   useEffect(() => {
@@ -19,6 +20,7 @@ function App() {
     <div className="App">
       {/*TODO это должно быть в роуте <Profile/>*/}
       {/*TODO это должно быть в роуте <Auth/>*/}
+      {/*TODO это должно быть в роуте <Leaderboard/>*/}
     </div>
   )
 }
