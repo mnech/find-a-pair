@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+import { Button } from 'react-bootstrap';
 import AuthController from '../../../../controllers/AuthController';
 
 export interface FooterProps {
