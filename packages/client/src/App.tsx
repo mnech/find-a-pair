@@ -1,9 +1,8 @@
-import { useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.scss'
-import { Profile } from './pages/Profile'
-import { Auth } from './pages/Auth/Auth'
-import { Leaderboard } from './pages/Leaderboard/Leaderboard'
+import { useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.scss';
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from './components/router/AppRouter';
 
 function App() {
   useEffect(() => {
@@ -17,11 +16,11 @@ function App() {
     fetchServerData()
   }, [])
   return (
-    <div className="App">
-      {/*TODO это должно быть в роуте <Profile/>*/}
-      {/*TODO это должно быть в роуте <Auth/>*/}
-      {/*TODO это должно быть в роуте <Leaderboard/>*/}
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <AppRouter />
+      </div>
+    </BrowserRouter>
   )
 }
 
