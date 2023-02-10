@@ -4,6 +4,7 @@ import './App.scss'
 import { Profile } from './pages/Profile'
 import { Auth } from './pages/Auth/Auth'
 import { Leaderboard } from './pages/Leaderboard/Leaderboard'
+import { EndGameScreen } from './pages/EndGameScreen/EndGameScreen'
 
 function App() {
   useEffect(() => {
@@ -21,6 +22,7 @@ function App() {
       {/*TODO это должно быть в роуте <Profile/>*/}
       {/*TODO это должно быть в роуте <Auth/>*/}
       {/*TODO это должно быть в роуте <Leaderboard/>*/}
+      {/*TODO это должно быть в роуте <EndGameScreen/>*/}
     </div>
   )
 }
