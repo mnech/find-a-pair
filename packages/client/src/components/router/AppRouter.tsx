@@ -1,16 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
 import Page404 from "../../pages/Page404/Page404";
-
+import { Auth } from "../../pages/Auth/Auth";
+import { Leaderboard } from "../../pages/Leaderboard/Leaderboard";
 import Game from "../../pages/Game/Game";
-
 import Forum from "../../pages/Forum/Forum";
+import Profile from "../../pages/Profile/Profile";
 
 //пути к папкам нужно поменять, когда будут готовы страницы
-import Signin from "../../pages/Profile/Profile";
 import Signup from "../../pages/Profile/Profile";
-import Leaderboard from "../../pages/Page404/Page404";
-import Profile from "../../pages/Page404/Page404";
 
 function AppRouter() {
   return (
@@ -26,7 +24,7 @@ function AppRouter() {
           <Route 
             path="sigin"
             element={
-                <Signin />
+                <Auth />
             }
           />
 
