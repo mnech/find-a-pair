@@ -1,6 +1,7 @@
 import UsersController from '../../../../controllers/UsersController';
 import ResourcesController from '../../../../controllers/ResourcesController';
 import { useEffect, useRef } from 'react';
+import './Header.scss';
 
 export interface HeaderProps {
   avatar: string;
@@ -8,11 +9,11 @@ export interface HeaderProps {
 }
 
 const Header = ({ avatar, name }: HeaderProps) => {
-  const inputFile = useRef(null);
+  const inputFile = useRef<HTMLInputElement>(null);
   const changeAvatar = () => {
     if (inputFile.current) {
-      (inputFile.current as HTMLInputElement).value = '';
-      (inputFile.current as HTMLInputElement).click();
+      inputFile.current.value = '';
+      inputFile.current.click();
     }
   };
 
@@ -28,21 +29,25 @@ const Header = ({ avatar, name }: HeaderProps) => {
     }
   };
 
+  const onErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    event.currentTarget.src = '/logo.png';
+  };
+
   useEffect(() => {
     if (avatar) {
-      ResourcesController.fetchData(avatar);
+      ResourcesController.getData(avatar);
     }
   }, [avatar]);
 
-  return <header className='header'>
+  return <header className="header">
     <img
       src={avatar}
-      className='avatar rounded-3 shadow'
-      onError={(event) => event.currentTarget.src = '/logo.png'}
-      alt='Аватар'
+      className="avatar rounded-3 shadow"
+      onError={onErrorHandler}
+      alt="Аватар"
       onClick={changeAvatar}
     />
-    <input type='file' accept='image/*' ref={inputFile} onChange={onchange} hidden />
+    <input type="file" accept="image/*" ref={inputFile} onChange={onchange} hidden/>
     <h1>{name}</h1>
   </header>;
 };

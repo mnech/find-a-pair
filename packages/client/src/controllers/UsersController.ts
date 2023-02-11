@@ -32,8 +32,8 @@ class UsersController {
     });
   }
 
-  public async requestUser(id: number) {
-    await this.api.request({ id });
+  public async getUser(id: number) {
+    await this.api.getUser({ id });
   }
 
   public async searchUser(login: string) {

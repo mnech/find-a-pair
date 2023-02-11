@@ -1,36 +1,37 @@
 import { Group } from './components';
 import { UserData } from '../../../../models/User';
+import './PlayerInfo.scss';
 
 export interface PlayerInfoProps {
   data: UserData;
 }
 
 const PlayerInfo = ({
-  data
+  data,
 }: PlayerInfoProps) => {
-  return <div className='player-info'>
+  return <div className="player-info">
     <Group
-      name='Имя'
+      name="Имя"
       value={data.first_name}
     />
     <Group
-      name='Фамилия'
+      name="Фамилия"
       value={data.second_name}
     />
     <Group
-      name='Имя профиля'
+      name="Имя профиля"
       value={data.display_name}
     />
     <Group
-      name='Логин'
+      name="Логин"
       value={data.login}
     />
     <Group
-      name='Почта'
+      name="Почта"
       value={data.email}
     />
     <Group
-      name='Телефон'
+      name="Телефон"
       value={data.phone}
     />
   </div>;
