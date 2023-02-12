@@ -1,6 +1,7 @@
 import BaseAPI from './BaseAPI';
 import { SigninData, SignupData, User } from '../models/User';
 import { Methods } from './consts';
+import { AxiosPromise } from 'axios';
 
 export default class AuthAPI extends BaseAPI {
   constructor() {
@@ -8,7 +9,7 @@ export default class AuthAPI extends BaseAPI {
   }
 
   public signin(data: SigninData) {
-    return this.axios({
+    return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/signin`,
       data
@@ -16,21 +17,21 @@ export default class AuthAPI extends BaseAPI {
   }
 
   public signup(data: SignupData) {
-    return this.axios({
+    return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/signup`,
       data
     });
   }
 
-  public request(): Promise<User> {
-    return this.axios({
+  public getUser(): AxiosPromise<User> {
+    return this.request({
       url: `${this.endpoint}/user`
     });
   }
 
   public logout() {
-    return this.axios({
+    return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/logout`
     });

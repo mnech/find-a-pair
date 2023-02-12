@@ -7,15 +7,15 @@ export default class ResourcesAPI extends BaseAPI {
   }
 
   public upload(data: FormData) {
-    return this.axios({
+    return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/`,
       data
     });
   }
 
-  public request(path: string) {
-    return this.axios({
+  public getData(path: string) {
+    return this.request({
       url: `${path}`
     });
   }

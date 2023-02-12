@@ -1,5 +1,6 @@
 import { Footer, Header, PlayerInfo, EditDataForm, EditPasswordForm } from './components';
 import { useState } from 'react';
+import './Profile.scss';
 
 // TODO Поправить когда понятно будет, где данные хранятся
 const testUser = {
@@ -9,14 +10,14 @@ const testUser = {
   login: 'ivanovv',
   email: 'ivanov@yandex.ru',
   phone: '89999999999',
-  avatar: ''
+  avatar: '',
 };
 
 const Profile = () => {
   const [isEditData, setIsEditData] = useState<boolean>(false);
   const [isEditPassword, setIsEditPassword] = useState<boolean>(false);
 
-  return <div className='profile'>
+  return <div className="profile">
     <Header
       avatar={testUser.avatar}
       name={testUser.first_name}
@@ -24,20 +25,20 @@ const Profile = () => {
     {isEditData && (
       <EditDataForm
         data={testUser}
-        setIsEditData={(state: boolean) => setIsEditData(state)}
+        setIsEditData={setIsEditData}
       />
     )}
     {isEditPassword && (
       <EditPasswordForm
-        setIsEditPassword={(state: boolean) => setIsEditPassword(state)}
+        setIsEditPassword={setIsEditPassword}
       />
     )}
     {!isEditData && !isEditPassword && (
       <>
-        <PlayerInfo data={testUser} />
+        <PlayerInfo data={testUser}/>
         <Footer
-          setIsEditData={(state: boolean) => setIsEditData(state)}
-          setIsEditPassword={(state: boolean) => setIsEditPassword(state)}
+          setIsEditData={setIsEditData}
+          setIsEditPassword={setIsEditPassword}
         />
       </>
     )}
