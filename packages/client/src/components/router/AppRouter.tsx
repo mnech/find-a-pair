@@ -10,11 +10,13 @@ import { StartGameScreen } from "../../pages/StartGameScreen/StartGameScreen";
 
 //пути к папкам нужно поменять, когда будут готовы страницы
 import Signup from "../../pages/Profile/Profile";
+import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen'
+import { routes } from '../../models/App'
 
 function AppRouter() {
   return (
       <Routes>
-        <Route path="/">
+        <Route path={routes.profile}>
           <Route 
             index
             element={
@@ -23,46 +25,53 @@ function AppRouter() {
           />
 
           <Route 
-            path="sigin"
+            path={routes.auth}
             element={
                 <Auth />
             }
           />
 
           <Route 
-            path="signup"
+            path={routes.signUp}
             element={
                 <Signup />
             }
           />
 
           <Route 
-            path="leaderboard"
+            path={routes.leaderboard}
             element={
                 <Leaderboard />
             }
           />
 
-          <Route 
-            path="forum"
+          <Route
+            path={routes.forum}
             element={
                 <Forum />
             }
           />
 
-          <Route 
-            path="game"
+          <Route
+            path={routes.game}
             element={
                 <Game />
             }
           />   
 
-          <Route 
-            path="start-game"
+          <Route
+            path={routes.startGame}
             element={
                 <StartGameScreen />
             }
-          /> 
+          />
+
+          <Route
+            path={routes.endGame}
+            element={
+                <EndGameScreen />
+            }
+          />
         </Route>
         <Route path="*" element={<Page404 />} />
       </Routes>
