@@ -62,7 +62,7 @@ const FormGroups: TFormGroups = {
   },
 } as const;
 
-const getValidateFields = (data: UserData) => {
+const getValidateInit = (data: UserData) => {
   return Object.keys(FormGroups).reduce((acc, key) => {
     acc[key as keyof UserData] = !!data[key as keyof UserData];
     return acc;
@@ -70,7 +70,7 @@ const getValidateFields = (data: UserData) => {
 };
 
 const EditDataForm = ({ data, setIsEditData }: EditDataFormProps) => {
-  const [validated, setValidated] = useState(getValidateFields(data));
+  const [validated, setValidated] = useState(() => getValidateInit(data));
 
   const handleSubmit = async (event: React.SyntheticEvent<HTMLFormElement, Event>) => {
     event.stopPropagation();
@@ -94,20 +94,20 @@ const EditDataForm = ({ data, setIsEditData }: EditDataFormProps) => {
   };
 
   return <Form className="form-edit-data" noValidate onSubmit={handleSubmit}>
-    {Object.entries(FormGroups).map(([name, value]) => {
+    {Object.entries(FormGroups).map(([key, value]) => {
       const { label, placeholder, errorText, required, type } = value;
+      const name = key as keyof UserData;
 
       return (<FormGroup
         key={name}
         type={type}
         label={label}
-        defaultValue={data[name as keyof UserData]}
+        defaultValue={data[name]}
         name={name}
         placeholder={placeholder}
         required={required}
         errorText={errorText}
-        isValid={validated[name as keyof UserData]}
-        isInvalid={!validated[name as keyof UserData]}
+        isInvalid={!validated[name]}
         onChange={onChange}
       />);
     })}

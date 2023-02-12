@@ -8,7 +8,6 @@ export type TFormGroup = {
   required?: boolean,
   label: string,
   errorText?: string,
-  isValid?: boolean,
   isInvalid?: boolean,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   type?: string,
@@ -22,7 +21,6 @@ const FormGroup = (props: TFormGroup) => {
     label,
     errorText,
     onChange,
-    isValid = true,
     isInvalid = false,
     required = false,
     type = 'text',
@@ -36,7 +34,6 @@ const FormGroup = (props: TFormGroup) => {
       name={name}
       placeholder={placeholder}
       defaultValue={defaultValue}
-      isValid={isValid}
       isInvalid={isInvalid}
       onChange={onChange}
     />

@@ -66,8 +66,8 @@ const getValuesInit = () => {
 };
 
 const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
-  const [validated, setValidated] = useState(getValidateInit());
-  const [values, setValues] = useState(getValuesInit());
+  const [validated, setValidated] = useState(() => getValidateInit());
+  const [values, setValues] = useState(() => getValuesInit());
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.stopPropagation();
@@ -106,8 +106,10 @@ const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
   };
 
   return <Form className="form-edit-password" noValidate onSubmit={handleSubmit}>
-    {Object.entries(FormGroups).map(([name, value]) => {
+    {Object.entries(FormGroups).map(([key, value]) => {
       const { label, placeholder, errorText, required, type } = value;
+      const name = key as keyof TFormGroups;
+
       return (<FormGroup
         key={name}
         type={type}
@@ -116,8 +118,7 @@ const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
         placeholder={placeholder}
         required={required}
         errorText={errorText}
-        isValid={isValid(name as keyof TFormGroups)}
-        isInvalid={!isValid(name as keyof TFormGroups)}
+        isInvalid={!isValid(name)}
         onChange={name !== 'repeatNewPassword' ? onChange : onChangeRepeatPassword}
       />);
     })}
