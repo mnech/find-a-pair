@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import "./game.scss";
-import { GameExe } from './Game';
+import { GameExe } from './GameExe';
 
 
 function Game() {
