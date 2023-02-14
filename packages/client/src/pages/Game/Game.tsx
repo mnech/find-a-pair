@@ -3,12 +3,15 @@ import "./game.scss";
 import { GameExe } from './GameExe';
 
 
-function Game() {
+function Game(){
   const ref = useRef(null);
 
   useEffect(() => {
-    const canvas = ref.current!
-    const ctx = ref.current!.getContext('2d');
+    const canvas = ref.current! as HTMLCanvasElement
+
+    const ctx = canvas!.getContext('2d')
+  
+   // const ctx:React.MutableRefObject<null> = ref.current!.getContext('2d') as HTMLCanvasElement;
 
     new GameExe(canvas, ctx)
   }, []);
