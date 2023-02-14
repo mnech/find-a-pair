@@ -7,9 +7,7 @@ import Game from "../../pages/Game/Game";
 import Forum from "../../pages/Forum/Forum";
 import Profile from "../../pages/Profile/Profile";
 import { StartGameScreen } from "../../pages/StartGameScreen/StartGameScreen";
-
-//пути к папкам нужно поменять, когда будут готовы страницы
-import Signup from "../../pages/Profile/Profile";
+import Signup from "../../pages/SignUp/SignUp";
 import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen'
 import { routes } from '../../models/App'
 

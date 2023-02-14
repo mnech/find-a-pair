@@ -1,110 +1,138 @@
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import UsersController from '../../../../controllers/UsersController';
-import { Password } from '../../../../models/User';
-import { regexpTest } from '../../../../utils/validate';
+import React, { useState } from 'react'
+import Form from 'react-bootstrap/Form'
+import { Button } from 'react-bootstrap'
+import UsersController from '../../../../controllers/UsersController'
+import { Password } from '../../../../models/User'
+import { regexpTest } from '../../../../utils/validate'
+import { FormGroup } from '../../../../components/FormGroup'
+import './EditPasswordForm.scss'
 
 export interface EditPasswordFormProps {
-  setIsEditPassword: (state: boolean) => void,
+  setIsEditPassword: (state: boolean) => void
 }
 
-const fields: Password = {
-  oldPassword: '',
-  newPassword: ''
-};
+type TPasswordFields = {
+  oldPassword: string
+  newPassword: string
+  repeatNewPassword: string
+}
 
-const getValidateFields = (data: Password) => {
-  return Object.keys(fields).reduce((acc, key) => {
-    acc[key as keyof Password] = !!data[key as keyof Password];
-    return acc;
-  }, {} as Record<keyof Password, boolean>);
-};
+type TFormGroups = {
+  [key in keyof TPasswordFields]: {
+    label: string
+    placeholder: string
+    errorText: string
+    required: boolean
+    type?: string
+  }
+}
+
+const FormGroups: TFormGroups = {
+  oldPassword: {
+    label: 'Старый пароль',
+    placeholder: 'Введите старый пароль',
+    errorText: 'Введите верный старый пароль',
+    required: true,
+    type: 'password',
+  },
+  newPassword: {
+    label: 'Новый пароль',
+    placeholder: 'Введите новый пароль',
+    required: true,
+    errorText: 'Введите верный новый пароль',
+    type: 'password',
+  },
+  repeatNewPassword: {
+    label: 'Повторите новый пароль',
+    placeholder: 'Введите повторно новый пароль',
+    required: true,
+    errorText: 'Пароли не совпадают',
+    type: 'password',
+  },
+} as const
+
+const getValidateInit = () => {
+  return Object.keys(FormGroups).reduce((acc, key) => {
+    acc[key as keyof TFormGroups] = false
+    return acc
+  }, {} as Record<keyof TFormGroups, boolean>)
+}
+
+const getValuesInit = () => {
+  return Object.keys(FormGroups).reduce((acc, key) => {
+    acc[key as keyof TFormGroups] = null
+    return acc
+  }, {} as Record<keyof TFormGroups, string | null>)
+}
 
 const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
-  const [validated, setValidated] = useState(getValidateFields(fields));
-  const [oldPassword, setOldPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [newPasswordRepeat, setNewPasswordRepeat] = useState('');
+  const [validated, setValidated] = useState(() => getValidateInit())
+  const [values, setValues] = useState(() => getValuesInit())
 
   const handleSubmit = async (event: React.FormEvent) => {
-    event.stopPropagation();
-    event.preventDefault();
-    const form = event.currentTarget as HTMLFormElement;
-    if (!Object.values(validated).every(item => item)) return;
+    event.stopPropagation()
+    event.preventDefault()
+    const form = event.currentTarget as HTMLFormElement
+    if (!Object.values(validated).every(item => item)) return
 
-    const data = Object.fromEntries(new FormData(form));
-    await UsersController.updatePassword(data as unknown as Password);
+    const data = Object.fromEntries(new FormData(form))
+    await UsersController.updatePassword(data as unknown as Password)
 
-    setIsEditPassword(false);
-  };
+    setIsEditPassword(false)
+  }
 
-  return <Form className='form-edit-password' noValidate onSubmit={handleSubmit}>
-    <Form.Group className='mb-3' controlId='oldPassword'>
-      <Form.Label>Old password</Form.Label>
-      <Form.Control
-        required
-        type='password'
-        placeholder='Enter old password'
-        name='oldPassword'
-        onChange={({ currentTarget: { value } }) => {
-          setValidated(
-            {
-              ...validated,
-              oldPassword: regexpTest('password', value)
-            });
-          setOldPassword(value);
-        }}
-        isValid={validated['oldPassword'] && !!oldPassword}
-        isInvalid={!validated['oldPassword'] || !oldPassword}
-      />
-      <Form.Control.Feedback type='invalid'>
-        Please provide a valid old password
-      </Form.Control.Feedback>
-    </Form.Group>
-    <Form.Group className='mb-3' controlId='newPassword'>
-      <Form.Label>New password</Form.Label>
-      <Form.Control
-        required
-        type='password'
-        placeholder='Enter new password'
-        name='newPassword'
-        onChange={({ currentTarget: { value } }) => {
-          setValidated(
-            {
-              ...validated,
-              newPassword: regexpTest('password', value)
-            });
-          setNewPassword(value);
-        }}
-        isValid={validated['newPassword'] && !!newPassword}
-        isInvalid={!validated['newPassword'] || !newPassword}
-      />
-      <Form.Control.Feedback type='invalid'>
-        Please provide a valid new password
-      </Form.Control.Feedback>
-    </Form.Group>
-    <Form.Group className='mb-3' controlId='repeatNewPassword'>
-      <Form.Label>Repeat new password</Form.Label>
-      <Form.Control
-        required
-        type='password'
-        placeholder='Repeat new password'
-        name='repeatNewPassword'
-        onChange={({ currentTarget: { value } }) => {
-          setNewPasswordRepeat(value);
-        }}
-        isValid={newPassword === newPasswordRepeat && !!newPassword}
-        isInvalid={newPassword !== newPasswordRepeat}
-      />
-      <Form.Control.Feedback type='invalid'>
-        Password mismatch
-      </Form.Control.Feedback>
-    </Form.Group>
-    <Button variant='primary' type='submit' className='button'>
-      Submit
-    </Button>
-  </Form>;
-};
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = event.currentTarget
+    setValidated({
+      ...validated,
+      [name]: regexpTest('password', value),
+    })
+    setValues({ ...values, [name]: value })
+  }
 
-export default EditPasswordForm;
+  const onChangeRepeatPassword = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { value, name } = event.currentTarget
+    setValues({ ...values, [name]: value })
+    setValidated({
+      ...validated,
+      [name]:
+        values.newPassword === values.repeatNewPassword && !!values.newPassword,
+    })
+  }
+
+  const isValid = (name: keyof TFormGroups) => {
+    return Boolean(validated[name] && values[name])
+  }
+
+  return (
+    <Form className="form-edit-password" noValidate onSubmit={handleSubmit}>
+      {Object.entries(FormGroups).map(([key, value]) => {
+        const { label, placeholder, errorText, required, type } = value
+        const name = key as keyof TFormGroups
+
+        return (
+          <FormGroup
+            key={name}
+            type={type}
+            label={label}
+            name={name}
+            placeholder={placeholder}
+            required={required}
+            errorText={errorText}
+            isInvalid={!isValid(name)}
+            onChange={
+              name !== 'repeatNewPassword' ? onChange : onChangeRepeatPassword
+            }
+          />
+        )
+      })}
+      <Button variant="primary" type="submit" className="button">
+        Submit
+      </Button>
+    </Form>
+  )
+}
+
+export default EditPasswordForm

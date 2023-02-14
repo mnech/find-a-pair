@@ -27,7 +27,7 @@ class AuthController {
   }
 
   public async fetchUser() {
-    const user = await this.api.request();
+    const user = await this.api.getUser();
   }
 
   protected async request(req: () => void) {

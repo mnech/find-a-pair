@@ -11,9 +11,9 @@ class ResourcesController {
     });
   }
 
-  public async fetchData(path: string) {
+  public async getData(path: string) {
     await this.request(async () => {
-      await this.api.request(path);
+      await this.api.getData(path);
     });
   }
 
