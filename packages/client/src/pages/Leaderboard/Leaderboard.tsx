@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import { Pagination } from './components/Pagination'
 import { useState } from 'react'
 import { IUserRate, paginationMin } from '../../models/Leaderboard'
+import "./Leaderboard.scss";
 
 
 const data: IUserRate[] = [{

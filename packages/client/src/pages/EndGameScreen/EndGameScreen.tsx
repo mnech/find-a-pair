@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { routes } from '../../models/App'
-
+import './EndGameScreen.scss'
 //TODO Заглушка заменить когда подъедет статистика игры
 const rate = 40;
 

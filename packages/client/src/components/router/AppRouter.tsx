@@ -8,8 +8,8 @@ import Forum from "../../pages/Forum/Forum";
 import Profile from "../../pages/Profile/Profile";
 import { StartGameScreen } from "../../pages/StartGameScreen/StartGameScreen";
 import Signup from "../../pages/SignUp/SignUp";
-import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen'
 import { routes } from '../../models/App'
+import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen'
 
 function AppRouter() {
   return (
