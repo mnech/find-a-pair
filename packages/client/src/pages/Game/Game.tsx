@@ -11,8 +11,6 @@ function Game() {
     const ctx = ref.current!.getContext('2d');
 
     new GameExe(canvas,ctx)
-
-    //ctx.fillRect(0,0, 100, 100);
   }, []);
 
   return (
