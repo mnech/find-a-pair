@@ -10,7 +10,7 @@ function Game() {
     const canvas = ref.current!
     const ctx = ref.current!.getContext('2d');
 
-    new GameExe(canvas,ctx)
+    new GameExe(canvas, ctx)
   }, []);
 
   return (
