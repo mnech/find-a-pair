@@ -2,10 +2,10 @@ import { Field } from "./Field";
 
 export class GameExe extends Field {
   gameStatus = "0_start game";
-  intervalTime: number = 10;
-  gameOver: boolean = false;
-  score: number = 0;
-  lives: number = 3;
+  intervalTime = 10;
+  gameOver = false;
+  score = 0;
+  lives = 3;
 
   constructor(canvas: any, ctx: any) {
     super(canvas, ctx);
@@ -24,8 +24,8 @@ export class GameExe extends Field {
   }
 
   mauseClickCursorPointer(e: { clientX: number; clientY: number }) {
-    let relativeX = e.clientX - this.canvas.offsetLeft;
-    let relativeY = e.clientY - this.canvas.offsetTop;
+    const relativeX = e.clientX - this.canvas.offsetLeft;
+    const relativeY = e.clientY - this.canvas.offsetTop;
     if (
       relativeX > 0 &&
       relativeX < this.canvas.width &&
@@ -57,7 +57,7 @@ export class GameExe extends Field {
   openALLImages() {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
-        let square = this.fieldOfSquares[c][r];
+        const square = this.fieldOfSquares[c][r];
         this.clearA(square.x, square.y, square.width, square.height);
         this.drowImgAll(square.image, square.i, square.x, square.y, this.ctx);
       }
@@ -68,7 +68,7 @@ export class GameExe extends Field {
   closeALLImages() {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
-        let square = this.fieldOfSquares[c][r];
+        const square = this.fieldOfSquares[c][r];
         this.clearA(square.x, square.y, square.width, square.height);
         this.drowSquare(square.x, square.y, square.width, square.height);
       }

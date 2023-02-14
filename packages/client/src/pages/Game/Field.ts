@@ -17,19 +17,19 @@ import i5965452 from "./imgs/5965452.png";
 export class Field {
   canvas: any;
   ctx: any;
-  column: number = 6;
-  rows: number = 5;
-  padding: number = 10;
+  column = 6;
+  rows = 5;
+  padding = 10;
   fieldOfSquares: [any][any] = [];
   width = 50;
   height = 50;
   marginLeftX: number;
   marginTopY: number;
-  score: number = 0;
-  attempts: number = 0;
-  endGame: number = 0;
-  blockSquares: boolean = true;
-  totalScore: number = 0;
+  score = 0;
+  attempts = 0;
+  endGame = 0;
+  blockSquares = true;
+  totalScore = 0;
 
   baseImgs: any[] = [
     i5965270,
@@ -79,7 +79,7 @@ export class Field {
   }
 
   generateArray(column: number, rows: number) {
-    let tally = (column * rows) / 2;
+    const tally = (column * rows) / 2;
     for (let t = 0; t < tally; t++) {
       this.imgs.push(this.baseImgs[t]);
       this.imgs.push(this.baseImgs[t]);
@@ -162,8 +162,8 @@ export class Field {
 
   mauseClick(e: { clientX: number; clientY: number }) {
     if (!this.blockSquares) {
-      let relativeX = e.clientX - this.canvas.offsetLeft;
-      let relativeY = e.clientY - this.canvas.offsetTop;
+      const relativeX = e.clientX - this.canvas.offsetLeft;
+      const relativeY = e.clientY - this.canvas.offsetTop;
 
       if (
         relativeX > 0 &&
@@ -179,7 +179,7 @@ export class Field {
   clickSquardHandler(relativeX: number, relativeY: number) {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
-        let square = this.fieldOfSquares[c][r];
+        const square = this.fieldOfSquares[c][r];
         if (
           relativeX > square.x &&
           relativeX < square.x + square.width &&
@@ -191,7 +191,7 @@ export class Field {
             this.fieldOfSquares[c][r].status != 0 &&
             this.fieldOfSquares[c][r].status != 2
           ) {
-            let square = this.fieldOfSquares[c][r];
+            const square = this.fieldOfSquares[c][r];
             this.clearA(square.x, square.y, square.width, square.height);
             if (square.status == 1) {
               this.drowImg(
@@ -219,9 +219,9 @@ export class Field {
   }
 
   compareSquards(image: any) {
-    let clearCompareImages = (status: number) => {
+    const clearCompareImages = (status: number) => {
       for (let y = 0; y < this.compareImages.length; y++) {
-        let squard = this.compareImages[y];
+        const squard = this.compareImages[y];
         if (status == 1) {
           this.clearA(squard.x, squard.y, squard.width, squard.height);
           this.drowSquare(squard.x, squard.y, squard.width, squard.height);
@@ -273,7 +273,7 @@ export class Field {
     this.ctx.fillText("attempts: " + this.attempts, 50, 60);
   }
 
-  textYouWin(clear: boolean = false) {
+  textYouWin(clear = false) {
     if (clear) {
       this.clearA(this.canvas.width / 2 - 55, 5, 220, 25);
     } else {
@@ -283,7 +283,7 @@ export class Field {
     }
   }
 
-  textTotalScore(clear: boolean = false) {
+  textTotalScore(clear = false) {
     if (clear) {
       this.clearA(this.canvas.width / 2 - 20, 35, 220, 20);
     } else {
