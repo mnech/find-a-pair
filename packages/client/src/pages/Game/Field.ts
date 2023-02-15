@@ -15,6 +15,8 @@ import i5965375 from "./imgs/5965375.png";
 import i5965452 from "./imgs/5965452.png";
 
 export class Field {
+
+  textColor1 = "#0095DD";
   canvas: any;
   ctx: any;
   column = 6;
@@ -30,6 +32,8 @@ export class Field {
   endGame = 0;
   blockSquares = true;
   totalScore = 0;
+
+ 
 
   baseImgs: any[] = [
     i5965270,
@@ -262,14 +266,14 @@ export class Field {
   textScore() {
     this.clearA(50, 10, 140, 21);
     this.ctx.font = "20px Arial";
-    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillStyle = this.textColor1;
     this.ctx.fillText("score: " + this.score, 50, 30);
   }
 
   textAttempts() {
     this.clearA(50, 40, 220, 21);
     this.ctx.font = "20px Arial";
-    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillStyle = this.textColor1;
     this.ctx.fillText("attempts: " + this.attempts, 50, 60);
   }
 
@@ -278,7 +282,7 @@ export class Field {
       this.clearA(this.canvas.width / 2 - 55, 5, 220, 25);
     } else {
       this.ctx.font = "25px Arial";
-      this.ctx.fillStyle = "#0095DD";
+      this.ctx.fillStyle = this.textColor1;
       this.ctx.fillText("You Win", this.canvas.width / 2 - 55, 30);
     }
   }
@@ -289,7 +293,7 @@ export class Field {
     } else {
       this.totalScore = this.score - this.attempts;
       this.ctx.font = "20px Arial";
-      this.ctx.fillStyle = "#0095DD";
+      this.ctx.fillStyle = this.textColor1;
       this.ctx.fillText(
         this.totalScore as unknown as string,
         this.canvas.width / 2 - 20,

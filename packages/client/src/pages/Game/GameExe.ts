@@ -1,6 +1,7 @@
 import { Field } from "./Field";
 
 export class GameExe extends Field {
+
   gameStatus = "0_start game";
   intervalTime = 10;
   gameOver = false;
@@ -39,7 +40,6 @@ export class GameExe extends Field {
         relativeY < this.canvas.height - 50
       ) {
         if (this.gameStatus == "0_start game") {
-          console.log("start game");
           this.blockSquares = false;
           this.openALLImages();
           this.textRestartGame();
@@ -89,7 +89,7 @@ export class GameExe extends Field {
       30
     );
     this.ctx.font = "30px Arial";
-    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillStyle = this.textColor1;
     this.ctx.fillText(
       "START GAME",
       this.canvas.width / 2 - 100,
@@ -105,7 +105,7 @@ export class GameExe extends Field {
       30
     );
     this.ctx.font = "30px Arial";
-    this.ctx.fillStyle = "#0095DD";
+    this.ctx.fillStyle = this.textColor1;
     this.ctx.fillText(
       "RESTART GAME",
       this.canvas.width / 2 - 120,
