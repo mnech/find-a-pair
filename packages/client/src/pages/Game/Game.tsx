@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import "./game.scss";
-import { GameExe } from "./GameExe";
+import { GameController } from "./GameController";
 
 function Game() {
   const ref = useRef(null);
 
   useEffect(() => {
     const canvas = ref.current! as HTMLCanvasElement;
-
     const ctx = canvas!.getContext("2d");
-
-    new GameExe(canvas, ctx);
+    new GameController(canvas, ctx);
   }, []);
 
   return <canvas ref={ref} width={500} height={500} />;

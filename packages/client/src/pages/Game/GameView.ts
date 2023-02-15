@@ -14,7 +14,7 @@ import i5965366 from "./imgs/5965366.png";
 import i5965375 from "./imgs/5965375.png";
 import i5965452 from "./imgs/5965452.png";
 
-export class Field {
+export class GameView {
 
   textColor1 = "#0095DD";
   canvas: any;
@@ -30,10 +30,7 @@ export class Field {
   score = 0;
   attempts = 0;
   endGame = 0;
-  blockSquares = true;
   totalScore = 0;
-
- 
 
   baseImgs: any[] = [
     i5965270,
@@ -62,24 +59,8 @@ export class Field {
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
-    this.setEvent();
     this.textScore();
     this.textAttempts();
-  }
-
-  leadUpField() {
-    this.fieldOfSquares = [];
-    this.imgs = [];
-    this.compareImages = [];
-    this.score = 0;
-    this.textScore();
-    this.attempts = 0;
-    this.textAttempts();
-    this.endGame = 0;
-    this.blockSquares = true;
-    this.totalScore = 0;
-    this.textYouWin(true);
-    this.textTotalScore(true);
   }
 
   generateArray(column: number, rows: number) {
@@ -160,109 +141,6 @@ export class Field {
     this.ctx.closePath();
   }
 
-  setEvent() {
-    document.addEventListener("click", this.mauseClick.bind(this), false);
-  }
-
-  mauseClick(e: { clientX: number; clientY: number }) {
-    if (!this.blockSquares) {
-      const relativeX = e.clientX - this.canvas.offsetLeft;
-      const relativeY = e.clientY - this.canvas.offsetTop;
-
-      if (
-        relativeX > 0 &&
-        relativeX < this.canvas.width &&
-        relativeY > 0 &&
-        relativeY < this.canvas.height
-      ) {
-        this.clickSquardHandler(relativeX, relativeY);
-      }
-    }
-  }
-
-  clickSquardHandler(relativeX: number, relativeY: number) {
-    for (let c = 0; c < this.column; c++) {
-      for (let r = 0; r < this.rows; r++) {
-        const square = this.fieldOfSquares[c][r];
-        if (
-          relativeX > square.x &&
-          relativeX < square.x + square.width &&
-          relativeY > square.y &&
-          relativeY < square.y + square.height
-        ) {
-          if (
-            this.compareImages.length < 2 &&
-            this.fieldOfSquares[c][r].status != 0 &&
-            this.fieldOfSquares[c][r].status != 2
-          ) {
-            const square = this.fieldOfSquares[c][r];
-            this.clearA(square.x, square.y, square.width, square.height);
-            if (square.status == 1) {
-              this.drowImg(
-                square.image,
-                square.i,
-                square.x,
-                square.y,
-                this.ctx
-              );
-              this.compareSquards(square);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  clearA(
-    x: number,
-    y: number,
-    width: number = this.canvas.width,
-    height: number = this.canvas.height
-  ) {
-    this.ctx.clearRect(x, y, width, height);
-  }
-
-  compareSquards(image: any) {
-    const clearCompareImages = (status: number) => {
-      for (let y = 0; y < this.compareImages.length; y++) {
-        const squard = this.compareImages[y];
-        if (status == 1) {
-          this.clearA(squard.x, squard.y, squard.width, squard.height);
-          this.drowSquare(squard.x, squard.y, squard.width, squard.height);
-        }
-        squard.status = status;
-      }
-      this.compareImages = [];
-    };
-
-    if (this.compareImages.length < 2) {
-      this.compareImages.push(image);
-      if (this.compareImages.length == 2) {
-        if (this.compareImages[0].i == this.compareImages[1].i) {
-          this.score += 10;
-          this.textScore();
-          this.attempts += 1;
-          this.textAttempts();
-          clearCompareImages(2);
-          this.setEndGame();
-        } else {
-          setTimeout(clearCompareImages, 800, 1);
-          this.attempts += 1;
-          this.textAttempts();
-        }
-      }
-    }
-  }
-
-  setEndGame() {
-    this.endGame--;
-    if (this.endGame == 0) {
-      this.textYouWin();
-      this.textTotalScore();
-      this.blockSquares = true;
-    }
-  }
-
   textScore() {
     this.clearA(50, 10, 140, 21);
     this.ctx.font = "20px Arial";
@@ -300,5 +178,46 @@ export class Field {
         55
       );
     }
+  }
+
+  textButtonStartGame() {
+    this.ctx.clearRect(
+      this.canvas.width / 2 - 120,
+      this.canvas.height - 50 - 30,
+      300,
+      30
+    );
+    this.ctx.font = "30px Arial";
+    this.ctx.fillStyle = this.textColor1;
+    this.ctx.fillText(
+      "START GAME",
+      this.canvas.width / 2 - 100,
+      this.canvas.height - 50
+    );
+  }
+
+  textRestartGame() {
+    this.ctx.clearRect(
+      this.canvas.width / 2 - 100,
+      this.canvas.height - 50 - 30,
+      300,
+      30
+    );
+    this.ctx.font = "30px Arial";
+    this.ctx.fillStyle = this.textColor1;
+    this.ctx.fillText(
+      "RESTART GAME",
+      this.canvas.width / 2 - 120,
+      this.canvas.height - 50
+    );
+  }
+
+  clearA(
+    x: number,
+    y: number,
+    width: number = this.canvas.width,
+    height: number = this.canvas.height
+  ) {
+    this.ctx.clearRect(x, y, width, height);
   }
 }
