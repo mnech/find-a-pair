@@ -22,7 +22,7 @@ type ScuareT = {
   height: number,
   status: number,
   id: number,
-  image: new () => typeof Image,
+  image: HTMLImageElement,
   i: string,
 };
 
@@ -35,7 +35,7 @@ export class GameView {
   column = 6;
   rows = 5;
   padding = 10;
-  fieldOfSquares: [any][any] = [];
+  fieldOfSquares: ScuareT[][] = [];
   width = 50;
   height = 50;
   marginLeftX: number;
@@ -45,7 +45,7 @@ export class GameView {
   endGame = 0;
   totalScore = 0;
 
-  baseImgs: any[] = [
+  baseImgs: string[] = [
     i5965270,
     i5965263,
     i5965278,
@@ -104,6 +104,7 @@ export class GameView {
         id++;
       }
     }
+    console.log(this.fieldOfSquares)
   }
 
   drowImgAll(img: any, i: any, x: number, y: number, ctx: any): any {
