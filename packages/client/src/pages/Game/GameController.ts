@@ -8,7 +8,7 @@ export class GameController extends GameView {
   lives = 3;
   blockSquares = true;
 
-  constructor(canvas: any, ctx: any) {
+  constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
     super(canvas, ctx);
 
     this.setEventClickStartGameAndSquares();
@@ -34,27 +34,26 @@ export class GameController extends GameView {
   setEventClickStartGameAndSquares() {
     document.addEventListener(
       "click",
-      this.mauseClick.bind(this),
+      this.mouseClick.bind(this),
       false
     );
   }
 
-  mauseClick(e: { clientX: number; clientY: number }) {
+  mouseClick(e: { clientX: number; clientY: number }) {
       const relativeX = e.clientX - this.canvas.offsetLeft;
       const relativeY = e.clientY - this.canvas.offsetTop;
-
-      if (
-        relativeX > 0 &&
-        relativeX < this.canvas.width &&
-        relativeY > 0 &&
-        relativeY < this.canvas.height
-      ) {
-          if (
-          relativeX > this.canvas.width / 2 - 100 &&
-          relativeX < this.canvas.width / 2 + 100 &&
-          relativeY > this.canvas.height - 80 &&
-          relativeY < this.canvas.height - 50
-        ) {
+      const isThereAClickOnTheCanvas=
+      relativeX > 0 &&
+      relativeX < this.canvas.width &&
+      relativeY > 0 &&
+      relativeY < this.canvas.height
+      if (isThereAClickOnTheCanvas) {
+        const isThereAClickOnTheTextStartRestartGame=
+        relativeX > this.canvas.width / 2 - 100 &&
+        relativeX < this.canvas.width / 2 + 100 &&
+        relativeY > this.canvas.height - 80 &&
+        relativeY < this.canvas.height - 50
+          if (isThereAClickOnTheTextStartRestartGame) {
           this.clickStartGameHandler()
         }else if(!this.blockSquares) {
           this.clickSquardHandler(relativeX, relativeY)
@@ -69,6 +68,7 @@ export class GameController extends GameView {
       this.textRestartGame();
       this.gameStatus = "restart game";
     } else if (this.gameStatus == "restart game") {
+      this.blockSquares = true;
       this.closeALLImages();
       this.restartGame();
       this.openALLImages();

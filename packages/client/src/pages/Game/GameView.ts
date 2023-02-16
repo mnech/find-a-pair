@@ -14,6 +14,19 @@ import i5965366 from "./imgs/5965366.png";
 import i5965375 from "./imgs/5965375.png";
 import i5965452 from "./imgs/5965452.png";
 
+
+type ScuareT = {
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  status: number,
+  id: number,
+  image: new () => typeof Image,
+  i: string,
+};
+
+
 export class GameView {
 
   textColor1 = "#0095DD";
@@ -50,10 +63,10 @@ export class GameView {
     i5965452,
   ];
 
-  imgs: any[] = [];
-  compareImages: any[] = [];
+  imgs: string[] = [];
+  compareImages: ScuareT[] = [];
 
-  constructor(canvas: any, ctx: any) {
+  constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.marginLeftX =
@@ -63,7 +76,7 @@ export class GameView {
     this.textAttempts();
   }
 
-  generateArray(column: number, rows: number) {
+  generateArrayWithImgs(column: number, rows: number) {
     const tally = (column * rows) / 2;
     for (let t = 0; t < tally; t++) {
       this.imgs.push(this.baseImgs[t]);
@@ -111,7 +124,7 @@ export class GameView {
   }
 
   createField() {
-    this.generateArray(this.column, this.rows);
+    this.generateArrayWithImgs(this.column, this.rows);
     this.createSquares();
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {

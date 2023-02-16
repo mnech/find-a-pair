@@ -3,7 +3,7 @@ import "./game.scss";
 import { GameController } from "./GameController";
 
 function Game() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
     const canvas = ref.current! as HTMLCanvasElement;
