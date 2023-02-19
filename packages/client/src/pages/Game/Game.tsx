@@ -1,11 +1,12 @@
-import "./game.scss";
+import './game.scss'
+import { ErrorBoundary } from '../../utils/ErrorBoundary'
 
 function Game() {
   return (
-    <div>
-      game
-    </div>
-  );
+    <ErrorBoundary>
+      <div>game</div>
+    </ErrorBoundary>
+  )
 }
 
-export default Game;
+export default Game
