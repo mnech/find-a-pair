@@ -1,17 +1,17 @@
-import Form from 'react-bootstrap/Form'
-import React from 'react'
+import Form from 'react-bootstrap/Form';
+import React from 'react';
 
 export type TFormGroup = {
-  defaultValue?: string
-  name: string
-  placeholder?: string
-  required?: boolean
-  label: string
-  errorText?: string
-  isInvalid?: boolean
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-  type?: string
-}
+  defaultValue?: string;
+  name: string;
+  placeholder?: string;
+  required?: boolean;
+  label: string;
+  errorText?: string;
+  isInvalid?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+};
 
 const FormGroup = (props: TFormGroup) => {
   const {
@@ -24,7 +24,7 @@ const FormGroup = (props: TFormGroup) => {
     isInvalid = false,
     required = false,
     type = 'text',
-  } = props
+  } = props;
 
   return (
     <Form.Group className="mb-3" controlId={name}>
@@ -44,7 +44,7 @@ const FormGroup = (props: TFormGroup) => {
         </Form.Control.Feedback>
       )}
     </Form.Group>
-  )
-}
+  );
+};
 
-export default FormGroup
+export default FormGroup;

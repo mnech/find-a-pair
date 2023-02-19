@@ -1,5 +1,5 @@
-import React from 'react'
-import './forum.scss'
+import React from 'react';
+import './forum.scss';
 
 const forums = {
   // TODO api
@@ -33,7 +33,7 @@ const forums = {
       },
     ],
   },
-}
+};
 
 const Forum = () => {
   return (
@@ -70,15 +70,15 @@ const Forum = () => {
                         <span className="center">{item.count}</span>
                       </div>
                     </div>
-                  )
+                  );
                 })}
               </div>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Forum
+export default Forum;
