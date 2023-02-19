@@ -3,14 +3,13 @@ import { User } from '../models/User';
 
 interface IProfile {
   data: User;
-  isLoading: boolean;
-  isSaving: boolean;
-  error: string | null;
+  isLoading?: boolean;
+  isSaving?: boolean;
+  error?: string | null;
 }
 
-const initialState: IProfile = {
+const initialState = {
   data: {
-    id: 0,
     first_name: '',
     second_name: '',
     display_name: '',
@@ -22,7 +21,7 @@ const initialState: IProfile = {
   isLoading: false,
   isSaving: false,
   error: null,
-};
+} as IProfile;
 
 const profileSlice = createSlice({
   name: 'Profile',
