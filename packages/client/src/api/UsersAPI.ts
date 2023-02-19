@@ -1,11 +1,11 @@
-import BaseAPI from './BaseAPI'
-import { User, Password, Login, UserData } from '../models/User'
-import { Methods } from './consts'
-import { AxiosPromise } from 'axios'
+import BaseAPI from './BaseAPI';
+import { User, Password, Login, UserData } from '../models/User';
+import { Methods } from './consts';
+import { AxiosPromise } from 'axios';
 
 export default class UsersAPI extends BaseAPI {
   constructor() {
-    super('/user')
+    super('/user');
   }
 
   public updateProfile(data: UserData): AxiosPromise<User> {
@@ -13,7 +13,7 @@ export default class UsersAPI extends BaseAPI {
       method: Methods.Put,
       url: `${this.endpoint}/profile`,
       data,
-    })
+    });
   }
 
   public updateAvatar(data: FormData): AxiosPromise<User> {
@@ -21,7 +21,7 @@ export default class UsersAPI extends BaseAPI {
       method: Methods.Put,
       url: `${this.endpoint}/profile/avatar`,
       data,
-    })
+    });
   }
 
   public updatePassword(data: Password) {
@@ -29,13 +29,13 @@ export default class UsersAPI extends BaseAPI {
       method: Methods.Put,
       url: `${this.endpoint}/password`,
       data,
-    })
+    });
   }
 
   public getUser({ id }: { [key in string]: number }): AxiosPromise<User> {
     return this.request({
       url: `${this.endpoint}/${id}`,
-    })
+    });
   }
 
   public search(data: Login): AxiosPromise<User[]> {
@@ -43,10 +43,10 @@ export default class UsersAPI extends BaseAPI {
       method: Methods.Post,
       url: `${this.endpoint}/search`,
       data,
-    })
+    });
   }
 
-  create = undefined
-  update = undefined
-  delete = undefined
+  create = undefined;
+  update = undefined;
+  delete = undefined;
 }
