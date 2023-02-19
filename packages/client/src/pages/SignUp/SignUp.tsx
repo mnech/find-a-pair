@@ -5,6 +5,7 @@ import AuthController from '../../controllers/AuthController'
 import { Password, SignupData } from '../../models/User'
 import { regexpTest } from '../../utils/validate'
 import { FormGroup } from '../../components/FormGroup'
+import { ErrorBoundary } from '../../utils/ErrorBoundary'
 
 const fields: SignupData = {
   first_name: 'First name',
@@ -35,37 +36,39 @@ const SignUp = () => {
   }
 
   return (
-    <div className="d-flex w-100 sign-up">
-      <Form
-        noValidate
-        onSubmit={onSubmit}
-        className="border rounded p-4 m-auto w-50">
-        <h3 className="text-center">Sign up</h3>
-        {Object.entries(fields).map(([key, name]) => {
-          return (
-            <FormGroup
-              name={key}
-              label={name}
-              type={key}
-              placeholder={`Enter ${name.toLowerCase()}`}
-              onChange={({ target: { value } }) => {
-                setValidated({
-                  ...validated,
-                  [key]: regexpTest(key as keyof SignupData, value),
-                })
-              }}
-              {...(validated[key as keyof SignupData] !== null
-                ? { isInvalid: !validated[key as keyof SignupData] }
-                : {})}
-              errorText={`Please provide a valid ${name.toLowerCase()}`}
-            />
-          )
-        })}
-        <Button variant="primary" type="submit">
-          Submit
-        </Button>
-      </Form>
-    </div>
+    <ErrorBoundary>
+      <div className="d-flex w-100 sign-up">
+        <Form
+          noValidate
+          onSubmit={onSubmit}
+          className="border rounded p-4 m-auto w-50">
+          <h3 className="text-center">Sign up</h3>
+          {Object.entries(fields).map(([key, name]) => {
+            return (
+              <FormGroup
+                name={key}
+                label={name}
+                type={key}
+                placeholder={`Enter ${name.toLowerCase()}`}
+                onChange={({ target: { value } }) => {
+                  setValidated({
+                    ...validated,
+                    [key]: regexpTest(key as keyof SignupData, value),
+                  })
+                }}
+                {...(validated[key as keyof SignupData] !== null
+                  ? { isInvalid: !validated[key as keyof SignupData] }
+                  : {})}
+                errorText={`Please provide a valid ${name.toLowerCase()}`}
+              />
+            )
+          })}
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+      </div>
+    </ErrorBoundary>
   )
 }
 
