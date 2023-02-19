@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './components/router/AppRouter';
+import { ErrorBoundary } from './utils/ErrorBoundary';
 import { store } from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,13 +18,15 @@ function App() {
     fetchServerData();
   }, []);
   return (
-    <BrowserRouter>
-      <Provider store={store}>
-        <div className="App">
-          <AppRouter />
-        </div>
-      </Provider>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Provider store={store}>
+          <div className='App'>
+            <AppRouter />
+          </div>
+        </Provider>
+      </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
