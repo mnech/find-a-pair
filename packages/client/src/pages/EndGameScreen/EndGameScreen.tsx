@@ -1,9 +1,9 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { routes } from '../../models/App'
-import './EndGameScreen.scss'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { routes } from '../../models/App';
+import './EndGameScreen.scss';
 //TODO Заглушка заменить когда подъедет статистика игры
-const rate = 40
+const rate = 40;
 
 export const EndGameScreen = () => {
   return (
@@ -16,5 +16,5 @@ export const EndGameScreen = () => {
       <Link to={routes.leaderboard}>Лидерборд</Link>
       <Link to={routes.profile}>Профиль</Link>
     </div>
-  )
-}
+  );
+};

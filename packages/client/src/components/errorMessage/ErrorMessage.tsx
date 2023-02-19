@@ -1,5 +1,5 @@
-import error from '../../assets/img/error.png'
-import './errorMessage.scss'
+import error from '../../assets/img/error.png';
+import './errorMessage.scss';
 
 function ErrorMessage() {
   return (
@@ -7,7 +7,7 @@ function ErrorMessage() {
       <img src={error} alt="error" className="error__img" />
       <p className="error__text">Что-то пошло не так...</p>
     </div>
-  )
+  );
 }
 
-export default ErrorMessage
+export default ErrorMessage;

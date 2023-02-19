@@ -4,9 +4,9 @@ import {
   PlayerInfo,
   EditDataForm,
   EditPasswordForm,
-} from './components'
-import { useState } from 'react'
-import './Profile.scss'
+} from './components';
+import { useState } from 'react';
+import './Profile.scss';
 
 // TODO Поправить когда понятно будет, где данные хранятся
 const testUser = {
@@ -17,11 +17,11 @@ const testUser = {
   email: 'ivanov@yandex.ru',
   phone: '89999999999',
   avatar: '',
-}
+};
 
 const Profile = () => {
-  const [isEditData, setIsEditData] = useState<boolean>(false)
-  const [isEditPassword, setIsEditPassword] = useState<boolean>(false)
+  const [isEditData, setIsEditData] = useState<boolean>(false);
+  const [isEditPassword, setIsEditPassword] = useState<boolean>(false);
 
   return (
     <div className="profile">
@@ -42,7 +42,7 @@ const Profile = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

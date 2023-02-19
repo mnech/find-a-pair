@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import './StartGameScreen.scss'
+import { Link } from 'react-router-dom';
+import './StartGameScreen.scss';
 
 export const StartGameScreen = () => {
   return (
@@ -14,5 +14,5 @@ export const StartGameScreen = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
