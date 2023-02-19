@@ -1,20 +1,20 @@
-import React, { useEffect } from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import AppRouter from './components/router/AppRouter'
-import { ErrorBoundary } from './utils/ErrorBoundary'
-import 'bootstrap/dist/css/bootstrap.min.css'
+import React, { useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import AppRouter from './components/router/AppRouter';
+import { ErrorBoundary } from './utils/ErrorBoundary';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   useEffect(() => {
     const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
+      const url = `http://localhost:${__SERVER_PORT__}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    };
 
-    fetchServerData()
-  }, [])
+    fetchServerData();
+  }, []);
   return (
     <ErrorBoundary>
       <BrowserRouter>
@@ -23,7 +23,7 @@ function App() {
         </div>
       </BrowserRouter>
     </ErrorBoundary>
-  )
+  );
 }
 
-export default App
+export default App;
