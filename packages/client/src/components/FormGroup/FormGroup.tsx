@@ -1,6 +1,5 @@
 import Form from 'react-bootstrap/Form'
 import React from 'react'
-import { ErrorBoundary } from '../../utils/ErrorBoundary'
 
 export type TFormGroup = {
   defaultValue?: string
@@ -28,26 +27,23 @@ const FormGroup = (props: TFormGroup) => {
   } = props
 
   return (
-    <ErrorBoundary>
-      <Form.Group className="mb-3" controlId={name}>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control
-          required={required}
-          type={type}
-          name={name}
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          isInvalid={isInvalid}
-          onChange={onChange}
-        />
-        {errorText && (
-          <Form.Control.Feedback type="invalid">
-            {errorText}
-          </Form.Control.Feedback>
-        )}
-      </Form.Group>
-      ;
-    </ErrorBoundary>
+    <Form.Group className="mb-3" controlId={name}>
+      <Form.Label>{label}</Form.Label>
+      <Form.Control
+        required={required}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        isInvalid={isInvalid}
+        onChange={onChange}
+      />
+      {errorText && (
+        <Form.Control.Feedback type="invalid">
+          {errorText}
+        </Form.Control.Feedback>
+      )}
+    </Form.Group>
   )
 }
 

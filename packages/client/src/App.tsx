@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter } from "react-router-dom";
-import AppRouter from './components/router/AppRouter';
+import { BrowserRouter } from 'react-router-dom'
+import AppRouter from './components/router/AppRouter'
+import { ErrorBoundary } from './utils/ErrorBoundary'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
   useEffect(() => {
@@ -15,11 +16,13 @@ function App() {
     fetchServerData()
   }, [])
   return (
-    <BrowserRouter>
-      <div className="App">
-        <AppRouter />
-      </div>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <div className="App">
+          <AppRouter />
+        </div>
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }
 

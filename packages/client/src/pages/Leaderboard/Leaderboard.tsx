@@ -1,9 +1,8 @@
-import Table from 'react-bootstrap/Table'
-import { Pagination } from './components/Pagination'
-import { useState } from 'react'
-import { IUserRate, paginationMin } from '../../models/Leaderboard'
-import './Leaderboard.scss'
-import { ErrorBoundary } from '../../utils/ErrorBoundary'
+import Table from 'react-bootstrap/Table';
+import { Pagination } from './components/Pagination';
+import { useState } from 'react';
+import { IUserRate, paginationMin } from '../../models/Leaderboard';
+import './Leaderboard.scss';
 
 const data: IUserRate[] = [
   {
@@ -22,9 +21,9 @@ const data: IUserRate[] = [
     name: 'Luis',
     rate: 10,
   },
-]
+];
 export const Leaderboard = () => {
-  const [isActivPage, setIsActivPage] = useState(paginationMin)
+  const [isActivPage, setIsActivPage] = useState(paginationMin);
 
   const renderRow = (row: IUserRate, idx: number): JSX.Element => {
     return (
@@ -33,33 +32,29 @@ export const Leaderboard = () => {
         <td>{row.name}</td>
         <td>{row.rate}</td>
       </tr>
-    )
-  }
+    );
+  };
 
   return (
-    <ErrorBoundary>
-      <div className="container-md overflow-auto mt-5 w-50 h-auto container">
-        <div className="h3 pb-3">LeaderBoard</div>
-        <Table
-          striped
-          bordered
-          hover
-          variant="striped"
-          size="md"
-          className="pb-3">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Имя</th>
-              <th>Рейтинг</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.map((userRate, idx) => renderRow(userRate, idx))}
-          </tbody>
-        </Table>
-        <Pagination page={isActivPage} onChange={setIsActivPage} />
-      </div>
-    </ErrorBoundary>
-  )
-}
+    <div className="container-md overflow-auto mt-5 w-50 h-auto container">
+      <div className="h3 pb-3">LeaderBoard</div>
+      <Table
+        striped
+        bordered
+        hover
+        variant="striped"
+        size="md"
+        className="pb-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Имя</th>
+            <th>Рейтинг</th>
+          </tr>
+        </thead>
+        <tbody>{data?.map((userRate, idx) => renderRow(userRate, idx))}</tbody>
+      </Table>
+      <Pagination page={isActivPage} onChange={setIsActivPage} />
+    </div>
+  );
+};
