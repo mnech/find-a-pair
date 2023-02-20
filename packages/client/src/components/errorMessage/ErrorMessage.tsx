@@ -1,5 +1,5 @@
-import error from "../../assets/img/error.png";
-import "./errorMessage.scss";
+import error from '../../assets/img/error.png';
+import './errorMessage.scss';
 
 function ErrorMessage() {
   return (
