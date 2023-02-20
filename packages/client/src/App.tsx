@@ -21,7 +21,7 @@ function App() {
     <ErrorBoundary>
       <BrowserRouter>
         <Provider store={store}>
-          <div className='App'>
+          <div className="App">
             <AppRouter />
           </div>
         </Provider>

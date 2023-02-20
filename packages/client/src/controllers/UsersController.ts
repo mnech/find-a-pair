@@ -2,7 +2,6 @@ import UsersAPI from '../api/UsersAPI';
 import { Password, UserData } from '../models/User';
 import { store } from '../store';
 import { setError, setSaving, updateUser } from '../reducers/profile';
-import ResourcesController from './ResourcesController';
 
 class UsersController {
   private readonly api = new UsersAPI();
@@ -11,7 +10,7 @@ class UsersController {
     await this.request(async () => {
       const user = await this.api.updateProfile(data);
 
-      store.dispatch(updateUser({ data: user.data }));
+      store.dispatch(updateUser(user.data));
     });
   }
 
@@ -19,12 +18,7 @@ class UsersController {
     await this.request(async () => {
       const user = await this.api.updateAvatar(data);
 
-      store.dispatch(updateUser({ data: user.data }));
-
-      const { avatar } = user.data;
-      if (avatar) {
-        await ResourcesController.getData(avatar);
-      }
+      store.dispatch(updateUser(user.data));
     });
   }
 
