@@ -1,5 +1,6 @@
 import Table from 'react-bootstrap/Table';
-import { Pagination } from './components/Pagination'
+import { Pagination } from './components/Pagination';
+import './Leaderboard.scss';
 import { IUserScore } from '../../models/Leaderboard'
 import "./Leaderboard.scss";
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,8 +20,8 @@ export const Leaderboard = () => {
         <td>{row.name}</td>
         <td>{row.score}</td>
       </tr>
-    )
-  }
+    );
+  };
 
   const handleChangePage = (value: number) => {
     dispatch(leaderboardActions.setPage(value));
@@ -29,19 +30,23 @@ export const Leaderboard = () => {
   return (
     <div className="container-md overflow-auto mt-5 w-50 h-auto container">
       <div className="h3 pb-3">LeaderBoard</div>
-      <Table striped bordered hover variant="striped" size="md" className="pb-3">
+      <Table
+        striped
+        bordered
+        hover
+        variant="striped"
+        size="md"
+        className="pb-3">
         <thead>
-        <tr>
-          <th>#</th>
-          <th>Имя</th>
-          <th>Рейтинг</th>
-        </tr>
+          <tr>
+            <th>#</th>
+            <th>Имя</th>
+            <th>Рейтинг</th>
+          </tr>
         </thead>
-        <tbody>
-          {data?.map((userRate, idx) => renderRow(userRate, idx))}
-        </tbody>
+        <tbody>{data?.map((userRate, idx) => renderRow(userRate, idx))}</tbody>
       </Table>
       <Pagination page={activePage} onChange={handleChangePage}/>
     </div>
-  )
-}
+  );
+};

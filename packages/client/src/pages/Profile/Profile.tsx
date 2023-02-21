@@ -1,4 +1,10 @@
-import { Footer, Header, PlayerInfo, EditDataForm, EditPasswordForm } from './components';
+import {
+  Footer,
+  Header,
+  PlayerInfo,
+  EditDataForm,
+  EditPasswordForm,
+} from './components';
 import { useState } from 'react';
 import './Profile.scss';
 
@@ -17,32 +23,26 @@ const Profile = () => {
   const [isEditData, setIsEditData] = useState<boolean>(false);
   const [isEditPassword, setIsEditPassword] = useState<boolean>(false);
 
-  return <div className="profile">
-    <Header
-      avatar={testUser.avatar}
-      name={testUser.first_name}
-    />
-    {isEditData && (
-      <EditDataForm
-        data={testUser}
-        setIsEditData={setIsEditData}
-      />
-    )}
-    {isEditPassword && (
-      <EditPasswordForm
-        setIsEditPassword={setIsEditPassword}
-      />
-    )}
-    {!isEditData && !isEditPassword && (
-      <>
-        <PlayerInfo data={testUser}/>
-        <Footer
-          setIsEditData={setIsEditData}
-          setIsEditPassword={setIsEditPassword}
-        />
-      </>
-    )}
-  </div>;
+  return (
+    <div className="profile">
+      <Header avatar={testUser.avatar} name={testUser.first_name} />
+      {isEditData && (
+        <EditDataForm data={testUser} setIsEditData={setIsEditData} />
+      )}
+      {isEditPassword && (
+        <EditPasswordForm setIsEditPassword={setIsEditPassword} />
+      )}
+      {!isEditData && !isEditPassword && (
+        <>
+          <PlayerInfo data={testUser} />
+          <Footer
+            setIsEditData={setIsEditData}
+            setIsEditPassword={setIsEditPassword}
+          />
+        </>
+      )}
+    </div>
+  );
 };
 
 export default Profile;
