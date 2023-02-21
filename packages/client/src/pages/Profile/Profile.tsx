@@ -8,10 +8,10 @@ import {
 import { useState } from 'react';
 import './Profile.scss';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store';
+import { userDataSelector } from '../../selectors/profile';
 
 const Profile = () => {
-  const userData = useSelector((state: RootState) => state.profile.data);
+  const userData = useSelector(userDataSelector);
   const [isEditData, setIsEditData] = useState<boolean>(false);
   const [isEditPassword, setIsEditPassword] = useState<boolean>(false);
 
