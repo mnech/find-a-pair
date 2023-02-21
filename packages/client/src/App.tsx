@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from './components/router/AppRouter';
 import { Provider } from 'react-redux'
-import { store } from './store'
+import { setupStore } from './store'
 
 function App() {
   useEffect(() => {
@@ -16,6 +16,8 @@ function App() {
 
     fetchServerData()
   }, [])
+
+  const store = setupStore();
   return (
     <BrowserRouter>
       <Provider store={store}>

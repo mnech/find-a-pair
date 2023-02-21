@@ -29,7 +29,11 @@ const getInitialLeaderboardState = ():ILeaderboardState => ({
       "name": "Luis",
       "score": 10
     }],
-    request: getInitialLeaderboardRequest()
+    request: {
+      ratingFieldName: ratingFieldName,
+      cursor: paginationMin,
+      limit: limitPage
+    }
 })
 
 const leaderboardSlice = createSlice(
