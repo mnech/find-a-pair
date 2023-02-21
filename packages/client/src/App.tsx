@@ -3,6 +3,8 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/router/AppRouter';
 import { ErrorBoundary } from './utils/ErrorBoundary';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 function App() {
   useEffect(() => {
@@ -18,9 +20,11 @@ function App() {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <div className="App">
-          <AppRouter />
-        </div>
+        <Provider store={store}>
+          <div className="App">
+            <AppRouter />
+          </div>
+        </Provider>
       </BrowserRouter>
     </ErrorBoundary>
   );
