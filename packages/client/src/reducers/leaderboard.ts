@@ -1,44 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit'
 import {
-  ILeaderboardRequest,
-  ILeaderboardState,
   limitPage,
   paginationMin,
   ratingFieldName
 } from '../models/Leaderboard'
 
-
-const getInitialLeaderboardRequest = (): ILeaderboardRequest => ({
-      ratingFieldName: ratingFieldName,
-      cursor: paginationMin,
-      limit: limitPage
-})
-
-const getInitialLeaderboardState = ():ILeaderboardState => ({
-   //пока заглушка
-    data: [{
-      "name": "User",
-      "score": 1
-    },{
-      "name": "Jane",
-      "score": 2
-    },{
-      "name": "James",
-      "score": 7
-    },{
-      "name": "Luis",
-      "score": 10
-    }],
-    request: getInitialLeaderboardRequest()
-})
+const initialLeaderboardState = {
+  //пока заглушка
+  data: [{
+    "name": "User",
+    "score": 1
+  },{
+    "name": "Jane",
+    "score": 2
+  },{
+    "name": "James",
+    "score": 7
+  },{
+    "name": "Luis",
+    "score": 10
+  }],
+  request: {
+    ratingFieldName: ratingFieldName,
+    cursor: paginationMin,
+    limit: limitPage
+  }
+}
 
 const leaderboardSlice = createSlice(
   {
     name: 'Leaderboard',
-    initialState: getInitialLeaderboardState(),
+    initialState: initialLeaderboardState,
     reducers: {
       dropState(){
-        return getInitialLeaderboardState();
+        return initialLeaderboardState;
       },
       setPage(state, action){
         state.request.cursor=action.payload

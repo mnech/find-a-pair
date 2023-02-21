@@ -22,6 +22,10 @@ export const Leaderboard = () => {
     )
   }
 
+  const handleChangePage = (value: number) => {
+    dispatch(leaderboardActions.setPage(value));
+  }
+
   return (
     <div className="container-md overflow-auto mt-5 w-50 h-auto container">
       <div className="h3 pb-3">LeaderBoard</div>
@@ -37,7 +41,7 @@ export const Leaderboard = () => {
           {data?.map((userRate, idx) => renderRow(userRate, idx))}
         </tbody>
       </Table>
-      <Pagination page={activePage} onChange={(value)=>dispatch(leaderboardActions.setPage(value))}/>
+      <Pagination page={activePage} onChange={handleChangePage}/>
     </div>
   )
 }

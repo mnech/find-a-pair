@@ -1,9 +1,9 @@
 /**Минимальный номер страницы для отображения*/
-export const paginationMin=1;
+export const paginationMin = 1;
 /**Максимальный номер страницы для отображения*/
-export const paginationMax=10;
+export const paginationMax = 10;
 /**Количество записей для отображения*/
-export const limitPage=10;
+export const limitPage = 10;
 
 /**
  * Интерфейс данных с рейтингами
