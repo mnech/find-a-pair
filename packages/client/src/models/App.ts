@@ -8,4 +8,4 @@ export const routes = {
   game: 'game',
   startGame: 'start-game',
   endGame: 'end-game',
-}
+};

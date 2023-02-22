@@ -8,8 +8,9 @@ import { RootState } from '../../store';
 import { leaderboardActions } from '../../reducers/leaderboard';
 
 export const Leaderboard = () => {
-
-  const activePage = useSelector((state: RootState) => state.leaderboard.request.cursor);
+  const activePage = useSelector(
+    (state: RootState) => state.leaderboard.request.cursor,
+  );
   const data = useSelector((state: RootState) => state.leaderboard.data);
   const dispatch = useDispatch();
 
@@ -36,13 +37,14 @@ export const Leaderboard = () => {
         hover
         variant="striped"
         size="md"
-        className="pb-3">
+        className="pb-3"
+      >
         <thead>
-        <tr>
-          <th>#</th>
-          <th>Имя</th>
-          <th>Рейтинг</th>
-        </tr>
+          <tr>
+            <th>#</th>
+            <th>Имя</th>
+            <th>Рейтинг</th>
+          </tr>
         </thead>
         <tbody>{data?.map((userRate, idx) => renderRow(userRate, idx))}</tbody>
       </Table>

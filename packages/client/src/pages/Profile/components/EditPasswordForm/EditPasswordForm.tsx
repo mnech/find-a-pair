@@ -73,7 +73,7 @@ const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
     event.stopPropagation();
     event.preventDefault();
     const form = event.currentTarget as HTMLFormElement;
-    if (!Object.values(validated).every(item => item)) return;
+    if (!Object.values(validated).every((item) => item)) return;
 
     const data = Object.fromEntries(new FormData(form));
     await UsersController.updatePassword(data as unknown as Password);
@@ -91,7 +91,7 @@ const EditPasswordForm = ({ setIsEditPassword }: EditPasswordFormProps) => {
   };
 
   const onChangeRepeatPassword = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const { value, name } = event.currentTarget;
     setValues({ ...values, [name]: value });

@@ -73,12 +73,12 @@ const EditDataForm = ({ data, setIsEditData }: EditDataFormProps) => {
   const [validated, setValidated] = useState(() => getValidateInit(data));
 
   const handleSubmit = async (
-    event: React.SyntheticEvent<HTMLFormElement, Event>
+    event: React.SyntheticEvent<HTMLFormElement, Event>,
   ) => {
     event.stopPropagation();
     event.preventDefault();
     const form = event.currentTarget;
-    if (!Object.values(validated).every(item => item)) return;
+    if (!Object.values(validated).every((item) => item)) return;
 
     const data = Object.fromEntries(new FormData(form));
     await UsersController.updateProfile(data as unknown as UserData);
