@@ -41,7 +41,7 @@ const Forum = () => {
       <header className="border-bottom border-info p-4">Forum</header>
 
       <div className="p-5">
-        {Object.values(forums).map(item => {
+        {Object.values(forums).map((item) => {
           return (
             <div key={item.title} className="mt-4">
               <div className="forum-category rounded-top">
@@ -54,11 +54,12 @@ const Forum = () => {
                   <div className="p-3">Posts</div>
                 </div>
 
-                {item.posts.map(item => {
+                {item.posts.map((item) => {
                   return (
                     <div
                       key={item.title}
-                      className="p-3 forum-topic d-flex border-bottom bg-light">
+                      className="p-3 forum-topic d-flex border-bottom bg-light"
+                    >
                       <div className="d-flex flex-column flex-grow-1">
                         <span className="text-info fw-bold">
                           <a href="#">{item.title}</a>

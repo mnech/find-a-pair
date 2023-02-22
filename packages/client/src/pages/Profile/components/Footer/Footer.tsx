@@ -3,8 +3,8 @@ import AuthController from '../../../../controllers/AuthController';
 import './Footer.scss';
 
 export interface FooterProps {
-  setIsEditData: (state: boolean) => void,
-  setIsEditPassword: (state: boolean) => void,
+  setIsEditData: (state: boolean) => void;
+  setIsEditPassword: (state: boolean) => void;
 }
 
 const Footer = ({ setIsEditData, setIsEditPassword }: FooterProps) => {
@@ -20,27 +20,19 @@ const Footer = ({ setIsEditData, setIsEditPassword }: FooterProps) => {
     await AuthController.logout();
   };
 
-  return <footer className="footer">
-    <Button
-      variant="link"
-      onClick={handlerEditData}
-    >
-      Изменить данные
-    </Button>
-    <Button
-      variant="link"
-      onClick={handlerEditPassword}
-    >
-      Изменить пароль
-    </Button>
-    <Button
-      variant="link"
-      className="danger"
-      onClick={logout}
-    >
-      Выйти
-    </Button>
-  </footer>;
+  return (
+    <footer className="footer">
+      <Button variant="link" onClick={handlerEditData}>
+        Изменить данные
+      </Button>
+      <Button variant="link" onClick={handlerEditPassword}>
+        Изменить пароль
+      </Button>
+      <Button variant="link" className="danger" onClick={logout}>
+        Выйти
+      </Button>
+    </footer>
+  );
 };
 
 export default Footer;

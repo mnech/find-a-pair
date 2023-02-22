@@ -10,7 +10,7 @@ export default abstract class BaseAPI {
   }
 
   protected request(req: TRequest) {
-    return this.Transport.request(req)
+    return this.Transport.request(req);
   }
 
   public abstract create?(data: unknown): Promise<unknown>;

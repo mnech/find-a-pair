@@ -2,9 +2,9 @@ import axios from 'axios';
 import { Methods } from '../api/consts';
 
 export type TRequest = {
-  method?: Methods
-  url: string
-  data?: unknown
+  method?: Methods;
+  url: string;
+  data?: unknown;
 };
 
 export default class Transport {

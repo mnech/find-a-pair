@@ -1,26 +1,26 @@
-import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
-import Form from 'react-bootstrap/Form'
-import { UserData } from '../../../../models/User'
-import UsersController from '../../../../controllers/UsersController'
-import { regexpTest } from '../../../../utils/validate'
-import { FormGroup } from '../../../../components/FormGroup'
-import './EditDataForm.scss'
+import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import { UserData } from '../../../../models/User';
+import UsersController from '../../../../controllers/UsersController';
+import { regexpTest } from '../../../../utils/validate';
+import { FormGroup } from '../../../../components/FormGroup';
+import './EditDataForm.scss';
 
 export interface EditDataFormProps {
-  data: UserData
-  setIsEditData: (state: boolean) => void
+  data: UserData;
+  setIsEditData: (state: boolean) => void;
 }
 
 type TFormGroups = {
   [key in keyof UserData]: {
-    label: string
-    placeholder: string
-    errorText: string
-    required: boolean
-    type?: string
-  }
-}
+    label: string;
+    placeholder: string;
+    errorText: string;
+    required: boolean;
+    type?: string;
+  };
+};
 
 const FormGroups: TFormGroups = {
   first_name: {
@@ -60,45 +60,45 @@ const FormGroups: TFormGroups = {
     errorText: 'Введите верный номер телефона',
     type: 'tel',
   },
-} as const
+} as const;
 
 const getValidateInit = (data: UserData) => {
   return Object.keys(FormGroups).reduce((acc, key) => {
-    acc[key as keyof UserData] = !!data[key as keyof UserData]
-    return acc
-  }, {} as Record<keyof UserData, boolean>)
-}
+    acc[key as keyof UserData] = !!data[key as keyof UserData];
+    return acc;
+  }, {} as Record<keyof UserData, boolean>);
+};
 
 const EditDataForm = ({ data, setIsEditData }: EditDataFormProps) => {
-  const [validated, setValidated] = useState(() => getValidateInit(data))
+  const [validated, setValidated] = useState(() => getValidateInit(data));
 
   const handleSubmit = async (
-    event: React.SyntheticEvent<HTMLFormElement, Event>
+    event: React.SyntheticEvent<HTMLFormElement, Event>,
   ) => {
-    event.stopPropagation()
-    event.preventDefault()
-    const form = event.currentTarget
-    if (!Object.values(validated).every(item => item)) return
+    event.stopPropagation();
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (!Object.values(validated).every((item) => item)) return;
 
-    const data = Object.fromEntries(new FormData(form))
-    await UsersController.updateProfile(data as unknown as UserData)
+    const data = Object.fromEntries(new FormData(form));
+    await UsersController.updateProfile(data as unknown as UserData);
 
-    setIsEditData(false)
-  }
+    setIsEditData(false);
+  };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = event.currentTarget
+    const { value, name } = event.currentTarget;
     setValidated({
       ...validated,
       [name]: regexpTest(name as keyof UserData, value),
-    })
-  }
+    });
+  };
 
   return (
     <Form className="form-edit-data" noValidate onSubmit={handleSubmit}>
       {Object.entries(FormGroups).map(([key, value]) => {
-        const { label, placeholder, errorText, required, type } = value
-        const name = key as keyof UserData
+        const { label, placeholder, errorText, required, type } = value;
+        const name = key as keyof UserData;
 
         return (
           <FormGroup
@@ -113,13 +113,13 @@ const EditDataForm = ({ data, setIsEditData }: EditDataFormProps) => {
             isInvalid={!validated[name]}
             onChange={onChange}
           />
-        )
+        );
       })}
       <Button variant="primary" type="submit" className="button">
         Submit
       </Button>
     </Form>
-  )
-}
+  );
+};
 
-export default EditDataForm
+export default EditDataForm;

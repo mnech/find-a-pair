@@ -10,13 +10,13 @@ export default class ResourcesAPI extends BaseAPI {
     return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/`,
-      data
+      data,
     });
   }
 
   public getData(path: string) {
     return this.request({
-      url: `${path}`
+      url: `${path}`,
     });
   }
 

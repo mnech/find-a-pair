@@ -26,7 +26,8 @@ export const Auth = () => {
     <div className="container-sm mt-5" style={{ padding: '10em 0' }}>
       <Form
         className="row d-flex justify-content-center col-lg-4 offset-lg-4 shadow-sm p-5 rounded needs-validation"
-        onSubmit={handleClickSubmit}>
+        onSubmit={handleClickSubmit}
+      >
         <div className="form-outline">
           <input
             type="text"
