@@ -7,34 +7,26 @@ import {
 } from './components';
 import { useState } from 'react';
 import './Profile.scss';
-
-// TODO Поправить когда понятно будет, где данные хранятся
-const testUser = {
-  first_name: 'Иван',
-  second_name: 'Иванов',
-  display_name: 'Иванушка',
-  login: 'ivanovv',
-  email: 'ivanov@yandex.ru',
-  phone: '89999999999',
-  avatar: '',
-};
+import { useSelector } from 'react-redux';
+import { userDataSelector } from '../../selectors/profile';
 
 const Profile = () => {
+  const userData = useSelector(userDataSelector);
   const [isEditData, setIsEditData] = useState<boolean>(false);
   const [isEditPassword, setIsEditPassword] = useState<boolean>(false);
 
   return (
     <div className="profile">
-      <Header avatar={testUser.avatar} name={testUser.first_name} />
+      <Header avatar={userData.avatar} name={userData.first_name} />
       {isEditData && (
-        <EditDataForm data={testUser} setIsEditData={setIsEditData} />
+        <EditDataForm data={userData} setIsEditData={setIsEditData} />
       )}
       {isEditPassword && (
         <EditPasswordForm setIsEditPassword={setIsEditPassword} />
       )}
       {!isEditData && !isEditPassword && (
         <>
-          <PlayerInfo data={testUser} />
+          <PlayerInfo data={userData} />
           <Footer
             setIsEditData={setIsEditData}
             setIsEditPassword={setIsEditPassword}
