@@ -12,8 +12,8 @@ export const limitPage = 10;
  * score Рейтинг
  */
 export interface IUserScore {
-  name: string,
-  score: number
+  name: string;
+  score: number;
 }
 
 /**
@@ -29,9 +29,9 @@ export const ratingFieldName = 'findAPairScore';
  * limit Количество записей на странице
  */
 export interface ILeaderboardRequest {
-  ratingFieldName: string,
-  cursor: number,
-  limit: number
+  ratingFieldName: string;
+  cursor: number;
+  limit: number;
 }
 
 /**
@@ -40,7 +40,7 @@ export interface ILeaderboardRequest {
  * data Данные для отображения
  * request Запрос
  */
-export interface ILeaderboardState  {
-  data: IUserScore[]
-  request: ILeaderboardRequest
+export interface ILeaderboardState {
+  data: IUserScore[];
+  request: ILeaderboardRequest;
 }

@@ -29,7 +29,9 @@ const Header = ({ avatar, name }: HeaderProps) => {
     }
   };
 
-  const onErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const onErrorHandler = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>,
+  ) => {
     event.currentTarget.src = '/logo.png';
   };
 
@@ -39,17 +41,25 @@ const Header = ({ avatar, name }: HeaderProps) => {
     }
   }, [avatar]);
 
-  return <header className="header">
-    <img
-      src={avatar}
-      className="avatar rounded-3 shadow"
-      onError={onErrorHandler}
-      alt="Аватар"
-      onClick={changeAvatar}
-    />
-    <input type="file" accept="image/*" ref={inputFile} onChange={onchange} hidden/>
-    <h1>{name}</h1>
-  </header>;
+  return (
+    <header className="header">
+      <img
+        src={avatar}
+        className="avatar rounded-3 shadow"
+        onError={onErrorHandler}
+        alt="Аватар"
+        onClick={changeAvatar}
+      />
+      <input
+        type="file"
+        accept="image/*"
+        ref={inputFile}
+        onChange={onchange}
+        hidden
+      />
+      <h1>{name}</h1>
+    </header>
+  );
 };
 
 export default Header;

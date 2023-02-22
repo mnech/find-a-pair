@@ -12,7 +12,7 @@ export default class AuthAPI extends BaseAPI {
     return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/signin`,
-      data
+      data,
     });
   }
 
@@ -20,20 +20,20 @@ export default class AuthAPI extends BaseAPI {
     return this.request({
       method: Methods.Post,
       url: `${this.endpoint}/signup`,
-      data
+      data,
     });
   }
 
   public getUser(): AxiosPromise<User> {
     return this.request({
-      url: `${this.endpoint}/user`
+      url: `${this.endpoint}/user`,
     });
   }
 
   public logout() {
     return this.request({
       method: Methods.Post,
-      url: `${this.endpoint}/logout`
+      url: `${this.endpoint}/logout`,
     });
   }
 
