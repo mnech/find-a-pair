@@ -1,6 +1,7 @@
 import UsersAPI from '../api/UsersAPI';
 import { Password, UserData } from '../models/User';
-import ResourcesController from './ResourcesController';
+import { store } from '../store';
+import { setError, setSaving, updateUser } from '../reducers/profile';
 
 class UsersController {
   private readonly api = new UsersAPI();
@@ -9,7 +10,7 @@ class UsersController {
     await this.request(async () => {
       const user = await this.api.updateProfile(data);
 
-      // TODO Здесь должены данные пользователя записываться в стор (редакс в будущем)
+      store.dispatch(updateUser(user.data));
     });
   }
 
@@ -17,12 +18,7 @@ class UsersController {
     await this.request(async () => {
       const user = await this.api.updateAvatar(data);
 
-      // TODO Здесь должены данные пользователя записываться в стор (редакс в будущем)
-
-      /*      const { avatar } = store.getState().user.data;
-            if (avatar) {
-              await ResourcesController.fetchData(avatar);
-            }*/
+      store.dispatch(updateUser(user.data));
     });
   }
 
@@ -42,10 +38,16 @@ class UsersController {
   }
 
   protected async request(req: () => void) {
+    store.dispatch(setSaving(true));
+
     try {
       await req();
+
+      store.dispatch(setError(null));
     } catch (e: any) {
-      console.error(e.reason);
+      store.dispatch(setError(e.reason));
+    } finally {
+      store.dispatch(setSaving(false));
     }
   }
 }
