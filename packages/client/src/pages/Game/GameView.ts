@@ -104,7 +104,6 @@ export class GameView {
         id++;
       }
     }
-    console.log(this.fieldOfSquares)
   }
 
   drowImgAll(img: any, i: any, x: number, y: number, ctx: any): any {
