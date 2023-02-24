@@ -2,14 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from '../../models/App';
 import './EndGameScreen.scss';
-//TODO Заглушка заменить когда подъедет статистика игры
-const rate = 40;
+import { useSelector } from 'react-redux';
+import { scoreSelector } from '../../selectors/game';
 
 export const EndGameScreen = () => {
+  const score = useSelector(scoreSelector);
   return (
     <div className="container-md mt-5 w-50 h-auto d-flex flex-column align-items-center">
       <p className="endGameTitle">Конец игры</p>
-      <p className="endGameScore">Счёт: {rate}</p>
+      <p className="endGameScore">Счёт: {score}</p>
       <Link to={routes.game} className="btn btn-primary">
         Попробовать еще раз?
       </Link>
