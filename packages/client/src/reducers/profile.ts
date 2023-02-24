@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../models/User';
-
 interface IProfile {
   data: User;
   isLoading: boolean;
@@ -8,7 +7,7 @@ interface IProfile {
   error: string | null;
 }
 
-const initialState: IProfile = {
+export const initialState: IProfile = {
   data: {
     id: 0,
     first_name: '',

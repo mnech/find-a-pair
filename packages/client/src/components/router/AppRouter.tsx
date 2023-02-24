@@ -10,14 +10,17 @@ import { StartGameScreen } from '../../pages/StartGameScreen/StartGameScreen';
 import Signup from '../../pages/SignUp/SignUp';
 import { routes } from '../../models/App';
 import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen';
+import { useAuth } from '../../hooks/useAuth';
 
 function AppRouter() {
+  useAuth();
+
   return (
     <Routes>
-      <Route path={routes.profile}>
-        <Route index element={<Profile />} />
+      <Route path={routes.auth}>
+        <Route index element={<Auth />} />
 
-        <Route path={routes.auth} element={<Auth />} />
+        <Route path={routes.profile} element={<Profile />} />
 
         <Route path={routes.signUp} element={<Signup />} />
 

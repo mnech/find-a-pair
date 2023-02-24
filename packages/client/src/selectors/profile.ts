@@ -29,3 +29,7 @@ export const userErrorSelector = createSelector(
     return error;
   },
 );
+
+export const userIdSelector = createSelector(userDataSelector, (data: User) => {
+  return data.id;
+});
