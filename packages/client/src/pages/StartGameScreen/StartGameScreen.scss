@@ -24,19 +24,18 @@
     margin-bottom: 30px;
   }
 
-  &__game {
-    color: blue;
-    font-size: 22px;
-    line-height: 26px;
-    text-align: center;
-    margin-bottom: 80px;
-  }
-
   &__link {
     color: black;
     font-size: 16px;
     line-height: 22px;
     text-align: center;
     margin-bottom: 15px;
+
+    &_game {
+      color: blue;
+      font-size: 22px;
+      line-height: 26px;
+      margin-bottom: 80px;
+    }
   }
 }

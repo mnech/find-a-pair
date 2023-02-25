@@ -16,7 +16,7 @@ export const StartGameScreen = () => {
           Кликай по карточкам, запоминай, что под ними изображено, и находи пары
           одинаковых картинок
         </p>
-        <Link to={routes.game} className="start__game">
+        <Link to={routes.game} className="start__link start__link_game">
           Старт
         </Link>
         <Link to={routes.leaderboard} className="start__link">
