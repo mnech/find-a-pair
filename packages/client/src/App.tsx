@@ -4,7 +4,8 @@ import AppRouter from './components/router/AppRouter';
 import { ErrorBoundary } from './utils/ErrorBoundary';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { store, persistor } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
   useEffect(() => {
@@ -21,9 +22,11 @@ function App() {
     <ErrorBoundary>
       <BrowserRouter>
         <Provider store={store}>
-          <div className="App">
-            <AppRouter />
-          </div>
+          <PersistGate loading={null} persistor={persistor}>
+            <div className="App">
+              <AppRouter />
+            </div>
+          </PersistGate>
         </Provider>
       </BrowserRouter>
     </ErrorBoundary>

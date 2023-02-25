@@ -1,5 +1,7 @@
 import AuthAPI from '../api/AuthAPI';
 import { SigninData, SignupData } from '../models/User';
+import { store } from '../store';
+import { updateUser } from '../reducers/profile';
 
 class AuthController {
   private readonly api = new AuthAPI();
@@ -12,11 +14,11 @@ class AuthController {
     });
   }
 
-  public async signup(data: SignupData) {
+  public async signup(signupData: SignupData) {
     await this.request(async () => {
-      await this.api.signup(data);
-
-      await this.fetchUser();
+      await this.api.signup(signupData);
+      const { data } = await this.fetchUser();
+      store.dispatch(updateUser(data));
     });
   }
 
@@ -28,6 +30,7 @@ class AuthController {
 
   public async fetchUser() {
     const user = await this.api.getUser();
+    return user;
   }
 
   protected async request(req: () => void) {
