@@ -10,7 +10,7 @@ class AuthController {
 
   public async signin(data: SigninData) {
     await this.request(async () => {
-      await this.api.signin(data).then;
+      await this.api.signin(data);
       await this.fetchUser();
     });
   }
