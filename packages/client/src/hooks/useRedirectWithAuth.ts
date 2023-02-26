@@ -7,7 +7,7 @@ import { authActions } from '../reducers/auth';
 import { UserStatusTypes } from '../models/Auth';
 import { RootState } from '../store';
 
-export const useAuth = () => {
+export const useRedirectWithAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.profile.data.id);
@@ -23,7 +23,9 @@ export const useAuth = () => {
 
   useEffect(() => {
     dispatch(authActions.setUserLoadingStatus(null));
-    !userId && getUserInfo();
+    if (!userId) {
+      getUserInfo();
+    }
     setPathName(location.pathname);
   }, [location]);
 
@@ -39,6 +41,8 @@ export const useAuth = () => {
   };
 
   useEffect(() => {
-    status !== null && status !== UserStatusTypes.BEGIN && handleRedirect();
+    if (status !== null && status !== UserStatusTypes.BEGIN) {
+      handleRedirect();
+    }
   }, [userId, status]);
 };

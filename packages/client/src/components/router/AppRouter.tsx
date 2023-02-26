@@ -10,10 +10,10 @@ import { StartGameScreen } from '../../pages/StartGameScreen/StartGameScreen';
 import Signup from '../../pages/SignUp/SignUp';
 import { routes } from '../../models/App';
 import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen';
-import { useAuth } from '../../hooks/useAuth';
+import { useRedirectWithAuth } from '../../hooks/useRedirectWithAuth';
 
 function AppRouter() {
-  useAuth();
+  useRedirectWithAuth();
 
   return (
     <Routes>
