@@ -5,6 +5,9 @@ import { ErrorBoundary } from './utils/ErrorBoundary';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import registerServiceWorker from './utils/registerSW';
+
+registerServiceWorker();
 
 function App() {
   useEffect(() => {
