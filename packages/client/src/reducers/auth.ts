@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { EGetUserStatusTypes } from '../models/Auth';
+import { UserStatusTypes } from '../models/Auth';
 
 interface IAuthState {
   isSignedIn: false;
-  status: EGetUserStatusTypes | null;
+  userLoadingStatus: UserStatusTypes | null;
   error?: string | null;
 }
 
 const initialState: IAuthState = {
   isSignedIn: false,
-  status: null,
+  userLoadingStatus: null,
   error: null,
 };
 
@@ -17,8 +17,8 @@ const authSlice = createSlice({
   name: 'Auth',
   initialState,
   reducers: {
-    setStatusLoading(state, action) {
-      state.status = action.payload;
+    setUserLoadingStatus(state, action) {
+      state.userLoadingStatus = action.payload;
     },
     setError(state, action) {
       state.error = action.payload;

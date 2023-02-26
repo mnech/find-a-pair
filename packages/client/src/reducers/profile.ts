@@ -7,7 +7,7 @@ interface IProfile {
   error: string | null;
 }
 
-export const initialState: IProfile = {
+const initialState: IProfile = {
   data: {
     id: 0,
     first_name: '',
@@ -39,9 +39,12 @@ const profileSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+    resetData(state) {
+      state.data = initialState.data;
+    },
   },
 });
 
-export const { updateUser, setLoading, setSaving, setError } =
+export const { updateUser, setLoading, setSaving, setError, resetData } =
   profileSlice.actions;
 export const profileReducer = profileSlice.reducer;

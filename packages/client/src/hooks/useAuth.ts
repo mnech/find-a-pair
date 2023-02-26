@@ -4,14 +4,16 @@ import AuthController from '../controllers/AuthController';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { routes } from '../models/App';
 import { authActions } from '../reducers/auth';
-import { EGetUserStatusTypes } from '../models/Auth';
+import { UserStatusTypes } from '../models/Auth';
 import { RootState } from '../store';
 
 export const useAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.profile.data.id);
-  const status = useSelector((state: RootState) => state.auth.status);
+  const status = useSelector(
+    (state: RootState) => state.auth.userLoadingStatus,
+  );
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
 
@@ -20,9 +22,9 @@ export const useAuth = () => {
   };
 
   useEffect(() => {
-    setPathName(location.pathname);
-    dispatch(authActions.setStatusLoading(null));
+    dispatch(authActions.setUserLoadingStatus(null));
     !userId && getUserInfo();
+    setPathName(location.pathname);
   }, [location]);
 
   const handleRedirect = () => {
@@ -37,6 +39,6 @@ export const useAuth = () => {
   };
 
   useEffect(() => {
-    status !== null && status !== EGetUserStatusTypes.BEGIN && handleRedirect();
+    status !== null && status !== UserStatusTypes.BEGIN && handleRedirect();
   }, [userId, status]);
 };

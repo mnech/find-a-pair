@@ -2,8 +2,8 @@ import AuthAPI from '../api/AuthAPI';
 import { SigninData, SignupData } from '../models/User';
 import { store } from '../store';
 import { authActions } from '../reducers/auth';
-import { initialState, updateUser } from '../reducers/profile';
-import { EGetUserStatusTypes } from '../models/Auth';
+import { resetData, updateUser } from '../reducers/profile';
+import { UserStatusTypes } from '../models/Auth';
 
 class AuthController {
   private readonly api = new AuthAPI();
@@ -26,27 +26,35 @@ class AuthController {
   public async logout() {
     await this.request(async () => {
       await this.api.logout();
-      store.dispatch(updateUser(initialState.data));
+      store.dispatch(resetData());
     });
   }
 
   public async fetchUser() {
-    try {
-      store.dispatch(authActions.setStatusLoading(EGetUserStatusTypes.BEGIN));
-      const response = await this.api.getUser();
-      store.dispatch(updateUser(response.data));
-      store.dispatch(authActions.setStatusLoading(EGetUserStatusTypes.SUCCESS));
-    } catch (e: any) {
-      store.dispatch(authActions.setStatusLoading(EGetUserStatusTypes.FAILURE));
-    }
+    await this.request(
+      async () => {
+        store.dispatch(authActions.setUserLoadingStatus(UserStatusTypes.BEGIN));
+        const response = await this.api.getUser();
+        store.dispatch(updateUser(response.data));
+        store.dispatch(
+          authActions.setUserLoadingStatus(UserStatusTypes.SUCCESS),
+        );
+      },
+      () =>
+        store.dispatch(
+          authActions.setUserLoadingStatus(UserStatusTypes.FAILURE),
+        ),
+    );
   }
 
-  protected async request(req: () => void) {
+  protected async request(req: () => void, errorHandler?: () => void) {
     try {
       await req();
     } catch (e: any) {
       const reason = e.response.data?.reason;
-      store.dispatch(authActions.setError(reason));
+      errorHandler
+        ? errorHandler()
+        : store.dispatch(authActions.setError(reason));
     }
   }
 }

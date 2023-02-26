@@ -1,4 +1,4 @@
-export enum EGetUserStatusTypes {
+export enum UserStatusTypes {
   BEGIN = 'BEGIN',
   FAILURE = 'FAILURE',
   SUCCESS = 'SUCCESS',
