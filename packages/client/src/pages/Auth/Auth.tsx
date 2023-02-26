@@ -4,12 +4,12 @@ import AuthController from '../../controllers/AuthController';
 import { useSelector } from 'react-redux';
 import { routes } from '../../models/App';
 import { Link } from 'react-router-dom';
-import { errorSelector } from '../../selectors/auth';
+import { RootState } from '../../store';
 
 export const Auth = () => {
   const [login, setLogin] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const error = useSelector(errorSelector);
+  const error = useSelector((state: RootState) => state.auth.error);
   const handleChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.currentTarget.value);
   };

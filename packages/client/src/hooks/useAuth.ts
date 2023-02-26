@@ -1,18 +1,17 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { userIdSelector } from '../selectors/profile';
 import { useEffect, useState } from 'react';
 import AuthController from '../controllers/AuthController';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { routes } from '../models/App';
-import { statusSelector } from '../selectors/auth';
 import { authActions } from '../reducers/auth';
 import { EGetUserStatusTypes } from '../models/Auth';
+import { RootState } from '../store';
 
 export const useAuth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const userId = useSelector(userIdSelector);
-  const status = useSelector(statusSelector);
+  const userId = useSelector((state: RootState) => state.profile.data.id);
+  const status = useSelector((state: RootState) => state.auth.status);
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
 
