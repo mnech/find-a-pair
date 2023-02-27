@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { User } from '../models/User';
-
 interface IProfile {
   data: User;
   isLoading: boolean;
@@ -40,9 +39,12 @@ const profileSlice = createSlice({
     setError(state, action) {
       state.error = action.payload;
     },
+    resetData(state) {
+      state.data = initialState.data;
+    },
   },
 });
 
-export const { updateUser, setLoading, setSaving, setError } =
+export const { updateUser, setLoading, setSaving, setError, resetData } =
   profileSlice.actions;
 export const profileReducer = profileSlice.reducer;
