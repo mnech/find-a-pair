@@ -1,5 +1,7 @@
 import React from 'react';
 import './forum.scss';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store';
 
 const forums = {
   // TODO api
@@ -36,6 +38,7 @@ const forums = {
 };
 
 const Forum = () => {
+  const state = useSelector((state: RootState) => state.forum);
   return (
     <div>
       <header className="border-bottom border-info p-4">Forum</header>
