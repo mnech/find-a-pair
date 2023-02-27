@@ -1,7 +1,7 @@
 /**Роутинги**/
 export const routes = {
-  profile: '/',
-  auth: 'sign-in',
+  auth: '/',
+  profile: 'profile',
   signUp: 'sign-up',
   leaderboard: 'leaderboard',
   forum: 'forum',

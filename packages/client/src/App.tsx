@@ -6,6 +6,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store, persistor } from './store';
 import { PersistGate } from 'redux-persist/integration/react';
+import registerServiceWorker from './utils/registerSW';
+
+registerServiceWorker();
 
 function App() {
   useEffect(() => {
