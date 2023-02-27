@@ -2,9 +2,10 @@ import React, { FormEvent, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AuthController from '../../controllers/AuthController';
-import { Password, SignupData } from '../../models/User';
+import { SignupData } from '../../models/User';
 import { regexpTest } from '../../utils/validate';
 import { FormGroup } from '../../components/FormGroup';
+import './SignUp.scss';
 
 const fields: SignupData = {
   first_name: 'First name',
@@ -31,7 +32,7 @@ const SignUp = () => {
       new FormData(event.target as HTMLFormElement),
     );
 
-    const userId = await AuthController.signup(data as unknown as SignupData); // TODO redux store?
+    await AuthController.signup(data as unknown as SignupData);
   };
 
   return (
@@ -48,6 +49,7 @@ const SignUp = () => {
               name={key}
               label={name}
               type={key}
+              key={key}
               placeholder={`Enter ${name.toLowerCase()}`}
               onChange={({ target: { value } }) => {
                 setValidated({

@@ -15,10 +15,9 @@ class AuthController {
     });
   }
 
-  public async signup(data: SignupData) {
+  public async signup(signupData: SignupData) {
     await this.request(async () => {
-      await this.api.signup(data);
-
+      await this.api.signup(signupData);
       await this.fetchUser();
     });
   }
