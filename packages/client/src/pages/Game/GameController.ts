@@ -62,12 +62,16 @@ export class GameController extends GameView {
   }
 
   clickStartGameHandler(){
-    if (this.gameStatus == "0_start game") {
+    enum GameStatuses {
+      StartGame = "0_start game",
+      RestartGame = "restart game"
+    }
+    if (this.gameStatus == GameStatuses.StartGame) {
       this.blockSquares = false;
       this.openALLImages();
       this.textRestartGame();
-      this.gameStatus = "restart game";
-    } else if (this.gameStatus == "restart game") {
+      this.gameStatus = GameStatuses.RestartGame;
+    } else if (this.gameStatus == GameStatuses.RestartGame) {
       this.blockSquares = true;
       this.closeALLImages();
       this.restartGame();
