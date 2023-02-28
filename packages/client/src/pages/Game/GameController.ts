@@ -157,6 +157,7 @@ export class GameController extends GameView {
   }
 
   openALLImages() {
+    const closingTimeOfAllImages = 2000;
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
         const square = this.fieldOfSquares[c][r];
@@ -164,7 +165,7 @@ export class GameController extends GameView {
         this.drowImgAll(square.image, square.i, square.x, square.y, this.ctx);
       }
     }
-    setTimeout(this.closeALLImages.bind(this), 2000);
+    setTimeout(this.closeALLImages.bind(this), closingTimeOfAllImages);
   }
 
   closeALLImages() {
