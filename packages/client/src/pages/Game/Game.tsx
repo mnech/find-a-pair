@@ -6,9 +6,11 @@ function Game() {
   const ref = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
-    const canvas = ref.current! as HTMLCanvasElement;
-    const ctx = canvas!.getContext("2d");
-    new GameController(canvas, ctx);
+    const canvas = ref.current;
+    if(canvas){
+      const ctx = canvas.getContext("2d");
+      new GameController(canvas, ctx);
+    }
   }, []);
 
   return <canvas ref={ref} width={500} height={500} />;
