@@ -10,7 +10,6 @@ export class GameController extends GameView {
 
   constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
     super(canvas, ctx);
-
     this.setEventClickStartGameAndSquares();
     this.textButtonStartGame();
     this.createField();
@@ -115,10 +114,13 @@ export class GameController extends GameView {
   }
 
   compareSquards(image: any) {
+   const closingTimeMismatchImages = 800;
+   const imageIsReadyForTheOpening = 1;
+   const imageMatched = 2;
     const clearCompareImages = (status: number) => {
       for (let y = 0; y < this.compareImages.length; y++) {
         const squard = this.compareImages[y];
-        if (status == 1) {
+        if (status == imageIsReadyForTheOpening) {
           this.clearA(squard.x, squard.y, squard.width, squard.height);
           this.drowSquare(squard.x, squard.y, squard.width, squard.height);
         }
@@ -126,7 +128,6 @@ export class GameController extends GameView {
       }
       this.compareImages = [];
     };
-
     if (this.compareImages.length < 2) {
       this.compareImages.push(image);
       if (this.compareImages.length == 2) {
@@ -135,10 +136,10 @@ export class GameController extends GameView {
           this.textScore();
           this.attempts += 1;
           this.textAttempts();
-          clearCompareImages(2);
+          clearCompareImages(imageMatched);
           this.setEndGame();
         } else {
-          setTimeout(clearCompareImages, 800, 1);
+          setTimeout(clearCompareImages, closingTimeMismatchImages, imageIsReadyForTheOpening);
           this.attempts += 1;
           this.textAttempts();
         }
