@@ -68,11 +68,12 @@ export class GameView {
   constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
     this.canvas = canvas;
     this.ctx = ctx;
-    console.log("this.ctx", this.ctx);
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
     this.drowSquare = this.drowSquare.bind(this);
+    this.drowAllImgs = this.drowAllImgs.bind(this);
+    this.drowImg = this.drowImg.bind(this);
     this.textScore();
     this.textAttempts();
   }
@@ -107,20 +108,24 @@ export class GameView {
     }
   }
 
-  drowImgAll(square: SquareT, ctx: CanvasRenderingContext2D): any {
+  drowAllImgs(square: SquareT): any {
     return new Promise<void>((resolve) => {
       square.image.src = square.i;
-      square.image.onload = function () {
-        ctx.drawImage(square.image, square.x, square.y, 50, 50);
-        resolve();
+      square.image.onload = () => {
+        if (this.ctx) {
+          this.ctx.drawImage(square.image, square.x, square.y, 50, 50);
+        }
       };
+      resolve();
     });
   }
 
-  drowImg(img: any, i: any, x: number, y: number, ctx: any): any {
-    img.src = i;
-    img.onload = function () {
-      ctx.drawImage(img, x, y, 50, 50);
+  drowImg(square: SquareT): void {
+    square.image.src = square.i;
+    square.image.onload = () => {
+      if (this.ctx) {
+        this.ctx.drawImage(square.image, square.x, square.y, 50, 50);
+      }
     };
   }
 

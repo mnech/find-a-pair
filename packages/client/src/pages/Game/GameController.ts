@@ -93,13 +93,7 @@ export class GameController extends GameView {
             const square = this.fieldOfSquares[c][r];
             this.clearA(square.x, square.y, square.width, square.height);
             if (square.status == 1) {
-              this.drowImg(
-                square.image,
-                square.i,
-                square.x,
-                square.y,
-                this.ctx
-              );
+              this.drowImg(square);
               square.status = 0;
               this.compareSquards(square);
             }
@@ -158,7 +152,7 @@ export class GameController extends GameView {
 
   openALLImages() {
     const closingTimeOfAllImages = 2000;
-    this.helperGetAllImages(this.drowImgAll);
+    this.helperGetAllImages(this.drowAllImgs);
     setTimeout(this.closeALLImages.bind(this), closingTimeOfAllImages);
   }
 
@@ -167,16 +161,13 @@ export class GameController extends GameView {
   }
 
   helperGetAllImages(
-    additionalFunction: (square: SquareT, ctx: CanvasRenderingContext2D) => void
+    additionalFunction: (square: SquareT) => void
   ) {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
         const square = this.fieldOfSquares[c][r];
         this.clearA(square.x, square.y, square.width, square.height);
-        console.log("1");
-        if (this.ctx) {
-          additionalFunction(square, this.ctx);
-        }
+          additionalFunction(square);
       }
     }
   }
