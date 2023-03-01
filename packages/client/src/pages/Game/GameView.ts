@@ -15,7 +15,7 @@ import i5965375 from "./imgs/game_item_backpack.png";
 import i5965452 from "./imgs/game_item_branch.png";
 
 
-type ScuareT = {
+export type SquareT = {
   x: number,
   y: number,
   width: number,
@@ -28,14 +28,13 @@ type ScuareT = {
 
 
 export class GameView {
-
   textColor1 = "#0095DD";
   canvas: any;
-  ctx: any;
+  ctx: CanvasRenderingContext2D | null;
   column = 6;
   rows = 5;
   padding = 10;
-  fieldOfSquares: ScuareT[][] = [];
+  fieldOfSquares: SquareT[][] = [];
   width = 50;
   height = 50;
   marginLeftX: number;
@@ -64,14 +63,16 @@ export class GameView {
   ];
 
   imgs: string[] = [];
-  compareImages: ScuareT[] = [];
+  compareImages: SquareT[] = [];
 
   constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
     this.canvas = canvas;
     this.ctx = ctx;
+    console.log("this.ctx", this.ctx);
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
+    this.drowSquare = this.drowSquare.bind(this);
     this.textScore();
     this.textAttempts();
   }
@@ -106,11 +107,11 @@ export class GameView {
     }
   }
 
-  drowImgAll(img: any, i: any, x: number, y: number, ctx: any): any {
+  drowImgAll(square: SquareT, ctx: CanvasRenderingContext2D): any {
     return new Promise<void>((resolve) => {
-      img.src = i;
-      img.onload = function () {
-        ctx.drawImage(img, x, y, 50, 50);
+      square.image.src = square.i;
+      square.image.onload = function () {
+        ctx.drawImage(square.image, square.x, square.y, 50, 50);
         resolve();
       };
     });
@@ -135,46 +136,49 @@ export class GameView {
           this.fieldOfSquares[c][r].y =
             r * (this.fieldOfSquares[c][r].height + this.padding) +
             this.marginTopY;
-          this.drowSquare(
-            this.fieldOfSquares[c][r].x,
-            this.fieldOfSquares[c][r].y,
-            this.fieldOfSquares[c][r].width,
-            this.fieldOfSquares[c][r].height
-          );
+          this.drowSquare(this.fieldOfSquares[c][r]);
         }
       }
     }
   }
 
-  drowSquare(x: number, y: number, width: number, height: number) {
-    this.ctx.beginPath();
-    this.ctx.rect(x, y, width, height);
-    this.ctx.fillStyle = "#0095DD";
-    this.ctx.fill();
-    this.ctx.closePath();
+  drowSquare(square: SquareT) {
+    if (this.ctx) {
+      this.ctx.beginPath();
+      this.ctx.rect(square.x, square.y, square.width, square.height);
+      this.ctx.fillStyle = "#0095DD";
+      this.ctx.fill();
+      this.ctx.closePath();
+    }
   }
 
   textScore() {
     this.clearA(50, 10, 140, 21);
-    this.ctx.font = "20px Arial";
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText("score: " + this.score, 50, 30);
+    if (this.ctx) {
+      this.ctx.font = "20px Arial";
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText("score: " + this.score, 50, 30);
+    }
   }
 
   textAttempts() {
     this.clearA(50, 40, 220, 21);
-    this.ctx.font = "20px Arial";
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText("attempts: " + this.attempts, 50, 60);
+    if (this.ctx) {
+      this.ctx.font = "20px Arial";
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText("attempts: " + this.attempts, 50, 60);
+    }
   }
 
   textYouWin(clear = false) {
     if (clear) {
       this.clearA(this.canvas.width / 2 - 55, 5, 220, 25);
     } else {
-      this.ctx.font = "25px Arial";
-      this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText("You Win", this.canvas.width / 2 - 55, 30);
+      if (this.ctx) {
+        this.ctx.font = "25px Arial";
+        this.ctx.fillStyle = this.textColor1;
+        this.ctx.fillText("You Win", this.canvas.width / 2 - 55, 30);
+      }
     }
   }
 
@@ -183,46 +187,52 @@ export class GameView {
       this.clearA(this.canvas.width / 2 - 20, 35, 220, 20);
     } else {
       this.totalScore = this.score - this.attempts;
-      this.ctx.font = "20px Arial";
-      this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText(
-        this.totalScore as unknown as string,
-        this.canvas.width / 2 - 20,
-        55
-      );
+      if (this.ctx) {
+        this.ctx.font = "20px Arial";
+        this.ctx.fillStyle = this.textColor1;
+        this.ctx.fillText(
+          this.totalScore as unknown as string,
+          this.canvas.width / 2 - 20,
+          55
+        );
+      }
     }
   }
 
   textButtonStartGame() {
-    this.ctx.clearRect(
-      this.canvas.width / 2 - 120,
-      this.canvas.height - 50 - 30,
-      300,
-      30
-    );
-    this.ctx.font = "30px Arial";
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText(
-      "START GAME",
-      this.canvas.width / 2 - 100,
-      this.canvas.height - 50
-    );
+    if (this.ctx) {
+      this.ctx.clearRect(
+        this.canvas.width / 2 - 120,
+        this.canvas.height - 50 - 30,
+        300,
+        30
+      );
+      this.ctx.font = "30px Arial";
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText(
+        "START GAME",
+        this.canvas.width / 2 - 100,
+        this.canvas.height - 50
+      );
+    }
   }
 
   textRestartGame() {
-    this.ctx.clearRect(
-      this.canvas.width / 2 - 100,
-      this.canvas.height - 50 - 30,
-      300,
-      30
-    );
-    this.ctx.font = "30px Arial";
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText(
-      "RESTART GAME",
-      this.canvas.width / 2 - 120,
-      this.canvas.height - 50
-    );
+    if (this.ctx) {
+      this.ctx.clearRect(
+        this.canvas.width / 2 - 100,
+        this.canvas.height - 50 - 30,
+        300,
+        30
+      );
+      this.ctx.font = "30px Arial";
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText(
+        "RESTART GAME",
+        this.canvas.width / 2 - 120,
+        this.canvas.height - 50
+      );
+    }
   }
 
   clearA(
@@ -231,6 +241,8 @@ export class GameView {
     width: number = this.canvas.width,
     height: number = this.canvas.height
   ) {
-    this.ctx.clearRect(x, y, width, height);
+    if (this.ctx) {
+      this.ctx.clearRect(x, y, width, height);
+    }
   }
 }
