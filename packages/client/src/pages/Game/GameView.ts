@@ -110,12 +110,7 @@ export class GameView {
 
   drowAllImgs(square: SquareT): any {
     return new Promise<void>((resolve) => {
-      square.image.src = square.i;
-      square.image.onload = () => {
-        if (this.ctx) {
-          this.ctx.drawImage(square.image, square.x, square.y, 50, 50);
-        }
-      };
+      this.drowImg(square)
       resolve();
     });
   }
