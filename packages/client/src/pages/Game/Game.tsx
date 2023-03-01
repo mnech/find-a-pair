@@ -3,11 +3,11 @@ import "./game.scss";
 import { GameController } from "./GameController";
 
 function Game() {
-  
+
   const ref = useRef<HTMLCanvasElement | null>(null);
+  let game: GameController;
 
   useEffect(() => {
-    let game: GameController;
     const canvas = ref.current;
     if (canvas) {
       const ctx = canvas.getContext("2d");
