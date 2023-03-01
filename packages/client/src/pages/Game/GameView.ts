@@ -65,7 +65,7 @@ export class GameView {
   imgs: string[] = [];
   compareImages: SquareT[] = [];
 
-  constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
+  constructor(canvas: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.marginLeftX =

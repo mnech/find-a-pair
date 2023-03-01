@@ -8,8 +8,9 @@ export class GameController extends GameView {
   lives = 3;
   blockSquares = true;
 
-  constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
+  constructor(canvas: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null) {
     super(canvas, ctx);
+    this.mouseClick=this.mouseClick.bind(this)
     this.setEventClickStartGameAndSquares();
     this.textButtonStartGame();
     this.createField();
@@ -31,7 +32,12 @@ export class GameController extends GameView {
   }
 
   setEventClickStartGameAndSquares() {
-    document.addEventListener("click", this.mouseClick.bind(this), false);
+    // document.addEventListener("click", this.mouseClick.bind(this), false);
+    document.addEventListener("click", this.mouseClick);
+  }
+
+  removeEventClickStartGameAndSquares(){
+    document.removeEventListener("click", this.mouseClick)
   }
 
   mouseClick(e: { clientX: number; clientY: number }) {
