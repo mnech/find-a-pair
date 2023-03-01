@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import './game.scss';
 import { GameController } from './GameController';
 import Player from '../../components/player/Player';
+import { MUSIC_URL } from '../../consts';
 
 function Game() {
   const ref = useRef<HTMLCanvasElement | null>(null);
@@ -14,7 +15,7 @@ function Game() {
 
   return (
     <>
-      <Player url="http://jplayer.org/audio/mp3/RioMez-01-Sleep_together.mp3" />
+      <Player url={MUSIC_URL} />
       <canvas ref={ref} width={500} height={500} />
     </>
   );
