@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 
-type AudioRef = {
-  current: null | HTMLAudioElement;
-};
-
 const useAudio = (url: string): [boolean, () => void] => {
-  const audioRef: AudioRef = useRef(null);
+  const audioRef = useRef<null | HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
   if (audioRef.current === null) {
