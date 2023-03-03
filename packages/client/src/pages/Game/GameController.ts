@@ -11,6 +11,9 @@ enum SquareStasuses {
   imageMatched = 2,
 }
 
+const closingTimeMismatchImages = 800;
+const closingTimeOfAllImages = 2000;
+
 export class GameController extends GameView {
   gameStatus = '0_start game';
   intervalTime = 10;
@@ -118,7 +121,6 @@ export class GameController extends GameView {
   }
 
   compareSquards(image: any) {
-    const closingTimeMismatchImages = 800;
     const clearCompareImages = (status: number) => {
       for (let y = 0; y < this.compareImages.length; y++) {
         const squard = this.compareImages[y];
@@ -163,7 +165,6 @@ export class GameController extends GameView {
   }
 
   openALLImages() {
-    const closingTimeOfAllImages = 2000;
     this.helperGetAllImages(this.drowAllImgs);
     setTimeout(this.closeALLImages.bind(this), closingTimeOfAllImages);
   }
