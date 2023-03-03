@@ -1,6 +1,5 @@
 import UsersController from '../../../../controllers/UsersController';
-import ResourcesController from '../../../../controllers/ResourcesController';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import './Header.scss';
 
 export interface HeaderProps {
@@ -29,27 +28,31 @@ const Header = ({ avatar, name }: HeaderProps) => {
     }
   };
 
-  const onErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const onErrorHandler = (
+    event: React.SyntheticEvent<HTMLImageElement, Event>,
+  ) => {
     event.currentTarget.src = '/logo.png';
   };
 
-  useEffect(() => {
-    if (avatar) {
-      ResourcesController.getData(avatar);
-    }
-  }, [avatar]);
-
-  return <header className="header">
-    <img
-      src={avatar}
-      className="avatar rounded-3 shadow"
-      onError={onErrorHandler}
-      alt="Аватар"
-      onClick={changeAvatar}
-    />
-    <input type="file" accept="image/*" ref={inputFile} onChange={onchange} hidden/>
-    <h1>{name}</h1>
-  </header>;
+  return (
+    <header className="header">
+      <img
+        src={avatar && `https://ya-praktikum.tech/api/v2/resources${avatar}`}
+        className="avatar rounded-3 shadow"
+        onError={onErrorHandler}
+        alt="Аватар"
+        onClick={changeAvatar}
+      />
+      <input
+        type="file"
+        accept="image/*"
+        ref={inputFile}
+        onChange={onchange}
+        hidden
+      />
+      <h1>{name}</h1>
+    </header>
+  );
 };
 
 export default Header;

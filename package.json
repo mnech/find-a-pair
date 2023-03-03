@@ -22,5 +22,9 @@
   "devDependencies": {
     "@evilmartians/lefthook": "^1.1.1",
     "lerna": "^5.4.3"
+  },
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
+    "react-redux": "^8.0.5"
   }
 }

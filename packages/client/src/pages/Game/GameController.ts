@@ -181,6 +181,6 @@ export class GameController extends GameView {
   restartGame() {
     this.leadUpField();
     this.createField();
-    this.gameStatus = "restart game";
+    this.gameStatus = 'restart game';
   }
 }

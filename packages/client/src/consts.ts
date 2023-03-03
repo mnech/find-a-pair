@@ -20,3 +20,6 @@ export enum Fields {
   NewPassword = 'newPassword',
   Phone = 'phone',
 }
+
+export const MUSIC_URL =
+  'http://jplayer.org/audio/mp3/RioMez-01-Sleep_together.mp3';

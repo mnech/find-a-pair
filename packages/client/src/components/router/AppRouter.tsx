@@ -1,69 +1,41 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from 'react-router-dom';
 
-import Page404 from "../../pages/Page404/Page404";
-import { Auth } from "../../pages/Auth/Auth";
-import { Leaderboard } from "../../pages/Leaderboard/Leaderboard";
-import Game from "../../pages/Game/Game";
-import Forum from "../../pages/Forum/Forum";
-import Profile from "../../pages/Profile/Profile";
-import { StartGameScreen } from "../../pages/StartGameScreen/StartGameScreen";
-import Signup from "../../pages/SignUp/SignUp";
+import Page404 from '../../pages/Page404/Page404';
+import { Auth } from '../../pages/Auth/Auth';
+import { Leaderboard } from '../../pages/Leaderboard/Leaderboard';
+import Game from '../../pages/Game/Game';
+import Forum from '../../pages/Forum/Forum';
+import Profile from '../../pages/Profile/Profile';
+import { StartGameScreen } from '../../pages/StartGameScreen/StartGameScreen';
+import Signup from '../../pages/SignUp/SignUp';
+import { routes } from '../../models/App';
+import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen';
+import { useRedirectWithAuth } from '../../hooks/useRedirectWithAuth';
 
 function AppRouter() {
+  useRedirectWithAuth();
+
   return (
-      <Routes>
-        <Route path="/">
-          <Route 
-            index
-            element={
-                <Profile />
-            }
-          />
+    <Routes>
+      <Route path={routes.auth}>
+        <Route index element={<Auth />} />
 
-          <Route 
-            path="sigin"
-            element={
-                <Auth />
-            }
-          />
+        <Route path={routes.profile} element={<Profile />} />
 
-          <Route 
-            path="signup"
-            element={
-                <Signup />
-            }
-          />
+        <Route path={routes.signUp} element={<Signup />} />
 
-          <Route 
-            path="leaderboard"
-            element={
-                <Leaderboard />
-            }
-          />
+        <Route path={routes.leaderboard} element={<Leaderboard />} />
 
-          <Route 
-            path="forum"
-            element={
-                <Forum />
-            }
-          />
+        <Route path={routes.forum} element={<Forum />} />
 
-          <Route 
-            path="game"
-            element={
-                <Game />
-            }
-          />   
+        <Route path={routes.game} element={<Game />} />
 
-          <Route 
-            path="start-game"
-            element={
-                <StartGameScreen />
-            }
-          /> 
-        </Route>
-        <Route path="*" element={<Page404 />} />
-      </Routes>
+        <Route path={routes.startGame} element={<StartGameScreen />} />
+
+        <Route path={routes.endGame} element={<EndGameScreen />} />
+      </Route>
+      <Route path="*" element={<Page404 />} />
+    </Routes>
   );
 }
 

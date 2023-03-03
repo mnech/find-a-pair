@@ -1,32 +1,38 @@
-import React, { useState } from 'react'
-import { Form, Button } from 'react-bootstrap'
-import AuthController from '../../controllers/AuthController'
+import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import AuthController from '../../controllers/AuthController';
+import { useSelector } from 'react-redux';
+import { routes } from '../../models/App';
+import { Link } from 'react-router-dom';
+import { RootState } from '../../store';
 
 export const Auth = () => {
-  const [login, setLogin] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-
+  const [login, setLogin] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const error = useSelector((state: RootState) => state.auth.error);
   const handleChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setLogin(event.currentTarget.value)
-  }
-
+    setLogin(event.currentTarget.value);
+  };
   const handleChangePasword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.currentTarget.value)
-  }
+    setPassword(event.currentTarget.value);
+  };
 
   const handleClickSubmit = async (event: React.FormEvent) => {
-    await AuthController.signin({ login, password })
-  }
-
-  const handleClickSignIn = () => {
-    //TODO Добавить редирект
-  }
+    event.preventDefault();
+    await AuthController.signin({ login, password });
+  };
 
   return (
     <div className="container-sm mt-5" style={{ padding: '10em 0' }}>
+      {error && (
+        <div className="alert alert-danger col-lg-4 offset-lg-4" role="alert">
+          {error}
+        </div>
+      )}
       <Form
         className="row d-flex justify-content-center col-lg-4 offset-lg-4 shadow-sm p-5 rounded needs-validation"
-        onSubmit={handleClickSubmit}>
+        onSubmit={handleClickSubmit}
+      >
         <div className="form-outline">
           <input
             type="text"
@@ -57,11 +63,11 @@ export const Auth = () => {
           Войти
         </Button>
         <div className="text-center">
-          <Button variant="link" onClick={handleClickSignIn}>
+          <Link to={routes.signUp} className="link-primary">
             Нет аккаунта?
-          </Button>
+          </Link>
         </div>
       </Form>
     </div>
-  )
-}
+  );
+};
