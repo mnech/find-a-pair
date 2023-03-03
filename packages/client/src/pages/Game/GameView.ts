@@ -1,20 +1,20 @@
-import i5965270 from './imgs/5965270.png';
-import i5965263 from './imgs/5965263.png';
-import i5965278 from './imgs/5965278.png';
-import i5965284 from './imgs/5965284.png';
-import i5965290 from './imgs/5965290.png';
-import i5965297 from './imgs/5965297.png';
-import i5965304 from './imgs/5965304.png';
-import i5965312 from './imgs/5965312.png';
-import i5965320 from './imgs/5965320.png';
-import i5965327 from './imgs/5965327.png';
-import i5965333 from './imgs/5965333.png';
-import i5965343 from './imgs/5965343.png';
-import i5965366 from './imgs/5965366.png';
-import i5965375 from './imgs/5965375.png';
-import i5965452 from './imgs/5965452.png';
+import i5965270 from './imgs/game_item_flower_star.png';
+import i5965263 from './imgs/game_item_glass_jar.png';
+import i5965278 from './imgs/game_item_tree_leaf.png';
+import i5965284 from './imgs/game_item_kettle.png';
+import i5965290 from './imgs/game_item_letters.png';
+import i5965297 from './imgs/game_item_plant_in_the_pot.png';
+import i5965304 from './imgs/game_item_cup.png';
+import i5965312 from './imgs/game_item_telephone.png';
+import i5965320 from './imgs/game_item_orange.png';
+import i5965327 from './imgs/game_item_notebook.png';
+import i5965333 from './imgs/game_item_tv.png';
+import i5965343 from './imgs/game_item_candle.png';
+import i5965366 from './imgs/game_item_yarn.png';
+import i5965375 from './imgs/game_item_backpack.png';
+import i5965452 from './imgs/game_item_branch.png';
 
-type ScuareT = {
+export type SquareT = {
   x: number;
   y: number;
   width: number;
@@ -22,17 +22,19 @@ type ScuareT = {
   status: number;
   id: number;
   image: HTMLImageElement;
-  i: string;
+  imgPath: string;
 };
 
 export class GameView {
   textColor1 = '#0095DD';
+  textStartGame = 'START GAME';
+  textRestartGame = 'RESTART GAME';
   canvas: any;
-  ctx: any;
+  ctx: CanvasRenderingContext2D | null;
   column = 6;
   rows = 5;
   padding = 10;
-  fieldOfSquares: ScuareT[][] = [];
+  fieldOfSquares: SquareT[][] = [];
   width = 50;
   height = 50;
   marginLeftX: number;
@@ -61,14 +63,21 @@ export class GameView {
   ];
 
   imgs: string[] = [];
-  compareImages: ScuareT[] = [];
+  compareImages: SquareT[] = [];
 
-  constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
+  constructor(
+    canvas: HTMLCanvasElement | null,
+    ctx: CanvasRenderingContext2D | null,
+  ) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
+    this.drawSquare = this.drawSquare.bind(this);
+    this.drawAllImgs = this.drawAllImgs.bind(this);
+    this.drawImg = this.drawImg.bind(this);
+    this.drawImg = this.drawImg.bind(this);
     this.textScore();
     this.textAttempts();
   }
@@ -96,27 +105,25 @@ export class GameView {
           status: 1,
           id: id,
           image: new Image(),
-          i: this.imgs[id],
+          imgPath: this.imgs[id],
         };
         id++;
       }
     }
   }
 
-  drowImgAll(img: any, i: any, x: number, y: number, ctx: any): any {
-    return new Promise<void>((resolve) => {
-      img.src = i;
-      img.onload = function () {
-        ctx.drawImage(img, x, y, 50, 50);
-        resolve();
-      };
+  drawAllImgs(square: SquareT) {
+    Promise.resolve(square).then((square) => {
+      this.drawImg(square);
     });
   }
 
-  drowImg(img: any, i: any, x: number, y: number, ctx: any): any {
-    img.src = i;
-    img.onload = function () {
-      ctx.drawImage(img, x, y, 50, 50);
+  drawImg(square: SquareT): void {
+    square.image.src = square.imgPath;
+    square.image.onload = () => {
+      if (this.ctx) {
+        this.ctx.drawImage(square.image, square.x, square.y, 50, 50);
+      }
     };
   }
 
@@ -132,94 +139,87 @@ export class GameView {
           this.fieldOfSquares[c][r].y =
             r * (this.fieldOfSquares[c][r].height + this.padding) +
             this.marginTopY;
-          this.drowSquare(
-            this.fieldOfSquares[c][r].x,
-            this.fieldOfSquares[c][r].y,
-            this.fieldOfSquares[c][r].width,
-            this.fieldOfSquares[c][r].height,
-          );
+          this.drawSquare(this.fieldOfSquares[c][r]);
         }
       }
     }
   }
 
-  drowSquare(x: number, y: number, width: number, height: number) {
-    this.ctx.beginPath();
-    this.ctx.rect(x, y, width, height);
-    this.ctx.fillStyle = '#0095DD';
-    this.ctx.fill();
-    this.ctx.closePath();
+  drawSquare(square: SquareT) {
+    if (this.ctx) {
+      this.ctx.beginPath();
+      this.ctx.rect(square.x, square.y, square.width, square.height);
+      this.ctx.fillStyle = '#0095DD';
+      this.ctx.fill();
+      this.ctx.closePath();
+    }
   }
 
   textScore() {
     this.clearA(50, 10, 140, 21);
-    this.ctx.font = '20px Arial';
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText('score: ' + this.score, 50, 30);
+    if (this.ctx) {
+      this.ctx.font = '20px Arial';
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText('score: ' + this.score, 50, 30);
+    }
   }
 
   textAttempts() {
     this.clearA(50, 40, 220, 21);
-    this.ctx.font = '20px Arial';
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText('attempts: ' + this.attempts, 50, 60);
+    if (this.ctx) {
+      this.ctx.font = '20px Arial';
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText('attempts: ' + this.attempts, 50, 60);
+    }
   }
 
   textYouWin(clear = false) {
+    const sameСalculations = this.canvas.width / 2 - 55;
     if (clear) {
-      this.clearA(this.canvas.width / 2 - 55, 5, 220, 25);
+      this.clearA(sameСalculations, 5, 220, 25);
     } else {
-      this.ctx.font = '25px Arial';
-      this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText('You Win', this.canvas.width / 2 - 55, 30);
+      if (this.ctx) {
+        this.ctx.font = '25px Arial';
+        this.ctx.fillStyle = this.textColor1;
+        this.ctx.fillText('You Win', sameСalculations, 30);
+      }
     }
   }
 
   textTotalScore(clear = false) {
+    const sameСalculations = this.canvas.width / 2 - 20;
     if (clear) {
-      this.clearA(this.canvas.width / 2 - 20, 35, 220, 20);
+      this.clearA(sameСalculations, 35, 220, 20);
     } else {
       this.totalScore = this.score - this.attempts;
-      this.ctx.font = '20px Arial';
-      this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText(
-        this.totalScore as unknown as string,
-        this.canvas.width / 2 - 20,
-        55,
-      );
+      if (this.ctx) {
+        this.ctx.font = '20px Arial';
+        this.ctx.fillStyle = this.textColor1;
+        this.ctx.fillText(
+          this.totalScore as unknown as string,
+          sameСalculations,
+          55,
+        );
+      }
     }
   }
 
-  textButtonStartGame() {
-    this.ctx.clearRect(
-      this.canvas.width / 2 - 120,
-      this.canvas.height - 50 - 30,
-      300,
-      30,
-    );
-    this.ctx.font = '30px Arial';
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText(
-      'START GAME',
-      this.canvas.width / 2 - 100,
-      this.canvas.height - 50,
-    );
-  }
-
-  textRestartGame() {
-    this.ctx.clearRect(
-      this.canvas.width / 2 - 100,
-      this.canvas.height - 50 - 30,
-      300,
-      30,
-    );
-    this.ctx.font = '30px Arial';
-    this.ctx.fillStyle = this.textColor1;
-    this.ctx.fillText(
-      'RESTART GAME',
-      this.canvas.width / 2 - 120,
-      this.canvas.height - 50,
-    );
+  drawButtonStartRestartGame(buttonName: string) {
+    if (this.ctx) {
+      this.ctx.clearRect(
+        this.canvas.width / 2 - 120,
+        this.canvas.height - 50 - 30,
+        300,
+        30,
+      );
+      this.ctx.font = '30px Arial';
+      this.ctx.fillStyle = this.textColor1;
+      this.ctx.fillText(
+        buttonName,
+        this.canvas.width / 2 - 100,
+        this.canvas.height - 50,
+      );
+    }
   }
 
   clearA(
@@ -228,6 +228,8 @@ export class GameView {
     width: number = this.canvas.width,
     height: number = this.canvas.height,
   ) {
-    this.ctx.clearRect(x, y, width, height);
+    if (this.ctx) {
+      this.ctx.clearRect(x, y, width, height);
+    }
   }
 }

@@ -6,11 +6,17 @@ import { MUSIC_URL } from '../../consts';
 
 function Game() {
   const ref = useRef<HTMLCanvasElement | null>(null);
+  let game: GameController;
 
   useEffect(() => {
-    const canvas = ref.current! as HTMLCanvasElement;
-    const ctx = canvas!.getContext('2d');
-    new GameController(canvas, ctx);
+    const canvas = ref.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      game = new GameController(canvas, ctx);
+    }
+    return () => {
+      game.ablation();
+    };
   }, []);
 
   return (
