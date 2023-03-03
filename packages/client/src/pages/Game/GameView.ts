@@ -27,6 +27,8 @@ export type SquareT = {
 
 export class GameView {
   textColor1 = '#0095DD';
+  textStartGame = 'START GAME';
+  textRestartGame = 'RESTART GAME';
   canvas: any;
   ctx: CanvasRenderingContext2D | null;
   column = 6;
@@ -200,7 +202,7 @@ export class GameView {
     }
   }
 
-  textButtonStartGame() {
+  drawButtonStartRestartGame(buttonName: string) {
     if (this.ctx) {
       this.ctx.clearRect(
         this.canvas.width / 2 - 120,
@@ -211,26 +213,8 @@ export class GameView {
       this.ctx.font = '30px Arial';
       this.ctx.fillStyle = this.textColor1;
       this.ctx.fillText(
-        'START GAME',
+        buttonName,
         this.canvas.width / 2 - 100,
-        this.canvas.height - 50,
-      );
-    }
-  }
-
-  textRestartGame() {
-    if (this.ctx) {
-      this.ctx.clearRect(
-        this.canvas.width / 2 - 100,
-        this.canvas.height - 50 - 30,
-        300,
-        30,
-      );
-      this.ctx.font = '30px Arial';
-      this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText(
-        'RESTART GAME',
-        this.canvas.width / 2 - 120,
         this.canvas.height - 50,
       );
     }

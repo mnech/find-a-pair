@@ -28,7 +28,7 @@ export class GameController extends GameView {
     super(canvas, ctx);
     this.mouseClick = this.mouseClick.bind(this);
     this.setEventClickStartGameAndSquares();
-    this.textButtonStartGame();
+    this.drawButtonStartRestartGame(this.textStartGame);
     this.createField();
   }
 
@@ -81,7 +81,7 @@ export class GameController extends GameView {
     if (this.gameStatus == GameStatuses.StartGame) {
       this.blockSquares = false;
       this.openALLImages();
-      this.textRestartGame();
+      this.drawButtonStartRestartGame(this.textRestartGame);
       this.gameStatus = GameStatuses.RestartGame;
     } else if (this.gameStatus == GameStatuses.RestartGame) {
       this.blockSquares = true;
