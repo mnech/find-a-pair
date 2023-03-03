@@ -1,16 +1,19 @@
-import { GameView } from "./GameView";
-import type { SquareT } from "./GameView";
+import { GameView } from './GameView';
+import type { SquareT } from './GameView';
 
 export class GameController extends GameView {
-  gameStatus = "0_start game";
+  gameStatus = '0_start game';
   intervalTime = 10;
   score = 0;
   lives = 3;
   blockSquares = true;
 
-  constructor(canvas: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null) {
+  constructor(
+    canvas: HTMLCanvasElement | null,
+    ctx: CanvasRenderingContext2D | null,
+  ) {
     super(canvas, ctx);
-    this.mouseClick=this.mouseClick.bind(this)
+    this.mouseClick = this.mouseClick.bind(this);
     this.setEventClickStartGameAndSquares();
     this.textButtonStartGame();
     this.createField();
@@ -32,11 +35,11 @@ export class GameController extends GameView {
   }
 
   setEventClickStartGameAndSquares() {
-    document.addEventListener("click", this.mouseClick);
+    document.addEventListener('click', this.mouseClick);
   }
 
-  removeEventClickStartGameAndSquares(){
-    document.removeEventListener("click", this.mouseClick)
+  ablation() {
+    document.removeEventListener('click', this.mouseClick);
   }
 
   mouseClick(e: { clientX: number; clientY: number }) {
@@ -63,8 +66,8 @@ export class GameController extends GameView {
 
   clickStartGameHandler() {
     enum GameStatuses {
-      StartGame = "0_start game",
-      RestartGame = "restart game",
+      StartGame = '0_start game',
+      RestartGame = 'restart game',
     }
     if (this.gameStatus == GameStatuses.StartGame) {
       this.blockSquares = false;
@@ -137,7 +140,7 @@ export class GameController extends GameView {
           setTimeout(
             clearCompareImages,
             closingTimeMismatchImages,
-            imageIsReadyForTheOpening
+            imageIsReadyForTheOpening,
           );
           this.attempts += 1;
           this.textAttempts();
@@ -165,14 +168,12 @@ export class GameController extends GameView {
     this.helperGetAllImages(this.drowSquare);
   }
 
-  helperGetAllImages(
-    additionalFunction: (square: SquareT) => void
-  ) {
+  helperGetAllImages(additionalFunction: (square: SquareT) => void) {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
         const square = this.fieldOfSquares[c][r];
         this.clearA(square.x, square.y, square.width, square.height);
-          additionalFunction(square);
+        additionalFunction(square);
       }
     }
   }
