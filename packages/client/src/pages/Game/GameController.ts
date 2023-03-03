@@ -1,6 +1,11 @@
 import { GameView } from './GameView';
 import type { SquareT } from './GameView';
 
+enum GameStatuses {
+  StartGame = '0_start game',
+  RestartGame = 'restart game',
+}
+
 export class GameController extends GameView {
   gameStatus = '0_start game';
   intervalTime = 10;
@@ -65,10 +70,6 @@ export class GameController extends GameView {
   }
 
   clickStartGameHandler() {
-    enum GameStatuses {
-      StartGame = '0_start game',
-      RestartGame = 'restart game',
-    }
     if (this.gameStatus == GameStatuses.StartGame) {
       this.blockSquares = false;
       this.openALLImages();
