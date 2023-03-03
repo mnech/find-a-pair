@@ -77,6 +77,7 @@ export class GameView {
     this.drawSquare = this.drawSquare.bind(this);
     this.drawAllImgs = this.drawAllImgs.bind(this);
     this.drawImg = this.drawImg.bind(this);
+    this.drawImg = this.drawImg.bind(this);
     this.textScore();
     this.textAttempts();
   }
@@ -111,10 +112,9 @@ export class GameView {
     }
   }
 
-  drawAllImgs(square: SquareT): any {
-    return new Promise<void>((resolve) => {
+  drawAllImgs(square: SquareT) {
+    Promise.resolve(square).then((square) => {
       this.drawImg(square);
-      resolve();
     });
   }
 
