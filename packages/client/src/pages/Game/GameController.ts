@@ -6,6 +6,11 @@ enum GameStatuses {
   RestartGame = 'restart game',
 }
 
+enum SquareStasuses {
+  imageIsReadyForTheOpening = 1,
+  imageMatched = 2,
+}
+
 export class GameController extends GameView {
   gameStatus = '0_start game';
   intervalTime = 10;
@@ -101,7 +106,7 @@ export class GameController extends GameView {
           ) {
             const square = this.fieldOfSquares[c][r];
             this.clearA(square.x, square.y, square.width, square.height);
-            if (square.status == 1) {
+            if (square.status == SquareStasuses.imageIsReadyForTheOpening) {
               this.drowImg(square);
               square.status = 0;
               this.compareSquards(square);
@@ -114,12 +119,10 @@ export class GameController extends GameView {
 
   compareSquards(image: any) {
     const closingTimeMismatchImages = 800;
-    const imageIsReadyForTheOpening = 1;
-    const imageMatched = 2;
     const clearCompareImages = (status: number) => {
       for (let y = 0; y < this.compareImages.length; y++) {
         const squard = this.compareImages[y];
-        if (status == imageIsReadyForTheOpening) {
+        if (status == SquareStasuses.imageIsReadyForTheOpening) {
           this.clearA(squard.x, squard.y, squard.width, squard.height);
           this.drowSquare(squard);
         }
@@ -135,13 +138,13 @@ export class GameController extends GameView {
           this.textScore();
           this.attempts += 1;
           this.textAttempts();
-          clearCompareImages(imageMatched);
+          clearCompareImages(SquareStasuses.imageMatched);
           this.setEndGame();
         } else {
           setTimeout(
             clearCompareImages,
             closingTimeMismatchImages,
-            imageIsReadyForTheOpening,
+            SquareStasuses.imageIsReadyForTheOpening,
           );
           this.attempts += 1;
           this.textAttempts();
