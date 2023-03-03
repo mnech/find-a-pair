@@ -26,7 +26,6 @@ export type SquareT = {
   i: string,
 };
 
-
 export class GameView {
   textColor1 = "#0095DD";
   canvas: any;
@@ -239,7 +238,7 @@ export class GameView {
     x: number,
     y: number,
     width: number = this.canvas.width,
-    height: number = this.canvas.height
+    height: number = this.canvas.height,
   ) {
     if (this.ctx) {
       this.ctx.clearRect(x, y, width, height);

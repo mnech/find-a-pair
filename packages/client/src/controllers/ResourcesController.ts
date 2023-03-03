@@ -6,8 +6,6 @@ class ResourcesController {
   public async upload(data: FormData) {
     await this.request(async () => {
       await this.api.upload(data);
-
-      // TODO Здесь должен быть route куда-то
     });
   }
 
