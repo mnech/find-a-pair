@@ -173,12 +173,12 @@ export class GameController extends GameView {
     this.helperGetAllImages(this.drawSquare);
   }
 
-  helperGetAllImages(additionalFunction: (square: SquareT) => void) {
+  helperGetAllImages(squareHandler: (square: SquareT) => void) {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
         const square = this.fieldOfSquares[c][r];
         this.clearA(square.x, square.y, square.width, square.height);
-        additionalFunction(square);
+        squareHandler(square);
       }
     }
   }
