@@ -174,20 +174,22 @@ export class GameView {
   }
 
   textYouWin(clear = false) {
+    const sameСalculations = this.canvas.width / 2 - 55;
     if (clear) {
-      this.clearA(this.canvas.width / 2 - 55, 5, 220, 25);
+      this.clearA(sameСalculations, 5, 220, 25);
     } else {
       if (this.ctx) {
         this.ctx.font = '25px Arial';
         this.ctx.fillStyle = this.textColor1;
-        this.ctx.fillText('You Win', this.canvas.width / 2 - 55, 30);
+        this.ctx.fillText('You Win', sameСalculations, 30);
       }
     }
   }
 
   textTotalScore(clear = false) {
+    const sameСalculations = this.canvas.width / 2 - 20;
     if (clear) {
-      this.clearA(this.canvas.width / 2 - 20, 35, 220, 20);
+      this.clearA(sameСalculations, 35, 220, 20);
     } else {
       this.totalScore = this.score - this.attempts;
       if (this.ctx) {
@@ -195,7 +197,7 @@ export class GameView {
         this.ctx.fillStyle = this.textColor1;
         this.ctx.fillText(
           this.totalScore as unknown as string,
-          this.canvas.width / 2 - 20,
+          sameСalculations,
           55,
         );
       }
