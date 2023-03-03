@@ -1,33 +1,32 @@
-import i5965270 from "./imgs/game_item_flower_star.png";
-import i5965263 from "./imgs/game_item_glass_jar.png";
-import i5965278 from "./imgs/game_item_tree_leaf.png";
-import i5965284 from "./imgs/game_item_kettle.png";
-import i5965290 from "./imgs/game_item_letters.png";
-import i5965297 from "./imgs/game_item_plant_in_the_pot.png";
-import i5965304 from "./imgs/game_item_cup.png";
-import i5965312 from "./imgs/game_item_telephone.png";
-import i5965320 from "./imgs/game_item_orange.png";
-import i5965327 from "./imgs/game_item_notebook.png";
-import i5965333 from "./imgs/game_item_tv.png";
-import i5965343 from "./imgs/game_item_candle.png";
-import i5965366 from "./imgs/game_item_yarn.png";
-import i5965375 from "./imgs/game_item_backpack.png";
-import i5965452 from "./imgs/game_item_branch.png";
-
+import i5965270 from './imgs/game_item_flower_star.png';
+import i5965263 from './imgs/game_item_glass_jar.png';
+import i5965278 from './imgs/game_item_tree_leaf.png';
+import i5965284 from './imgs/game_item_kettle.png';
+import i5965290 from './imgs/game_item_letters.png';
+import i5965297 from './imgs/game_item_plant_in_the_pot.png';
+import i5965304 from './imgs/game_item_cup.png';
+import i5965312 from './imgs/game_item_telephone.png';
+import i5965320 from './imgs/game_item_orange.png';
+import i5965327 from './imgs/game_item_notebook.png';
+import i5965333 from './imgs/game_item_tv.png';
+import i5965343 from './imgs/game_item_candle.png';
+import i5965366 from './imgs/game_item_yarn.png';
+import i5965375 from './imgs/game_item_backpack.png';
+import i5965452 from './imgs/game_item_branch.png';
 
 export type SquareT = {
-  x: number,
-  y: number,
-  width: number,
-  height: number,
-  status: number,
-  id: number,
-  image: HTMLImageElement,
-  i: string,
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  status: number;
+  id: number;
+  image: HTMLImageElement;
+  i: string;
 };
 
 export class GameView {
-  textColor1 = "#0095DD";
+  textColor1 = '#0095DD';
   canvas: any;
   ctx: CanvasRenderingContext2D | null;
   column = 6;
@@ -64,15 +63,18 @@ export class GameView {
   imgs: string[] = [];
   compareImages: SquareT[] = [];
 
-  constructor(canvas: HTMLCanvasElement | null, ctx: CanvasRenderingContext2D | null) {
+  constructor(
+    canvas: HTMLCanvasElement | null,
+    ctx: CanvasRenderingContext2D | null,
+  ) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
-    this.drowSquare = this.drowSquare.bind(this);
-    this.drowAllImgs = this.drowAllImgs.bind(this);
-    this.drowImg = this.drowImg.bind(this);
+    this.drawSquare = this.drawSquare.bind(this);
+    this.drawAllImgs = this.drawAllImgs.bind(this);
+    this.drawImg = this.drawImg.bind(this);
     this.textScore();
     this.textAttempts();
   }
@@ -107,14 +109,14 @@ export class GameView {
     }
   }
 
-  drowAllImgs(square: SquareT): any {
+  drawAllImgs(square: SquareT): any {
     return new Promise<void>((resolve) => {
-      this.drowImg(square)
+      this.drawImg(square);
       resolve();
     });
   }
 
-  drowImg(square: SquareT): void {
+  drawImg(square: SquareT): void {
     square.image.src = square.i;
     square.image.onload = () => {
       if (this.ctx) {
@@ -135,17 +137,17 @@ export class GameView {
           this.fieldOfSquares[c][r].y =
             r * (this.fieldOfSquares[c][r].height + this.padding) +
             this.marginTopY;
-          this.drowSquare(this.fieldOfSquares[c][r]);
+          this.drawSquare(this.fieldOfSquares[c][r]);
         }
       }
     }
   }
 
-  drowSquare(square: SquareT) {
+  drawSquare(square: SquareT) {
     if (this.ctx) {
       this.ctx.beginPath();
       this.ctx.rect(square.x, square.y, square.width, square.height);
-      this.ctx.fillStyle = "#0095DD";
+      this.ctx.fillStyle = '#0095DD';
       this.ctx.fill();
       this.ctx.closePath();
     }
@@ -154,18 +156,18 @@ export class GameView {
   textScore() {
     this.clearA(50, 10, 140, 21);
     if (this.ctx) {
-      this.ctx.font = "20px Arial";
+      this.ctx.font = '20px Arial';
       this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText("score: " + this.score, 50, 30);
+      this.ctx.fillText('score: ' + this.score, 50, 30);
     }
   }
 
   textAttempts() {
     this.clearA(50, 40, 220, 21);
     if (this.ctx) {
-      this.ctx.font = "20px Arial";
+      this.ctx.font = '20px Arial';
       this.ctx.fillStyle = this.textColor1;
-      this.ctx.fillText("attempts: " + this.attempts, 50, 60);
+      this.ctx.fillText('attempts: ' + this.attempts, 50, 60);
     }
   }
 
@@ -174,9 +176,9 @@ export class GameView {
       this.clearA(this.canvas.width / 2 - 55, 5, 220, 25);
     } else {
       if (this.ctx) {
-        this.ctx.font = "25px Arial";
+        this.ctx.font = '25px Arial';
         this.ctx.fillStyle = this.textColor1;
-        this.ctx.fillText("You Win", this.canvas.width / 2 - 55, 30);
+        this.ctx.fillText('You Win', this.canvas.width / 2 - 55, 30);
       }
     }
   }
@@ -187,12 +189,12 @@ export class GameView {
     } else {
       this.totalScore = this.score - this.attempts;
       if (this.ctx) {
-        this.ctx.font = "20px Arial";
+        this.ctx.font = '20px Arial';
         this.ctx.fillStyle = this.textColor1;
         this.ctx.fillText(
           this.totalScore as unknown as string,
           this.canvas.width / 2 - 20,
-          55
+          55,
         );
       }
     }
@@ -204,14 +206,14 @@ export class GameView {
         this.canvas.width / 2 - 120,
         this.canvas.height - 50 - 30,
         300,
-        30
+        30,
       );
-      this.ctx.font = "30px Arial";
+      this.ctx.font = '30px Arial';
       this.ctx.fillStyle = this.textColor1;
       this.ctx.fillText(
-        "START GAME",
+        'START GAME',
         this.canvas.width / 2 - 100,
-        this.canvas.height - 50
+        this.canvas.height - 50,
       );
     }
   }
@@ -222,14 +224,14 @@ export class GameView {
         this.canvas.width / 2 - 100,
         this.canvas.height - 50 - 30,
         300,
-        30
+        30,
       );
-      this.ctx.font = "30px Arial";
+      this.ctx.font = '30px Arial';
       this.ctx.fillStyle = this.textColor1;
       this.ctx.fillText(
-        "RESTART GAME",
+        'RESTART GAME',
         this.canvas.width / 2 - 120,
-        this.canvas.height - 50
+        this.canvas.height - 50,
       );
     }
   }

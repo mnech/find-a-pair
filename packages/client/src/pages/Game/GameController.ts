@@ -110,7 +110,7 @@ export class GameController extends GameView {
             const square = this.fieldOfSquares[c][r];
             this.clearA(square.x, square.y, square.width, square.height);
             if (square.status == SquareStasuses.imageIsReadyForTheOpening) {
-              this.drowImg(square);
+              this.drawImg(square);
               square.status = 0;
               this.compareSquards(square);
             }
@@ -126,7 +126,7 @@ export class GameController extends GameView {
         const squard = this.compareImages[y];
         if (status == SquareStasuses.imageIsReadyForTheOpening) {
           this.clearA(squard.x, squard.y, squard.width, squard.height);
-          this.drowSquare(squard);
+          this.drawSquare(squard);
         }
         squard.status = status;
       }
@@ -165,12 +165,12 @@ export class GameController extends GameView {
   }
 
   openALLImages() {
-    this.helperGetAllImages(this.drowAllImgs);
+    this.helperGetAllImages(this.drawAllImgs);
     setTimeout(this.closeALLImages.bind(this), closingTimeOfAllImages);
   }
 
   closeALLImages() {
-    this.helperGetAllImages(this.drowSquare);
+    this.helperGetAllImages(this.drawSquare);
   }
 
   helperGetAllImages(additionalFunction: (square: SquareT) => void) {
