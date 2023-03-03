@@ -32,7 +32,6 @@ export class GameController extends GameView {
   }
 
   setEventClickStartGameAndSquares() {
-    // document.addEventListener("click", this.mouseClick.bind(this), false);
     document.addEventListener("click", this.mouseClick);
   }
 
