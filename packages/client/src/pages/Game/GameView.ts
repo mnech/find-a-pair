@@ -22,7 +22,7 @@ export type SquareT = {
   status: number;
   id: number;
   image: HTMLImageElement;
-  i: string;
+  imgPath: string;
 };
 
 export class GameView {
@@ -102,7 +102,7 @@ export class GameView {
           status: 1,
           id: id,
           image: new Image(),
-          i: this.imgs[id],
+          imgPath: this.imgs[id],
         };
         id++;
       }
@@ -117,7 +117,7 @@ export class GameView {
   }
 
   drawImg(square: SquareT): void {
-    square.image.src = square.i;
+    square.image.src = square.imgPath;
     square.image.onload = () => {
       if (this.ctx) {
         this.ctx.drawImage(square.image, square.x, square.y, 50, 50);

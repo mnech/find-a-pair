@@ -135,7 +135,7 @@ export class GameController extends GameView {
     if (this.compareImages.length < 2) {
       this.compareImages.push(image);
       if (this.compareImages.length == 2) {
-        if (this.compareImages[0].i == this.compareImages[1].i) {
+        if (this.compareImages[0].imgPath == this.compareImages[1].imgPath) {
           this.score += 10;
           this.textScore();
           this.attempts += 1;
