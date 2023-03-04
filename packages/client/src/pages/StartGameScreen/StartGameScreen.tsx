@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Button } from 'react-bootstrap';
 import { routes } from '../../models/App';
 import AuthController from '../../controllers/AuthController';
 import './StartGameScreen.scss';
