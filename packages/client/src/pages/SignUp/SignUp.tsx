@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import AuthController from '../../controllers/AuthController';
 import { SignupData } from '../../models/User';
 import { regexpTest } from '../../utils/validate';
