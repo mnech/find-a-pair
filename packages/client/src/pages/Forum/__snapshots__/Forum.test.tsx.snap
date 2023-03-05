@@ -1,0 +1,381 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Forum page renders correctly 1`] = `
+<div>
+  <div>
+    <header
+      class="border-bottom border-info p-4"
+    >
+      Forum
+    </header>
+    <div
+      class="p-5"
+    >
+      <div
+        class="mt-4"
+      >
+        <div
+          class="forum-category rounded-top"
+        >
+          <div
+            class="p-3"
+          >
+            Category title
+          </div>
+        </div>
+        <div>
+          <div
+            class="forum-head d-flex flex-row bg-dark text-light"
+          >
+            <div
+              class="p-3 flex-grow-1"
+            >
+              Forums
+            </div>
+            <div
+              class="p-3"
+            >
+              Posts
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title2
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description2
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          class="forum-category rounded-top"
+        >
+          <div
+            class="p-3"
+          >
+            Category2 title
+          </div>
+        </div>
+        <div>
+          <div
+            class="forum-head d-flex flex-row bg-dark text-light"
+          >
+            <div
+              class="p-3 flex-grow-1"
+            >
+              Forums
+            </div>
+            <div
+              class="p-3"
+            >
+              Posts
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title2
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description2
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Forum page renders correctly default 1`] = `
+<div>
+  <div>
+    <header
+      class="border-bottom border-info p-4"
+    >
+      Forum
+    </header>
+    <div
+      class="p-5"
+    >
+      <div
+        class="mt-4"
+      >
+        <div
+          class="forum-category rounded-top"
+        >
+          <div
+            class="p-3"
+          >
+            Category title
+          </div>
+        </div>
+        <div>
+          <div
+            class="forum-head d-flex flex-row bg-dark text-light"
+          >
+            <div
+              class="p-3 flex-grow-1"
+            >
+              Forums
+            </div>
+            <div
+              class="p-3"
+            >
+              Posts
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title2
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description2
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-4"
+      >
+        <div
+          class="forum-category rounded-top"
+        >
+          <div
+            class="p-3"
+          >
+            Category2 title
+          </div>
+        </div>
+        <div>
+          <div
+            class="forum-head d-flex flex-row bg-dark text-light"
+          >
+            <div
+              class="p-3 flex-grow-1"
+            >
+              Forums
+            </div>
+            <div
+              class="p-3"
+            >
+              Posts
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+          <div
+            class="p-3 forum-topic d-flex border-bottom bg-light"
+          >
+            <div
+              class="d-flex flex-column flex-grow-1"
+            >
+              <span
+                class="text-info fw-bold"
+              >
+                <a
+                  href="#"
+                >
+                  Title2
+                </a>
+              </span>
+              <span
+                class="text-muted"
+              >
+                Description2
+              </span>
+            </div>
+            <div>
+              <span
+                class="center"
+              >
+                576
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
