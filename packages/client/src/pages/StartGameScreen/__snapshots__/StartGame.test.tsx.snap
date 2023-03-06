@@ -1,138 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Start game screen should render 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="start"
-      >
-        <div
-          class="start__container"
-        >
-          <p
-            class="start__title"
-          >
-            Кликай по карточкам, запоминай, что под ними изображено, и находи пары одинаковых картинок
-          </p>
-          <a
-            class="start__link start__link_game"
-            href="/game"
-          >
-            Старт
-          </a>
-          <a
-            class="start__link"
-            href="/leaderboard"
-          >
-            Лидерборд
-          </a>
-          <a
-            class="start__link"
-            href="/profile"
-          >
-            Профиль
-          </a>
-          <button
-            class="btn btn-outline-primary"
-            type="button"
-          >
-            Выйти
-          </button>
-        </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
+<div>
+  <div
+    class="start"
+  >
     <div
-      class="start"
+      class="start__container"
     >
-      <div
-        class="start__container"
+      <p
+        class="start__title"
       >
-        <p
-          class="start__title"
-        >
-          Кликай по карточкам, запоминай, что под ними изображено, и находи пары одинаковых картинок
-        </p>
-        <a
-          class="start__link start__link_game"
-          href="/game"
-        >
-          Старт
-        </a>
-        <a
-          class="start__link"
-          href="/leaderboard"
-        >
-          Лидерборд
-        </a>
-        <a
-          class="start__link"
-          href="/profile"
-        >
-          Профиль
-        </a>
-        <button
-          class="btn btn-outline-primary"
-          type="button"
-        >
-          Выйти
-        </button>
-      </div>
+        Кликай по карточкам, запоминай, что под ними изображено, и находи пары одинаковых картинок
+      </p>
+      <a
+        class="start__link start__link_game"
+        href="/game"
+      >
+        Старт
+      </a>
+      <a
+        class="start__link"
+        href="/leaderboard"
+      >
+        Лидерборд
+      </a>
+      <a
+        class="start__link"
+        href="/profile"
+      >
+        Профиль
+      </a>
+      <button
+        class="btn btn-outline-primary"
+        type="button"
+      >
+        Выйти
+      </button>
     </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
+  </div>
+</div>
 `;

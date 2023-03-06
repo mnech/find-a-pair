@@ -1,14 +1,14 @@
 import { render } from '@testing-library/react';
 import { StartGameScreen } from './StartGameScreen';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter as Router } from 'react-router-dom';
 
 describe('Start game screen', () => {
   it('should render', () => {
-    const element = render(
+    const { container } = render(
       <Router>
         <StartGameScreen />
       </Router>,
     );
-    expect(element).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });
