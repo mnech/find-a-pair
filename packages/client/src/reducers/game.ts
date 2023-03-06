@@ -10,7 +10,6 @@ const gameSlice = createSlice({
   initialState,
   reducers: {
     setScore(state, action) {
-      console.log(state, action);
       state.score = action.payload.score;
     },
   },
