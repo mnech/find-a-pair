@@ -16,9 +16,6 @@ const closingTimeOfAllImages = 2000;
 
 export class GameController extends GameView {
   gameStatus = '0_start game';
-  intervalTime = 10;
-  score = 0;
-  lives = 3;
   blockSquares = true;
 
   constructor(

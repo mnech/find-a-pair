@@ -14,6 +14,11 @@ import i5965366 from './imgs/game_item_yarn.png';
 import i5965375 from './imgs/game_item_backpack.png';
 import i5965452 from './imgs/game_item_branch.png';
 
+import { configureStore } from '@reduxjs/toolkit';
+import { setScore } from '../.././reducers/game';
+import rootReducer from '../.././reducers';
+const store = configureStore({ reducer: rootReducer });
+
 export type SquareT = {
   x: number;
   y: number;
@@ -42,7 +47,7 @@ export class GameView {
   score = 0;
   attempts = 0;
   endGame = 0;
-  totalScore = 0;
+  totalScore = store.getState().game.score;
 
   baseImgs: string[] = [
     i5965270,
@@ -192,6 +197,7 @@ export class GameView {
       this.clearA(sameСalculations, 35, 220, 20);
     } else {
       this.totalScore = this.score - this.attempts;
+      store.dispatch(setScore({ score: this.totalScore }));
       if (this.ctx) {
         this.ctx.font = '20px Arial';
         this.ctx.fillStyle = this.textColor1;
