@@ -1,5 +1,7 @@
 import { GameView } from './GameView';
 import type { SquareT } from './GameView';
+import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 enum GameStatuses {
   StartGame = '0_start game',
@@ -21,8 +23,10 @@ export class GameController extends GameView {
   constructor(
     canvas: HTMLCanvasElement | null,
     ctx: CanvasRenderingContext2D | null,
+    store: ToolkitStore,
+    setScore: ActionCreatorWithPayload<any, 'Game/setScore'>,
   ) {
-    super(canvas, ctx);
+    super(canvas, ctx, store, setScore);
     this.mouseClick = this.mouseClick.bind(this);
     this.setEventClickStartGameAndSquares();
     this.drawButtonStartRestartGame(this.textStartGame);

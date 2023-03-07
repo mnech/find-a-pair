@@ -3,6 +3,8 @@ import './game.scss';
 import { GameController } from './GameController';
 import Player from '../../components/player/Player';
 import { MUSIC_URL } from '../../consts';
+import { store } from '../../store';
+import { setScore } from '../.././reducers/game';
 
 function Game() {
   const ref = useRef<HTMLCanvasElement | null>(null);
@@ -12,7 +14,7 @@ function Game() {
     const canvas = ref.current;
     if (canvas) {
       const ctx = canvas.getContext('2d');
-      game = new GameController(canvas, ctx);
+      game = new GameController(canvas, ctx, store, setScore);
     }
     return () => {
       game.ablation();
