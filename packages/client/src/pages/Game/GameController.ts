@@ -16,16 +16,15 @@ const closingTimeOfAllImages = 2000;
 
 export class GameController extends GameView {
   gameStatus = '0_start game';
-  intervalTime = 10;
-  score = 0;
-  lives = 3;
   blockSquares = true;
 
   constructor(
     canvas: HTMLCanvasElement | null,
     ctx: CanvasRenderingContext2D | null,
+    totalScore: number,
+    setTotalScore: (totalScore: number) => void,
   ) {
-    super(canvas, ctx);
+    super(canvas, ctx, totalScore, setTotalScore);
     this.mouseClick = this.mouseClick.bind(this);
     this.setEventClickStartGameAndSquares();
     this.drawButtonStartRestartGame(this.textStartGame);

@@ -42,7 +42,7 @@ export class GameView {
   score = 0;
   attempts = 0;
   endGame = 0;
-  totalScore = 0;
+  totalScore: number;
 
   baseImgs: string[] = [
     i5965270,
@@ -64,13 +64,18 @@ export class GameView {
 
   imgs: string[] = [];
   compareImages: SquareT[] = [];
+  setTotalScore: (totalScore: number) => void;
 
   constructor(
     canvas: HTMLCanvasElement | null,
     ctx: CanvasRenderingContext2D | null,
+    totalScore: number,
+    setTotalScore: (totalScore: number) => void,
   ) {
     this.canvas = canvas;
     this.ctx = ctx;
+    this.totalScore = totalScore;
+    this.setTotalScore = setTotalScore;
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
@@ -192,6 +197,7 @@ export class GameView {
       this.clearA(sameСalculations, 35, 220, 20);
     } else {
       this.totalScore = this.score - this.attempts;
+      this.setTotalScore(this.totalScore);
       if (this.ctx) {
         this.ctx.font = '20px Arial';
         this.ctx.fillStyle = this.textColor1;
