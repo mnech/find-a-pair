@@ -14,9 +14,6 @@ import i5965366 from './imgs/game_item_yarn.png';
 import i5965375 from './imgs/game_item_backpack.png';
 import i5965452 from './imgs/game_item_branch.png';
 
-import { ToolkitStore } from '@reduxjs/toolkit/dist/configureStore';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-
 export type SquareT = {
   x: number;
   y: number;
@@ -46,8 +43,6 @@ export class GameView {
   attempts = 0;
   endGame = 0;
   totalScore: number;
-  store: ToolkitStore;
-  setScore: ActionCreatorWithPayload<any, 'Game/setScore'>;
 
   baseImgs: string[] = [
     i5965270,
@@ -69,18 +64,18 @@ export class GameView {
 
   imgs: string[] = [];
   compareImages: SquareT[] = [];
+  setTotalScore: (totalScore: number) => void;
 
   constructor(
     canvas: HTMLCanvasElement | null,
     ctx: CanvasRenderingContext2D | null,
-    store: ToolkitStore,
-    setScore: ActionCreatorWithPayload<any, 'Game/setScore'>,
+    totalScore: number,
+    setTotalScore: (totalScore: number) => void,
   ) {
     this.canvas = canvas;
     this.ctx = ctx;
-    this.store = store;
-    this.totalScore = store.getState().game.score;
-    this.setScore = setScore;
+    this.totalScore = totalScore;
+    this.setTotalScore = setTotalScore;
     this.marginLeftX =
       this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
@@ -202,7 +197,7 @@ export class GameView {
       this.clearA(sameСalculations, 35, 220, 20);
     } else {
       this.totalScore = this.score - this.attempts;
-      this.store.dispatch(this.setScore({ score: this.totalScore }));
+      this.setTotalScore(this.totalScore);
       if (this.ctx) {
         this.ctx.font = '20px Arial';
         this.ctx.fillStyle = this.textColor1;
