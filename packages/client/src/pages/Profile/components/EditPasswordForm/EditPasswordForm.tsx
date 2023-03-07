@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
+import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import UsersController from '../../../../controllers/UsersController';
 import { Password } from '../../../../models/User';
