@@ -4,7 +4,7 @@ import AppRouter from './components/router/AppRouter';
 import { ErrorBoundary } from './utils/ErrorBoundary';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { setupStore } from './store';
 
 function App() {
   useEffect(() => {
@@ -17,6 +17,7 @@ function App() {
 
     fetchServerData();
   }, []);
+  const store = setupStore();
   return (
     <ErrorBoundary>
       <BrowserRouter>
