@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Auth renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container-md mt-5 w-50 h-auto d-flex flex-column align-items-center"
+  >
+    <p
+      class="endGameTitle"
+    >
+      Конец игры
+    </p>
+    <p
+      class="endGameScore"
+    >
+      Счёт: 40
+    </p>
+    <a
+      class="btn btn-primary"
+      href="/game"
+    >
+      Попробовать еще раз?
+    </a>
+    <a
+      href="/leaderboard"
+    >
+      Лидерборд
+    </a>
+    <a
+      href="/"
+    >
+      Профиль
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`End Game renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container-md mt-5 w-50 h-auto d-flex flex-column align-items-center"
+  >
+    <p
+      class="endGameTitle"
+    >
+      Конец игры
+    </p>
+    <p
+      class="endGameScore"
+    >
+      Счёт: 40
+    </p>
+    <a
+      class="btn btn-primary"
+      href="/game"
+    >
+      Попробовать еще раз?
+    </a>
+    <a
+      href="/leaderboard"
+    >
+      Лидерборд
+    </a>
+    <a
+      href="/"
+    >
+      Профиль
+    </a>
+  </div>
+</DocumentFragment>
+`;

@@ -4,7 +4,7 @@ import {
   ratingFieldName,
 } from '../models/Leaderboard';
 
-export const getPreloadedState = () => ({
+export const preloadedState = {
   leaderboard: {
     //пока заглушка
     data: [
@@ -31,4 +31,4 @@ export const getPreloadedState = () => ({
       limit: limitPage,
     },
   },
-});
+};

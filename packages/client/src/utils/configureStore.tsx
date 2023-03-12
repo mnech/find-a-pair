@@ -2,10 +2,9 @@ import React, { PropsWithChildren } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { PreloadedState } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-
+import { MemoryRouter } from 'react-router-dom';
 import { setupStore } from '../store';
 import type { AppStore, RootState } from '../store';
-import { getPreloadedState } from './preloadedStore';
 
 // This type interface extends the default options for render from RTL, as well
 // as allows the user to specify other things such as initialState, store.
@@ -17,14 +16,18 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 export function renderWithProviders(
   ui: React.ReactElement,
   {
-    preloadedState = getPreloadedState(),
+    preloadedState,
     // Automatically create a store instance if no store was passed in
     store = setupStore(preloadedState),
     ...renderOptions
   }: ExtendedRenderOptions = {},
 ) {
   function Wrapper({ children }: PropsWithChildren<unknown>): JSX.Element {
-    return <Provider store={store}>{children}</Provider>;
+    return (
+      <Provider store={store}>
+        <MemoryRouter>{children}</MemoryRouter>
+      </Provider>
+    );
   }
   return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
