@@ -55,19 +55,19 @@ export class GameController extends GameView {
   }
 
   mouseClick(e: { clientX: number; clientY: number }) {
-    const relativeX = e.clientX - this.canvas.offsetLeft;
-    const relativeY = e.clientY - this.canvas.offsetTop;
+    const relativeX = e.clientX - this.canvas!.offsetLeft;
+    const relativeY = e.clientY - this.canvas!.offsetTop;
     const isThereAClickOnTheCanvas =
       relativeX > 0 &&
-      relativeX < this.canvas.width &&
+      relativeX < this.canvas!.width &&
       relativeY > 0 &&
-      relativeY < this.canvas.height;
+      relativeY < this.canvas!.height;
     if (isThereAClickOnTheCanvas) {
       const isThereAClickOnTheTextStartRestartGame =
-        relativeX > this.canvas.width / 2 - 100 &&
-        relativeX < this.canvas.width / 2 + 100 &&
-        relativeY > this.canvas.height - 80 &&
-        relativeY < this.canvas.height - 50;
+        relativeX > this.canvas!.width / 2 - 100 &&
+        relativeX < this.canvas!.width / 2 + 100 &&
+        relativeY > this.canvas!.height - 80 &&
+        relativeY < this.canvas!.height - 50;
       if (isThereAClickOnTheTextStartRestartGame) {
         this.clickStartGameHandler();
       } else if (!this.blockSquares) {

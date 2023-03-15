@@ -77,7 +77,7 @@ export class GameView {
     this.totalScore = totalScore;
     this.setTotalScore = setTotalScore;
     this.marginLeftX =
-      this.canvas.width / 2 - this.width * 3 - this.padding * 2.5;
+      this.canvas!.width / 2 - this.width * 3 - this.padding * 2.5;
     this.marginTopY = 70;
     this.drawSquare = this.drawSquare.bind(this);
     this.drawAllImgs = this.drawAllImgs.bind(this);
@@ -89,7 +89,7 @@ export class GameView {
 
   generateArrayWithImgs(column: number, rows: number) {
     const squares = column * rows;
-    if (!(squares % 2) === false) {
+    if (!(squares % 2) == false) {
       throw new Error('Передано нечетное число');
     } else {
       const tally = squares / 2;
@@ -187,7 +187,7 @@ export class GameView {
   }
 
   textYouWin(clear = false) {
-    const sameСalculations = this.canvas.width / 2 - 55;
+    const sameСalculations = this.canvas!.width / 2 - 55;
     if (clear) {
       this.clearA(sameСalculations, 5, 220, 25);
     } else {
@@ -200,7 +200,7 @@ export class GameView {
   }
 
   textTotalScore(clear = false) {
-    const sameСalculations = this.canvas.width / 2 - 20;
+    const sameСalculations = this.canvas!.width / 2 - 20;
     if (clear) {
       this.clearA(sameСalculations, 35, 220, 20);
     } else {
@@ -221,8 +221,8 @@ export class GameView {
   drawButtonStartRestartGame(buttonName: string) {
     if (this.ctx) {
       this.ctx.clearRect(
-        this.canvas.width / 2 - 120,
-        this.canvas.height - 50 - 30,
+        this.canvas!.width / 2 - 120,
+        this.canvas!.height - 50 - 30,
         300,
         30,
       );
@@ -230,8 +230,8 @@ export class GameView {
       this.ctx.fillStyle = this.textColor1;
       this.ctx.fillText(
         buttonName,
-        this.canvas.width / 2 - 100,
-        this.canvas.height - 50,
+        this.canvas!.width / 2 - 100,
+        this.canvas!.height - 50,
       );
     }
   }
@@ -239,8 +239,8 @@ export class GameView {
   clearA(
     x: number,
     y: number,
-    width: number = this.canvas.width,
-    height: number = this.canvas.height,
+    width: number = this.canvas!.width,
+    height: number = this.canvas!.height,
   ) {
     if (this.ctx) {
       this.ctx.clearRect(x, y, width, height);
