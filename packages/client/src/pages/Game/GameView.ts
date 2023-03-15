@@ -29,7 +29,7 @@ export class GameView {
   textColor1 = '#0095DD';
   textStartGame = 'START GAME';
   textRestartGame = 'RESTART GAME';
-  canvas: any;
+  canvas: HTMLCanvasElement | null;
   ctx: CanvasRenderingContext2D | null;
   column = 6;
   rows = 5;
@@ -43,7 +43,6 @@ export class GameView {
   attempts = 0;
   endGame = 0;
   totalScore: number;
-
   baseImgs: string[] = [
     i5965270,
     i5965263,
@@ -61,7 +60,8 @@ export class GameView {
     i5965375,
     i5965452,
   ];
-
+  maxImgs = this.baseImgs.length;
+  minImgs = 4;
   imgs: string[] = [];
   compareImages: SquareT[] = [];
   setTotalScore: (totalScore: number) => void;
@@ -88,13 +88,21 @@ export class GameView {
   }
 
   generateArrayWithImgs(column: number, rows: number) {
-    const tally = (column * rows) / 2;
-    for (let t = 0; t < tally; t++) {
-      this.imgs.push(this.baseImgs[t]);
-      this.imgs.push(this.baseImgs[t]);
+    const squares = column * rows;
+    if (!(squares % 2) === false) {
+      throw new Error('Передано нечетное число');
+    } else {
+      const tally = squares / 2;
+      if (tally > this.maxImgs || tally < this.minImgs) {
+        throw new Error('Число не соответствует ограничениям');
+      } else {
+        for (let t = 0; t < tally; t++) {
+          this.imgs.push(this.baseImgs[t], this.baseImgs[t]);
+        }
+        this.imgs.sort(() => Math.random() - 0.5);
+        this.endGame = tally;
+      }
     }
-    this.imgs.sort(() => Math.random() - 0.5);
-    this.endGame = tally;
   }
 
   createSquares() {
