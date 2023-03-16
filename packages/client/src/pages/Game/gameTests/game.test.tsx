@@ -62,7 +62,6 @@ describe('Тестирование класса GameView', () => {
     const rows = 5;
     const squares = column * rows;
     game.generateArrayWithImgs(column, rows);
-    console.log(game.imgs);
     expect(game.imgs.length).toBe(squares);
   });
 
