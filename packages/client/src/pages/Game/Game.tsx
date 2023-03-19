@@ -5,6 +5,7 @@ import Player from '../../components/player/Player';
 import { MUSIC_URL } from '../../consts';
 import { setScore } from '../.././reducers/game';
 import { useDispatch, useSelector } from 'react-redux';
+import FullScreen from '../../components/fullScreen/FullScreen';
 
 function Game() {
   const ref = useRef<HTMLCanvasElement | null>(null);
@@ -30,6 +31,7 @@ function Game() {
   return (
     <>
       <Player url={MUSIC_URL} />
+      <FullScreen />
       <canvas ref={ref} width={500} height={500} />
     </>
   );
