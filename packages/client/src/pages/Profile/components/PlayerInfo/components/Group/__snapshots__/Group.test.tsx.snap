@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Group profile component should be rendered correctly Group component default 1`] = `
+<DocumentFragment>
+  <div
+    class="group"
+  >
+    <span>
+      Name
+    </span>
+    <span>
+      value
+    </span>
+  </div>
+</DocumentFragment>
+`;
