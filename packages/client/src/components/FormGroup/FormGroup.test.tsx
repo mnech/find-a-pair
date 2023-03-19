@@ -8,27 +8,7 @@ describe('FormGroup', () => {
       const { asFragment } = render(
         <FormGroup name="default" label="Default" />,
       );
-      expect(asFragment()).toMatchInlineSnapshot(`
-        <DocumentFragment>
-          <div
-            class="mb-3"
-          >
-            <label
-              class="form-label"
-              for="default"
-            >
-              Default
-            </label>
-            <input
-              class="form-control"
-              id="default"
-              name="default"
-              type="text"
-              value=""
-            />
-          </div>
-        </DocumentFragment>
-      `);
+      expect(asFragment()).toMatchSnapshot();
     });
     test('Default value', () => {
       render(

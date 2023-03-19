@@ -18,27 +18,7 @@ describe('Header profile component', () => {
       const { asFragment } = render(
         <Header avatar={testUser.avatar} name={testUser.first_name} />,
       );
-      expect(asFragment()).toMatchInlineSnapshot(`
-        <DocumentFragment>
-          <header
-            class="header"
-          >
-            <img
-              alt="Аватар"
-              class="avatar rounded-3 shadow"
-              src=""
-            />
-            <input
-              accept="image/*"
-              hidden=""
-              type="file"
-            />
-            <h1>
-              Иван
-            </h1>
-          </header>
-        </DocumentFragment>
-      `);
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 });

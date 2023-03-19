@@ -5,10 +5,8 @@ import { Footer } from './index';
 describe('Footer profile component', () => {
   describe('should be rendered correctly Footer component', () => {
     test('default', () => {
-      let isEditPassword = false;
-      let isEditData = false;
-      const setIsEditData = (value: boolean) => (isEditData = value);
-      const setIsEditPassword = (value: boolean) => (isEditPassword = value);
+      const setIsEditData = jest.fn();
+      const setIsEditPassword = jest.fn();
 
       const { asFragment } = render(
         <Footer
@@ -16,32 +14,7 @@ describe('Footer profile component', () => {
           setIsEditPassword={setIsEditPassword}
         />,
       );
-      expect(asFragment()).toMatchInlineSnapshot(`
-        <DocumentFragment>
-          <footer
-            class="footer"
-          >
-            <button
-              class="btn btn-link"
-              type="button"
-            >
-              Изменить данные
-            </button>
-            <button
-              class="btn btn-link"
-              type="button"
-            >
-              Изменить пароль
-            </button>
-            <button
-              class="danger btn btn-link"
-              type="button"
-            >
-              Выйти
-            </button>
-          </footer>
-        </DocumentFragment>
-      `);
+      expect(asFragment()).toMatchSnapshot();
     });
   });
 });
