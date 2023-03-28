@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import AuthController from '../controllers/AuthController';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { routes } from '../models/App';
 import { authActions } from '../reducers/auth';
 import { UserStatusTypes } from '../models/Auth';
 import { RootState } from '../store';
+import { REDIRECT_URI } from '../consts';
+import OAuthController from '../controllers/OAuthController';
 
 export const useRedirectWithAuth = () => {
   const navigate = useNavigate();
@@ -16,6 +18,32 @@ export const useRedirectWithAuth = () => {
   );
   const location = useLocation();
   const [pathName, setPathName] = useState(location.pathname);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const oAuthYandex = useCallback(() => {
+    const code = searchParams.get('code');
+
+    if (!code) {
+      return;
+    }
+
+    const data = {
+      code,
+      redirect_uri: REDIRECT_URI,
+    };
+
+    OAuthController.signin(data).then(() => {
+      getUserInfo();
+    });
+    setSearchParams('');
+  }, []);
+
+  useEffect(() => {
+    if (searchParams.has('code')) {
+      oAuthYandex();
+    }
+  }, []);
 
   const getUserInfo = async () => {
     await AuthController.fetchUser();

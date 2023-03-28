@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { routes } from '../../models/App';
 import { Link } from 'react-router-dom';
 import { RootState } from '../../store';
+import ContinueWithYandex from '../../components/continueWithYandex/ContinueWithYandex';
 
 export const Auth = () => {
   const [login, setLogin] = useState<string>('');
@@ -59,9 +60,10 @@ export const Auth = () => {
             Пароль
           </label>
         </div>
-        <Button type="submit" className="btn btn-primary w-50">
+        <Button type="submit" className="btn btn-primary w-50 mb-2">
           Войти
         </Button>
+        <ContinueWithYandex />
         <div className="text-center">
           <Link to={routes.signUp} className="link-primary">
             Нет аккаунта?
