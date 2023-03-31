@@ -8,23 +8,32 @@ class OAuthController {
 
   public async signin(data: OAuthData) {
     await this.request(async () => {
-      await this.api.signinOAuth(data);
+      return await this.api.signinOAuth(data);
     });
   }
 
   public async getServiceId(redirectUri: string) {
-    const serviceId = await this.api.getServiceId(redirectUri);
-    return serviceId;
+    const res = await this.request(async () => {
+      const serviceId = await this.api.getServiceId(redirectUri);
+      return serviceId;
+    });
+
+    return res;
   }
 
-  protected async request(req: () => void, errorHandler?: () => void) {
+  protected async request(
+    req: () => Promise<Record<string, any> | null>,
+    errorHandler?: () => void,
+  ) {
     try {
-      await req();
+      const res = await req();
+      return res;
     } catch (e: any) {
       const reason = e.response.data?.reason;
       errorHandler
         ? errorHandler()
         : store.dispatch(authActions.setError(reason));
+      return null;
     }
   }
 }
