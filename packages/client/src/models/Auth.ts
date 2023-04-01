@@ -3,3 +3,8 @@ export enum UserStatusTypes {
   FAILURE = 'FAILURE',
   SUCCESS = 'SUCCESS',
 }
+
+export interface OAuthData {
+  code: string;
+  redirect_uri: string;
+}
