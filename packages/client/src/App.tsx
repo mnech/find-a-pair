@@ -11,15 +11,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App: React.FC<any> = hot(() => {
   return (
     <ErrorBoundary>
-      <BrowserRouter>
-        <Provider store={store}>
+      <Provider store={store}>
+        <BrowserRouter>
           <PersistGate loading={null} persistor={persistor}>
             <div className="App">
               <AppRouter />
             </div>
           </PersistGate>
-        </Provider>
-      </BrowserRouter>
+        </BrowserRouter>
+      </Provider>
     </ErrorBoundary>
   );
 });

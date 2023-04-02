@@ -24,11 +24,10 @@
     },
     "outDir": "dist"
   },
-  "include": ["./index.d.ts", "./index.ts"],
+  "include": ["./index.d.ts", "./index.tsx"],
   "exclude": [
     "dist",
     "node_modules",
-    "**/tests/*.test.ts",
     "**/*.test.ts"
   ]
 }
