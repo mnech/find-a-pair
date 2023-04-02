@@ -1,17 +1,33 @@
 import { GameView } from './GameView';
+import type { SquareT } from './GameView';
+
+enum GameStatuses {
+  StartGame = '0_start game',
+  RestartGame = 'restart game',
+}
+
+enum SquareStasuses {
+  imageIsReadyForTheOpening = 1,
+  imageMatched = 2,
+}
+
+const closingTimeMismatchImages = 800;
+const closingTimeOfAllImages = 2000;
 
 export class GameController extends GameView {
   gameStatus = '0_start game';
-  intervalTime = 10;
-  score = 0;
-  lives = 3;
   blockSquares = true;
 
-  constructor(canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D | null) {
-    super(canvas, ctx);
-
+  constructor(
+    canvas: HTMLCanvasElement | null,
+    ctx: CanvasRenderingContext2D | null,
+    totalScore: number,
+    setTotalScore: (totalScore: number) => void,
+  ) {
+    super(canvas, ctx, totalScore, setTotalScore);
+    this.mouseClick = this.mouseClick.bind(this);
     this.setEventClickStartGameAndSquares();
-    this.textButtonStartGame();
+    this.drawButtonStartRestartGame(this.textStartGame);
     this.createField();
   }
 
@@ -31,23 +47,27 @@ export class GameController extends GameView {
   }
 
   setEventClickStartGameAndSquares() {
-    document.addEventListener('click', this.mouseClick.bind(this), false);
+    document.addEventListener('click', this.mouseClick);
+  }
+
+  ablation() {
+    document.removeEventListener('click', this.mouseClick);
   }
 
   mouseClick(e: { clientX: number; clientY: number }) {
-    const relativeX = e.clientX - this.canvas.offsetLeft;
-    const relativeY = e.clientY - this.canvas.offsetTop;
+    const relativeX = e.clientX - this.canvas!.offsetLeft;
+    const relativeY = e.clientY - this.canvas!.offsetTop;
     const isThereAClickOnTheCanvas =
       relativeX > 0 &&
-      relativeX < this.canvas.width &&
+      relativeX < this.canvas!.width &&
       relativeY > 0 &&
-      relativeY < this.canvas.height;
+      relativeY < this.canvas!.height;
     if (isThereAClickOnTheCanvas) {
       const isThereAClickOnTheTextStartRestartGame =
-        relativeX > this.canvas.width / 2 - 100 &&
-        relativeX < this.canvas.width / 2 + 100 &&
-        relativeY > this.canvas.height - 80 &&
-        relativeY < this.canvas.height - 50;
+        relativeX > this.canvas!.width / 2 - 100 &&
+        relativeX < this.canvas!.width / 2 + 100 &&
+        relativeY > this.canvas!.height - 80 &&
+        relativeY < this.canvas!.height - 50;
       if (isThereAClickOnTheTextStartRestartGame) {
         this.clickStartGameHandler();
       } else if (!this.blockSquares) {
@@ -57,12 +77,12 @@ export class GameController extends GameView {
   }
 
   clickStartGameHandler() {
-    if (this.gameStatus == '0_start game') {
+    if (this.gameStatus == GameStatuses.StartGame) {
       this.blockSquares = false;
       this.openALLImages();
-      this.textRestartGame();
-      this.gameStatus = 'restart game';
-    } else if (this.gameStatus == 'restart game') {
+      this.drawButtonStartRestartGame(this.textRestartGame);
+      this.gameStatus = GameStatuses.RestartGame;
+    } else if (this.gameStatus == GameStatuses.RestartGame) {
       this.blockSquares = true;
       this.closeALLImages();
       this.restartGame();
@@ -88,14 +108,8 @@ export class GameController extends GameView {
           ) {
             const square = this.fieldOfSquares[c][r];
             this.clearA(square.x, square.y, square.width, square.height);
-            if (square.status == 1) {
-              this.drowImg(
-                square.image,
-                square.i,
-                square.x,
-                square.y,
-                this.ctx,
-              );
+            if (square.status == SquareStasuses.imageIsReadyForTheOpening) {
+              this.drawImg(square);
               square.status = 0;
               this.compareSquards(square);
             }
@@ -109,27 +123,30 @@ export class GameController extends GameView {
     const clearCompareImages = (status: number) => {
       for (let y = 0; y < this.compareImages.length; y++) {
         const squard = this.compareImages[y];
-        if (status == 1) {
+        if (status == SquareStasuses.imageIsReadyForTheOpening) {
           this.clearA(squard.x, squard.y, squard.width, squard.height);
-          this.drowSquare(squard.x, squard.y, squard.width, squard.height);
+          this.drawSquare(squard);
         }
         squard.status = status;
       }
       this.compareImages = [];
     };
-
     if (this.compareImages.length < 2) {
       this.compareImages.push(image);
       if (this.compareImages.length == 2) {
-        if (this.compareImages[0].i == this.compareImages[1].i) {
+        if (this.compareImages[0].imgPath == this.compareImages[1].imgPath) {
           this.score += 10;
           this.textScore();
           this.attempts += 1;
           this.textAttempts();
-          clearCompareImages(2);
+          clearCompareImages(SquareStasuses.imageMatched);
           this.setEndGame();
         } else {
-          setTimeout(clearCompareImages, 800, 1);
+          setTimeout(
+            clearCompareImages,
+            closingTimeMismatchImages,
+            SquareStasuses.imageIsReadyForTheOpening,
+          );
           this.attempts += 1;
           this.textAttempts();
         }
@@ -147,22 +164,20 @@ export class GameController extends GameView {
   }
 
   openALLImages() {
-    for (let c = 0; c < this.column; c++) {
-      for (let r = 0; r < this.rows; r++) {
-        const square = this.fieldOfSquares[c][r];
-        this.clearA(square.x, square.y, square.width, square.height);
-        this.drowImgAll(square.image, square.i, square.x, square.y, this.ctx);
-      }
-    }
-    setTimeout(this.closeALLImages.bind(this), 2000);
+    this.helperGetAllImages(this.drawAllImgs);
+    setTimeout(this.closeALLImages.bind(this), closingTimeOfAllImages);
   }
 
   closeALLImages() {
+    this.helperGetAllImages(this.drawSquare);
+  }
+
+  helperGetAllImages(squareHandler: (square: SquareT) => void) {
     for (let c = 0; c < this.column; c++) {
       for (let r = 0; r < this.rows; r++) {
         const square = this.fieldOfSquares[c][r];
         this.clearA(square.x, square.y, square.width, square.height);
-        this.drowSquare(square.x, square.y, square.width, square.height);
+        squareHandler(square);
       }
     }
   }

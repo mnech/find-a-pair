@@ -1,17 +1,40 @@
 import React, { useEffect, useRef } from 'react';
 import './game.scss';
 import { GameController } from './GameController';
+import Player from '../../components/player/Player';
+import { MUSIC_URL } from '../../consts';
+import { setScore } from '../.././reducers/game';
+import { useDispatch, useSelector } from 'react-redux';
+import FullScreen from '../../components/fullScreen/FullScreen';
 
 function Game() {
   const ref = useRef<HTMLCanvasElement | null>(null);
+  let game: GameController;
+
+  const totalScore = useSelector((state: any) => state.game.score);
+  const dispatch = useDispatch();
+  const setTotalScore = (totalScore: number) => {
+    dispatch(setScore({ score: totalScore }));
+  };
 
   useEffect(() => {
-    const canvas = ref.current! as HTMLCanvasElement;
-    const ctx = canvas!.getContext('2d');
-    new GameController(canvas, ctx);
+    const canvas = ref.current;
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      game = new GameController(canvas, ctx, totalScore, setTotalScore);
+    }
+    return () => {
+      game.ablation();
+    };
   }, []);
 
-  return <canvas ref={ref} width={500} height={500} />;
+  return (
+    <>
+      <Player url={MUSIC_URL} />
+      <FullScreen />
+      <canvas ref={ref} width={500} height={500} />
+    </>
+  );
 }
 
 export default Game;

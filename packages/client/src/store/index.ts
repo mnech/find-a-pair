@@ -1,9 +1,7 @@
 import { configureStore, PreloadedState } from '@reduxjs/toolkit';
 import combineReducers from '../reducers/index';
-
-export const store = configureStore({
-  reducer: combineReducers,
-});
+import storage from 'redux-persist/lib/storage';
+import { persistStore, persistReducer } from 'redux-persist';
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
@@ -11,6 +9,8 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     preloadedState,
   });
 };
+export const store = setupStore();
+export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof store.getState>;
 

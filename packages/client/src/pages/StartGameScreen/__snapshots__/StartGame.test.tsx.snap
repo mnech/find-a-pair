@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Start game screen should render 1`] = `
+<div>
+  <div
+    class="start"
+  >
+    <div
+      class="start__container"
+    >
+      <p
+        class="start__title"
+      >
+        Кликай по карточкам, запоминай, что под ними изображено, и находи пары одинаковых картинок
+      </p>
+      <a
+        class="start__link start__link_game"
+        href="/game"
+      >
+        Старт
+      </a>
+      <a
+        class="start__link"
+        href="/leaderboard"
+      >
+        Лидерборд
+      </a>
+      <a
+        class="start__link"
+        href="/profile"
+      >
+        Профиль
+      </a>
+      <button
+        class="btn btn-outline-primary"
+        type="button"
+      >
+        Выйти
+      </button>
+    </div>
+  </div>
+</div>
+`;

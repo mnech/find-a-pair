@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header profile component should be rendered correctly Header component default 1`] = `
+<DocumentFragment>
+  <header
+    class="header"
+  >
+    <img
+      alt="Аватар"
+      class="avatar rounded-3 shadow"
+      src=""
+    />
+    <input
+      accept="image/*"
+      hidden=""
+      type="file"
+    />
+    <h1>
+      Иван
+    </h1>
+  </header>
+</DocumentFragment>
+`;
