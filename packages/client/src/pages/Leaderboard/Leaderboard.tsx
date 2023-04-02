@@ -1,4 +1,4 @@
-import Table from 'react-bootstrap/Table';
+import { Table } from 'react-bootstrap';
 import { Pagination } from './components/Pagination';
 import './Leaderboard.scss';
 import { IUserScore } from '../../models/Leaderboard';

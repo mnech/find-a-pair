@@ -4,9 +4,8 @@ import AppRouter from './components/router/AppRouter';
 import { ErrorBoundary } from './utils/ErrorBoundary';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import { store, persistor } from './store';
-import { PersistGate } from 'redux-persist/integration/react';
 import registerServiceWorker from './utils/registerSW';
+import { setupStore } from './store';
 
 registerServiceWorker();
 
@@ -21,15 +20,14 @@ function App() {
 
     fetchServerData();
   }, []);
+  const store = setupStore();
   return (
     <ErrorBoundary>
       <BrowserRouter>
         <Provider store={store}>
-          <PersistGate loading={null} persistor={persistor}>
-            <div className="App">
-              <AppRouter />
-            </div>
-          </PersistGate>
+          <div className="App">
+            <AppRouter />
+          </div>
         </Provider>
       </BrowserRouter>
     </ErrorBoundary>
