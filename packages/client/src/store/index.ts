@@ -7,9 +7,11 @@ const persistConfig = {
   key: 'root',
   storage,
 };
+const persistedStore = persistReducer(persistConfig, combineReducers);
+
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
-    reducer: persistReducer(persistConfig, combineReducers),
+    reducer: persistedStore,
     preloadedState,
   });
 };
