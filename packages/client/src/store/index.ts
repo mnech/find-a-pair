@@ -1,23 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, PreloadedState } from '@reduxjs/toolkit';
 import combineReducers from '../reducers/index';
-import storage from 'redux-persist/lib/storage';
-import { persistStore, persistReducer } from 'redux-persist';
 
-const persistConfig = {
-  key: 'root',
-  storage,
+let initialState;
+
+if (typeof window !== 'undefined' && window.document) {
+  initialState = window.initialState;
+  delete window.initialState;
+}
+export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+  return configureStore({
+    reducer: combineReducers,
+    preloadedState:
+      preloadedState || typeof window !== 'undefined'
+        ? window.__PRELOADED_STATE__
+        : undefined,
+  });
 };
 
-const persistedReducer = persistReducer(persistConfig, combineReducers);
+export const store = setupStore(initialState);
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
-});
-
-export const persistor = persistStore(store);
-
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof combineReducers>;
+export type AppStore = ReturnType<typeof setupStore>;

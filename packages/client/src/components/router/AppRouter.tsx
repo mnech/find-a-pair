@@ -13,7 +13,7 @@ import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen';
 import { useRedirectWithAuth } from '../../hooks/useRedirectWithAuth';
 
 function AppRouter() {
-  useRedirectWithAuth();
+  // useRedirectWithAuth();
 
   return (
     <Routes>

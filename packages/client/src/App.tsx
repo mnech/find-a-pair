@@ -1,27 +1,25 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { hot } from 'react-hot-loader/root';
-import AppRouter from './components/router/AppRouter';
-import { ErrorBoundary } from './utils/ErrorBoundary';
-import { Provider } from 'react-redux';
-import { store, persistor } from './store';
-import { PersistGate } from 'redux-persist/integration/react';
+import React, { useEffect } from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import registerServiceWorker from './utils/registerSW';
+import { staticRoutes } from './utils/Routes';
+import AppRouter from './components/router/AppRouter';
 
-const App: React.FC<any> = hot(() => {
-  return (
-    <ErrorBoundary>
-      <Provider store={store}>
-        <BrowserRouter>
-          <PersistGate loading={null} persistor={persistor}>
-            <div className="App">
-              <AppRouter />
-            </div>
-          </PersistGate>
-        </BrowserRouter>
-      </Provider>
-    </ErrorBoundary>
-  );
-});
+registerServiceWorker();
+
+function App() {
+  useEffect(() => {
+    const fetchServerData = async () => {
+      const url = `http://localhost:${__SERVER_PORT__}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    };
+
+    fetchServerData();
+  }, []);
+
+  return <AppRouter />;
+}
 
 export default App;
