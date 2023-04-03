@@ -1,4 +1,4 @@
-import Button from 'react-bootstrap/Button';
+import { Button } from 'react-bootstrap';
 import OAuthController from '../../controllers/OAuthController';
 import { REDIRECT_URI, YANDEX_OAUTH } from '../../consts';
 import { useCallback, useEffect } from 'react';

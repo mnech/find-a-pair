@@ -17,7 +17,7 @@ function AppRouter() {
 
   return (
     <Routes>
-      <Route path={routes.auth}>
+      <Route path={routes.auth} element={<Auth />}>
         <Route index element={<Auth />} />
 
         <Route path={routes.profile} element={<Profile />} />

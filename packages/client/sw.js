@@ -4,7 +4,7 @@ const URLS = [
   '/index.html',
 ];
 
-self.addEventListener('install', (event) => {
+this.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
@@ -19,17 +19,19 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', function (event) {
+  const cacheKeeplist = [CACHE_NAME];
+
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames
-          .filter((name) => !URLS.includes(name))
-          .map((name) => caches.delete(name)),
-      );
+    caches.keys().then((cacheNames) => {
+      return Promise.all(cacheNames.map((key) => {
+        if (cacheKeeplist.indexOf(key) === -1) {
+          return caches.delete(key);
+        }
+      }));
     }));
 });
 
-self.addEventListener('fetch', event => {
+this.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -40,10 +42,13 @@ self.addEventListener('fetch', event => {
         const fetchRequest = event.request.clone();
         return fetch(fetchRequest)
           .then(response => {
-              if(!response || response.status !== 200
-                || response.type !== 'basic' || !event.request.url.startsWith('http')) {
-                return response;
-              }
+            if(!response
+              || response.status !== 200
+              || response.type !== 'basic'
+              || event.request.url.startsWith('http')
+              || event.request.url.startsWith('chrome-extension')) {
+              return response;
+            }
 
               const responseToCache = response.clone();
               caches.open(CACHE_NAME)

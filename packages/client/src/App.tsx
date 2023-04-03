@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { hot } from 'react-hot-loader/root';
 import AppRouter from './components/router/AppRouter';
 import { ErrorBoundary } from './utils/ErrorBoundary';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './utils/registerSW';
 import { setupStore } from './store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 registerServiceWorker();
 
-function App() {
+const App: React.FC<any> = hot(() => {
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`;
@@ -32,6 +33,6 @@ function App() {
       </BrowserRouter>
     </ErrorBoundary>
   );
-}
+});
 
 export default App;
