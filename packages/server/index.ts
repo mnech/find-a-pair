@@ -20,8 +20,18 @@ async function startServer() {
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
 
-  if (!isDev()) {
-    app.use('/assets', express.static(path.resolve(distPath, 'assets')));
+  interface SSRModule {
+    render: (uri: string) => Promise<[Record<string, any>, string]>;
+  }
+
+  if (isDev()) {
+    vite = await createViteServer({
+      server: { middlewareMode: true },
+      root: srcPath,
+      appType: 'custom',
+    });
+
+    app.use(vite.middlewares);
   }
 
   app.use(
@@ -35,76 +45,71 @@ async function startServer() {
     }),
   );
 
-  if (isDev()) {
-    vite = await createViteServer({
-      server: { middlewareMode: true },
-      root: srcPath,
-      appType: 'custom',
-    });
+  app.get('/api', (_, res) => {
+    res.json('👋 Howdy from the server :)');
+  });
 
-    app.use(vite.middlewares);
-  }
-
-  if (!isDev) {
+  if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
-  app.get('/sw.js', async (_, res, next) => {
-    try {
-      const fileName = path.resolve(srcPath, 'sw.js');
-
-      res.sendFile(fileName);
-    } catch (error) {
-      if (isDev() && vite) {
-        vite.ssrFixStacktrace(error as Error);
-      }
-      next(error);
-    }
-  });
-
-  app.use(express.static(distPath));
+  // app.get('/sw.js', async (_, res, next) => {
+  //   try {
+  //     const fileName = path.resolve(srcPath, 'sw.js');
+  //
+  //     res.sendFile(fileName);
+  //   } catch (error) {
+  //     if (isDev() && vite) {
+  //       vite.ssrFixStacktrace(error as Error);
+  //     }
+  //     next(error);
+  //   }
+  // });
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
-    console.log({ url });
 
     try {
       let template: string;
-      let render: (
-        url: string,
-      ) => Promise<{ appHtml: string; stateScript: string }>;
 
-      if (isDev() && vite) {
-        template = fs.readFileSync(
-          path.resolve(srcPath, 'index.html'),
-          'utf-8',
-        );
-        template = await vite.transformIndexHtml(url, template);
-
-        render = (await vite.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
-          .render;
-      } else {
+      if (!isDev()) {
         template = fs.readFileSync(
           path.resolve(distPath, 'index.html'),
           'utf-8',
         );
+      } else {
+        template = fs.readFileSync(
+          path.resolve(srcPath, 'index.html'),
+          'utf-8',
+        );
 
-        render = (await import(ssrClientPath)).render;
+        template = await vite!.transformIndexHtml(url, template);
       }
 
-      const { appHtml, stateScript } = await render(req.url);
-      console.log({ stateScript });
+      let mod: SSRModule;
+
+      if (isDev()) {
+        mod = (await vite!.ssrLoadModule(
+          path.resolve(srcPath, 'ssr.tsx'),
+        )) as SSRModule;
+      } else {
+        mod = await import(ssrClientPath);
+      }
+
+      const { render } = mod;
+      const [initialState, appHtml] = await render(url);
+      const initStateSerialized = JSON.stringify(initialState);
 
       const html = template
-        .replace('<!--SSR-->', appHtml)
-        .replace('<!--state-->', stateScript);
-      console.log({ html });
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace('<!--store-data-->', initStateSerialized);
+
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
-    } catch (error) {
-      if (isDev() && vite) {
-        vite.ssrFixStacktrace(error as Error);
+    } catch (e) {
+      if (isDev()) {
+        vite!.ssrFixStacktrace(e as Error);
       }
-      next(error);
+      next(e);
     }
   });
 

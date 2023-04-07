@@ -19,7 +19,6 @@
     "typeRoots": [
       "@types",
       "./node_modules/@types",
-      "./client.d.ts"
     ]
   },
   "include": ["src", "ssr.tsx", "ssr.config.ts"],
