@@ -8,12 +8,14 @@ import * as React from 'react';
 async function render(uri: string) {
   const initialState = store.getState();
   const renderResult = renderToString(
-    <StaticRouter location={uri}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <StaticRouter location={uri}>
         <App />
-      </Provider>
-    </StaticRouter>,
+      </StaticRouter>
+    </Provider>,
   );
+  console.log('renderResult', renderResult);
+  console.log('initialState', initialState);
   return [initialState, renderResult];
 }
 

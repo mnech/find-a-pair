@@ -20,10 +20,6 @@ async function startServer() {
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
 
-  interface SSRModule {
-    render: (uri: string) => Promise<[Record<string, any>, string]>;
-  }
-
   if (isDev()) {
     vite = await createViteServer({
       server: { middlewareMode: true },
@@ -33,7 +29,6 @@ async function startServer() {
 
     app.use(vite.middlewares);
   }
-
   app.use(
     '/api/v2',
     createProxyMiddleware({
@@ -86,24 +81,22 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let mod: SSRModule;
+      let mod;
 
       if (isDev()) {
-        mod = (await vite!.ssrLoadModule(
-          path.resolve(srcPath, 'ssr.tsx'),
-        )) as SSRModule;
+        mod = await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'));
       } else {
         mod = await import(ssrClientPath);
       }
-
       const { render } = mod;
-      const [initialState, appHtml] = await render(url);
-      const initStateSerialized = JSON.stringify(initialState);
 
+      const [initialState, appHtml] = await render(url);
+      const stateHtml = `<script>window.initialState = ${JSON.stringify(
+        initialState,
+      )};</script>`;
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)
-        .replace('<!--store-data-->', initStateSerialized);
-
+        .replace('<!--store-data-->', stateHtml);
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       if (isDev()) {
