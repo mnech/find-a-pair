@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppRouter from './components/router/AppRouter';
+import { useRedirectWithAuth } from './hooks/useRedirectWithAuth';
 
 function App() {
   useEffect(() => {
@@ -13,7 +14,7 @@ function App() {
 
     fetchServerData();
   }, []);
-
+  useRedirectWithAuth();
   return <AppRouter />;
 }
 
