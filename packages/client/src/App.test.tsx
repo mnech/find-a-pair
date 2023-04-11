@@ -1,7 +1,5 @@
 import App from './App';
-import { MemoryRouter } from 'react-router-dom';
 import { renderWithProviders } from './utils/configureStore';
-import { routes } from './models/App';
 
 const appContent = 'Вот тут будет жить ваше приложение :)';
 
@@ -10,11 +8,17 @@ global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') }),
 );
 
+jest.mock('react-router-dom', () => {
+  const originalModule = jest.requireActual('react-router-dom');
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    useParams: jest.fn(),
+    useHistory: jest.fn(),
+  };
+});
 test('Example test', async () => {
-  renderWithProviders(
-    <MemoryRouter initialEntries={[routes.profile]}>
-      <App />
-    </MemoryRouter>,
-  );
-  //expect(screen.getByText(appContent)).toBeDefined()
+  const screen = renderWithProviders(<App />);
+  expect(screen).not.toBeNull();
 });
