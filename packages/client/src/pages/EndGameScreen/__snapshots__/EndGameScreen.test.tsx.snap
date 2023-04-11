@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End Game renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="container-md mt-5 w-50 h-auto d-flex flex-column align-items-center"
+  >
+    <p
+      class="endGameTitle"
+    >
+      Конец игры
+    </p>
+    <p
+      class="endGameScore"
+    >
+      Счёт: 0
+    </p>
+    <a
+      class="btn btn-primary"
+      href="/game"
+    >
+      Попробовать еще раз?
+    </a>
+    <a
+      class="link-primary"
+      href="/leaderboard"
+    >
+      Лидерборд
+    </a>
+    <a
+      class="link-primary"
+      href="/profile"
+    >
+      Профиль
+    </a>
+    <button
+      class="btn-link bg-white btn btn-primary"
+      type="button"
+    >
+      Выйти
+    </button>
+  </div>
+</DocumentFragment>
+`;
