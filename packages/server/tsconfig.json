@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "composite": true,
     "target": "es2019",
     "module": "commonjs",
@@ -24,10 +26,4 @@
     },
     "outDir": "dist"
   },
-  "include": ["./index.d.ts", "./index.ts"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "**/*.test.ts"
-  ]
 }

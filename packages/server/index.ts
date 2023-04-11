@@ -2,18 +2,20 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
-
-dotenv.config();
-
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import { sequelize } from './db/db';
+
+dotenv.config();
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
 async function startServer() {
   const app = express();
   app.use(cors());
+  app.use(express.json());
+
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   let vite: ViteDevServer | undefined;
@@ -31,11 +33,11 @@ async function startServer() {
     app.use(vite.middlewares);
   }
 
+  await sequelize.sync();
+
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
-
-  app.use(express.static(distPath));
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
