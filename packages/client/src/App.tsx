@@ -6,10 +6,10 @@ import { useRedirectWithAuth } from './hooks/useRedirectWithAuth';
 function App() {
   useEffect(() => {
     const fetchServerData = async () => {
-      const url = `http://localhost:3001`;
+      const url = `http://localhost:${__SERVER_PORT__}`;
       const response = await fetch(url);
-      const data = await response;
-      console.log({ data });
+      const data = await response.json();
+      console.log(data);
     };
 
     fetchServerData();

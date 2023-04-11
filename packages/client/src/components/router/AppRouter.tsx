@@ -14,7 +14,7 @@ import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen';
 function AppRouter() {
   return (
     <Routes>
-      <Route index element={<Auth />} />
+      <Route index path={routes.auth} element={<Auth />} />
 
       <Route path={routes.profile} element={<Profile />} />
 

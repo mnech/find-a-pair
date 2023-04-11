@@ -4,7 +4,6 @@ import { createServer as createViteServer } from 'vite';
 import type { ViteDevServer } from 'vite';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 dotenv.config();
-
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -91,6 +90,7 @@ async function startServer() {
       const { render } = mod;
 
       const [initialState, appHtml] = await render(url);
+
       const stateHtml = `<script>window.initialState = ${JSON.stringify(
         initialState,
       )};</script>`;
