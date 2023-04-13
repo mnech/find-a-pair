@@ -47,18 +47,18 @@ async function startServer() {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
   }
 
-  // app.get('/sw.js', async (_, res, next) => {
-  //   try {
-  //     const fileName = path.resolve(srcPath, 'sw.js');
-  //
-  //     res.sendFile(fileName);
-  //   } catch (error) {
-  //     if (isDev() && vite) {
-  //       vite.ssrFixStacktrace(error as Error);
-  //     }
-  //     next(error);
-  //   }
-  // });
+  app.get('/sw.js', async (_, res, next) => {
+    try {
+      const fileName = path.resolve(srcPath, 'sw.js');
+
+      res.sendFile(fileName);
+    } catch (error) {
+      if (isDev() && vite) {
+        vite.ssrFixStacktrace(error as Error);
+      }
+      next(error);
+    }
+  });
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;

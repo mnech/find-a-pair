@@ -24,7 +24,6 @@ export enum Fields {
 export const MUSIC_URL =
   'http://jplayer.org/audio/mp3/RioMez-01-Sleep_together.mp3';
 
-export const REDIRECT_URI = 'http://localhost:3001';
-
+export const REDIRECT_URI = `http://localhost:${__SERVER_PORT__}`;
 export const YANDEX_OAUTH =
   'https://oauth.yandex.ru/authorize?response_type=code';
