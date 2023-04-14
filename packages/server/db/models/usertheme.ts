@@ -13,17 +13,17 @@ import { User } from './user';
   tableName: 'user_theme',
 })
 export class Usertheme extends Model<Usertheme> {
+  @ForeignKey(() => Theme)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  @ForeignKey(() => Theme)
   theme_id!: number;
 
+  @ForeignKey(() => User)
+  @PrimaryKey
   @Column({
     type: DataType.TEXT,
   })
-  @ForeignKey(() => User)
-  @PrimaryKey
   user_id!: string;
 }

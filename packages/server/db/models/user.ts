@@ -11,11 +11,11 @@ import {
   tableName: 'user',
 })
 export class User extends Model<User> {
+  @PrimaryKey
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  @PrimaryKey
   override id!: number;
 
   @Column({

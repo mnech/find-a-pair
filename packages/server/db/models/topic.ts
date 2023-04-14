@@ -28,9 +28,9 @@ export class Topic extends Model<Topic> {
   title!: string;
 
   @AllowNull(false)
+  @ForeignKey(() => User)
   @Column({
     type: DataType.STRING,
   })
-  @ForeignKey(() => User)
   user_id!: number;
 }
