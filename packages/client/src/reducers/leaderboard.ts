@@ -6,25 +6,8 @@ import {
 } from '../models/Leaderboard';
 
 const initialLeaderboardState = {
-  //пока заглушка
-  data: [
-    {
-      name: 'User',
-      score: 1,
-    },
-    {
-      name: 'Jane',
-      score: 2,
-    },
-    {
-      name: 'James',
-      score: 7,
-    },
-    {
-      name: 'Luis',
-      score: 10,
-    },
-  ],
+  data: [],
+  error: null,
   request: {
     ratingFieldName: ratingFieldName,
     cursor: paginationMin,
@@ -39,11 +22,17 @@ const leaderboardSlice = createSlice({
     dropState() {
       return initialLeaderboardState;
     },
+    setLeaderboardTeam(state, action) {
+      state.data = action.payload;
+    },
     setPage(state, action) {
       state.request.cursor = action.payload;
     },
     setLimit(state, action) {
       state.request.limit = action.payload;
+    },
+    setError(state, action) {
+      state.error = action.payload;
     },
   },
 });

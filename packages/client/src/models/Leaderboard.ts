@@ -5,6 +5,14 @@ export const paginationMax = 10;
 /**Количество записей для отображения*/
 export const limitPage = 10;
 
+/**Имя команды для API*/
+export const teamName = '22-super-duper-puper-team';
+
+/**
+ * Название поля с рейтингом для нашей игры
+ */
+export const ratingFieldName = 'findAPairScore';
+
 /**
  * Интерфейс данных с рейтингами
  *
@@ -12,14 +20,12 @@ export const limitPage = 10;
  * score Рейтинг
  */
 export interface IUserScore {
-  name: string;
-  score: number;
+  data: {
+    [ratingFieldName]: string;
+    first_name: string;
+    user_id: string;
+  };
 }
-
-/**
- * Название поля с рейтингом для нашей игры
- */
-export const ratingFieldName = 'findAPairScore';
 
 /**
  * Интерфейс данных с рейтингами для API
@@ -43,4 +49,10 @@ export interface ILeaderboardRequest {
 export interface ILeaderboardState {
   data: IUserScore[];
   request: ILeaderboardRequest;
+}
+
+export interface ILeaderData {
+  data: object;
+  ratingFieldName: string;
+  teamName: string;
 }
