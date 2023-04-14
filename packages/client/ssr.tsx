@@ -1,6 +1,22 @@
 import { renderToString } from 'react-dom/server';
-import App from './src/App';
+import { store } from './src/store';
+import { StaticRouter } from 'react-router-dom/server';
+import { Provider } from 'react-redux';
+import * as React from 'react';
+import AppRouter from './src/components/router/AppRouter';
 
-export function render() {
-  return renderToString(<App />);
+async function render(uri: string) {
+  const initialState = store.getState();
+  const renderResult = renderToString(
+    <React.StrictMode>
+      <Provider store={store}>
+        <StaticRouter location={uri}>
+          <AppRouter />
+        </StaticRouter>
+      </Provider>
+    </React.StrictMode>,
+  );
+  return [initialState, renderResult];
 }
+
+export { render };
