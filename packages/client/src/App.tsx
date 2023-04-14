@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { hot } from 'react-hot-loader/root';
-import AppRouter from './components/router/AppRouter';
-import { ErrorBoundary } from './utils/ErrorBoundary';
-import { Provider } from 'react-redux';
-import registerServiceWorker from './utils/registerSW';
-import { setupStore } from './store';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AppRouter from './components/router/AppRouter';
+import { useRedirectWithAuth } from './hooks/useRedirectWithAuth';
 
-registerServiceWorker();
-
-const App: React.FC<any> = hot(() => {
+function App() {
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`;
@@ -21,18 +14,8 @@ const App: React.FC<any> = hot(() => {
 
     fetchServerData();
   }, []);
-  const store = setupStore();
-  return (
-    <ErrorBoundary>
-      <BrowserRouter>
-        <Provider store={store}>
-          <div className="App">
-            <AppRouter />
-          </div>
-        </Provider>
-      </BrowserRouter>
-    </ErrorBoundary>
-  );
-});
+  useRedirectWithAuth();
+  return <AppRouter />;
+}
 
 export default App;

@@ -1,5 +1,5 @@
 import App from './App';
-import { render, screen } from '@testing-library/react';
+import { renderWithProviders } from './utils/configureStore';
 
 const appContent = 'Вот тут будет жить ваше приложение :)';
 
@@ -8,7 +8,17 @@ global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') }),
 );
 
+jest.mock('react-router-dom', () => {
+  const originalModule = jest.requireActual('react-router-dom');
+
+  return {
+    __esModule: true,
+    ...originalModule,
+    useParams: jest.fn(),
+    useHistory: jest.fn(),
+  };
+});
 test('Example test', async () => {
-  render(<App />);
-  //expect(screen.getByText(appContent)).toBeDefined()
+  const screen = renderWithProviders(<App />);
+  expect(screen).not.toBeNull();
 });

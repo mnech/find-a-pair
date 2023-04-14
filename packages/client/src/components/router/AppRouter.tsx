@@ -10,30 +10,25 @@ import { StartGameScreen } from '../../pages/StartGameScreen/StartGameScreen';
 import Signup from '../../pages/SignUp/SignUp';
 import { routes } from '../../models/App';
 import { EndGameScreen } from '../../pages/EndGameScreen/EndGameScreen';
-import { useRedirectWithAuth } from '../../hooks/useRedirectWithAuth';
 
 function AppRouter() {
-  useRedirectWithAuth();
-
   return (
     <Routes>
-      <Route path={routes.auth} element={<Auth />}>
-        <Route index element={<Auth />} />
+      <Route index path={routes.auth} element={<Auth />} />
 
-        <Route path={routes.profile} element={<Profile />} />
+      <Route path={routes.profile} element={<Profile />} />
 
-        <Route path={routes.signUp} element={<Signup />} />
+      <Route path={routes.signUp} element={<Signup />} />
 
-        <Route path={routes.leaderboard} element={<Leaderboard />} />
+      <Route path={routes.leaderboard} element={<Leaderboard />} />
 
-        <Route path={routes.forum} element={<Forum />} />
+      <Route path={routes.forum} element={<Forum />} />
 
-        <Route path={routes.game} element={<Game />} />
+      <Route path={routes.game} element={<Game />} />
 
-        <Route path={routes.startGame} element={<StartGameScreen />} />
+      <Route path={routes.startGame} element={<StartGameScreen />} />
 
-        <Route path={routes.endGame} element={<EndGameScreen />} />
-      </Route>
+      <Route path={routes.endGame} element={<EndGameScreen />} />
       <Route path="*" element={<Page404 />} />
     </Routes>
   );
