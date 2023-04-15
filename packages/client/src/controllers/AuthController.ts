@@ -1,4 +1,5 @@
 import AuthAPI from '../api/AuthAPI';
+import UserDbApi from '../api/db/UserDbApi';
 import { SigninData, SignupData } from '../models/User';
 import { store } from '../store';
 import { authActions } from '../reducers/auth';
@@ -7,6 +8,7 @@ import { UserStatusTypes } from '../models/Auth';
 
 class AuthController {
   private readonly api = new AuthAPI();
+  private readonly userDbApi = new UserDbApi();
 
   public async signin(data: SigninData) {
     await this.request(async () => {
@@ -38,6 +40,16 @@ class AuthController {
         store.dispatch(
           authActions.setUserLoadingStatus(UserStatusTypes.SUCCESS),
         );
+        await this.userDbApi
+          .checkIfUserExists(response.data.id)
+          .then(async (response) => {
+            if (!response.data) {
+              await this.userDbApi.addUserDb({
+                id: response.data.id,
+                name: response.data.login,
+              });
+            }
+          });
       },
       () =>
         store.dispatch(
