@@ -8,6 +8,7 @@ import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createClientAndConnect } from './db/db';
+import ApiRouter from './routes/index';
 
 dotenv.config();
 
@@ -44,6 +45,8 @@ async function startServer() {
       target: 'https://ya-praktikum.tech',
     }),
   );
+
+  app.use('', ApiRouter);
 
   await createClientAndConnect();
 
