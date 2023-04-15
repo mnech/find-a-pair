@@ -4,6 +4,7 @@ import {
   Table,
   DataType,
   PrimaryKey,
+  AllowNull,
 } from 'sequelize-typescript';
 
 @Table({
