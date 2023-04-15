@@ -7,7 +7,7 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-import { sequelize } from './db/db';
+import { createClientAndConnect } from './db/db';
 
 dotenv.config();
 
@@ -45,7 +45,7 @@ async function startServer() {
     }),
   );
 
-  await sequelize.sync();
+  await createClientAndConnect();
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');

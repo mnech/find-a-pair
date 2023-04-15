@@ -1,4 +1,3 @@
-import { Client } from 'pg';
 import { Sequelize } from 'sequelize-typescript';
 import { User } from './models/user';
 import { Topic } from './models/topic';
@@ -13,30 +12,6 @@ const {
   POSTGRES_HOST,
 } = process.env;
 
-export const createClientAndConnect = async (): Promise<Client | null> => {
-  try {
-    const client = new Client({
-      user: POSTGRES_USER,
-      host: POSTGRES_HOST || 'localhost',
-      database: POSTGRES_DB,
-      password: POSTGRES_PASSWORD,
-      port: Number(POSTGRES_PORT),
-    });
-
-    await client.connect();
-
-    const res = await client.query('SELECT NOW()');
-    console.log('  ➜ 🎸 Connected to the database at:', res?.rows?.[0].now);
-    client.end();
-
-    return client;
-  } catch (e) {
-    console.error(e);
-  }
-
-  return null;
-};
-
 export const sequelize = new Sequelize(
   POSTGRES_DB || 'postgres',
   POSTGRES_USER || 'postgres',
@@ -48,3 +23,14 @@ export const sequelize = new Sequelize(
     models: [User, Topic, Comment, Usertheme],
   },
 );
+
+export const createClientAndConnect = async (): Promise<void> => {
+  try {
+    await sequelize.authenticate();
+    await sequelize.sync({ force: true });
+
+    console.log('Connected to the Postgres database!');
+  } catch (e) {
+    console.error(e);
+  }
+};
