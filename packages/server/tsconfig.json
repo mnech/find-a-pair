@@ -26,7 +26,7 @@
     },
     "outDir": "dist"
   },
-  "include": ["./index.d.ts", "./index.ts"],
+  "include": ["./index.ts", "./db/"],
   "exclude": [
     "dist",
     "node_modules",

@@ -4,7 +4,7 @@ const useAudio = (url: string): [boolean, () => void] => {
   const audioRef = useRef<null | HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
-  if (audioRef.current === null) {
+  if (audioRef.current === null && typeof Audio !== 'undefined') {
     audioRef.current = new Audio(url);
   }
 

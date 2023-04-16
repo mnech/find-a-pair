@@ -1,6 +1,8 @@
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import AuthController from '../../../../controllers/AuthController';
 import './Footer.scss';
+import { routes } from '../../../../models/App';
 
 export interface FooterProps {
   setIsEditData: (state: boolean) => void;
@@ -8,6 +10,7 @@ export interface FooterProps {
 }
 
 const Footer = ({ setIsEditData, setIsEditPassword }: FooterProps) => {
+  const navigate = useNavigate();
   const handlerEditData = () => {
     setIsEditData(true);
   };
@@ -18,6 +21,7 @@ const Footer = ({ setIsEditData, setIsEditPassword }: FooterProps) => {
 
   const logout = async () => {
     await AuthController.logout();
+    navigate(routes.auth);
   };
 
   return (
