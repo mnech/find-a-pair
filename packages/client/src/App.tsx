@@ -7,9 +7,9 @@ function App() {
   useEffect(() => {
     const fetchServerData = async () => {
       const url = `http://localhost:${__SERVER_PORT__}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data);
+      if (__SERVER_PORT__) {
+        await fetch(url);
+      }
     };
 
     fetchServerData();

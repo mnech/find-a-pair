@@ -9,18 +9,11 @@ import {
   ForeignKey,
 } from 'sequelize-typescript';
 import { User } from './user';
-import { HasMany } from 'sequelize';
 
 @Table({
   tableName: 'topic',
 })
 export class Topic extends Model<Topic> {
-  @AllowNull(false)
-  @Column({
-    type: DataType.STRING,
-  })
-  name!: string;
-
   @AllowNull(false)
   @Column({
     type: DataType.STRING,
