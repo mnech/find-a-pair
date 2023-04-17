@@ -4,7 +4,7 @@ import { Methods } from '../consts';
 
 export default class UserDbApi extends BaseAPI {
   constructor() {
-    super('/user', '');
+    super('/user', true);
   }
 
   checkIfUserExists(id: number) {

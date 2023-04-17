@@ -46,7 +46,7 @@ async function startServer() {
     }),
   );
 
-  app.use('', ApiRouter);
+  app.use('/db', ApiRouter);
 
   await createClientAndConnect();
 

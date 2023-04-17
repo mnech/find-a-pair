@@ -12,10 +12,10 @@ export const checkUserExist: RequestHandler = async (req, res) => {
       },
     },
   });
-  return res.status(200).json(isUserExist);
+  return res.json(isUserExist);
 };
 
 export const addUser: RequestHandler = async (req, res) => {
   const addUser = await User.create({ ...req.body });
-  return res.status(200).json(addUser);
+  return res.json(addUser);
 };
