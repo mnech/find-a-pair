@@ -7,7 +7,7 @@ export default class LeaderboardAPI extends BaseAPI {
     super('/leaderboard');
   }
 
-  public addUsderToLeaderboard(data: ILeaderData) {
+  public addUserToLeaderboard(data: ILeaderData) {
     return this.request({
       method: Methods.Post,
       url: this.endpoint,

@@ -25,8 +25,8 @@ function Game() {
     dispatch(setScore({ score: totalScore }));
   };
 
-  const closeGame = () => {
-    LeaderboardController.addUsderToLeaderboard({
+  const closeGame = async () => {
+    const res = await LeaderboardController.addUserToLeaderboard({
       data: {
         user_id: user.id,
         first_name: user.first_name,
@@ -36,7 +36,9 @@ function Game() {
       teamName: teamName,
     });
 
-    navigate(routes.endGame);
+    if (res) {
+      navigate(routes.endGame);
+    }
   };
 
   useEffect(() => {

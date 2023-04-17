@@ -6,19 +6,18 @@ import { leaderboardActions } from '../reducers/leaderboard';
 class LeaderboardController {
   private readonly api = new LeaderboardAPI();
 
-  public async addUsderToLeaderboard(data: ILeaderData) {
-    console.log('addUsderToLeaderboard', data);
-    await this.request(async () => {
-      return await this.api.addUsderToLeaderboard(data);
+  public async addUserToLeaderboard(data: ILeaderData) {
+    const res = await this.request(async () => {
+      return await this.api.addUserToLeaderboard(data);
     });
+
+    return res?.status === 200;
   }
 
   public async getTeamLeaderboard(teamName: string, data: ILeaderboardRequest) {
     const leaderboardRes = await this.request(async () => {
       return await this.api.getTeamLeaderboard(teamName, data);
     });
-
-    console.log(leaderboardRes, data);
 
     if (leaderboardRes === null || !leaderboardRes?.data) {
       return;
