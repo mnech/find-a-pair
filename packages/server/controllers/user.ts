@@ -16,6 +16,6 @@ export const checkUserExist: RequestHandler = async (req, res) => {
 };
 
 export const addUser: RequestHandler = async (req, res) => {
-  const addUser = await User.create({ ...req.body });
+  const addUser = await User.create(req.body);
   return res.json(addUser);
 };
