@@ -42,8 +42,8 @@ class AuthController {
         );
         await this.userDbApi
           .checkIfUserExists(response.data.id)
-          .then(async (response) => {
-            if (!response.data) {
+          .then(async (responseExist) => {
+            if (!responseExist.data) {
               await this.userDbApi.addUserDb({
                 id: response.data.id,
                 name: response.data.login,
