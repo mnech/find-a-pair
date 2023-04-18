@@ -3,7 +3,6 @@ import {
   Column,
   Table,
   DataType,
-  AllowNull,
   BelongsTo,
 } from 'sequelize-typescript';
 import { User } from './user';
@@ -12,14 +11,13 @@ import { User } from './user';
   tableName: 'topic',
 })
 export class Topic extends Model<Topic> {
-  @AllowNull(false)
   @Column({
     type: DataType.STRING,
   })
   title!: string;
 
   @BelongsTo(() => User, {
-    foreignKey: 'id',
+    foreignKey: 'user_id',
     as: 'user',
   })
   user_id!: number;
