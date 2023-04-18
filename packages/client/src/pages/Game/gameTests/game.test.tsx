@@ -11,7 +11,18 @@ const dispatch = store.dispatch;
 const setTotalScore = (totalScore: number) => {
   dispatch(setScore({ score: totalScore }));
 };
-const game = new GameController(canvas, ctx, totalScore, setTotalScore);
+
+const closeGame = () => {
+  undefined;
+};
+
+const game = new GameController(
+  canvas,
+  ctx,
+  totalScore,
+  setTotalScore,
+  closeGame,
+);
 
 describe('Тестирование класса GameController', () => {
   test('Тест инициализации класса GameController', () => {

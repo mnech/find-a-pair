@@ -65,12 +65,14 @@ export class GameView {
   imgs: string[] = [];
   compareImages: SquareT[] = [];
   setTotalScore: (totalScore: number) => void;
+  closeGame: () => void;
 
   constructor(
     canvas: HTMLCanvasElement | null,
     ctx: CanvasRenderingContext2D | null,
     totalScore: number,
     setTotalScore: (totalScore: number) => void,
+    closeGame: () => void,
   ) {
     this.canvas = canvas;
     this.ctx = ctx;
@@ -85,6 +87,7 @@ export class GameView {
     this.drawImg = this.drawImg.bind(this);
     this.textScore();
     this.textAttempts();
+    this.closeGame = closeGame;
   }
 
   generateArrayWithImgs(column: number, rows: number) {
