@@ -3,10 +3,8 @@ import {
   Column,
   Table,
   DataType,
-  AutoIncrement,
-  PrimaryKey,
   AllowNull,
-  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { User } from './user';
 
@@ -20,10 +18,9 @@ export class Topic extends Model<Topic> {
   })
   title!: string;
 
-  @AllowNull(false)
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.STRING,
+  @BelongsTo(() => User, {
+    foreignKey: 'id',
+    as: 'user',
   })
   user_id!: number;
 }

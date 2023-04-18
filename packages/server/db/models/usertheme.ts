@@ -1,29 +1,20 @@
-import {
-  Model,
-  Column,
-  Table,
-  DataType,
-  PrimaryKey,
-  ForeignKey,
-} from 'sequelize-typescript';
-import { Theme } from './theme';
+import { Model, Table, BelongsTo } from 'sequelize-typescript';
 import { User } from './user';
+import { Theme } from './theme';
 
 @Table({
   tableName: 'user_theme',
 })
 export class Usertheme extends Model<Usertheme> {
-  @ForeignKey(() => Theme)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
+  @BelongsTo(() => Theme, {
+    foreignKey: 'theme_id',
+    as: 'theme',
   })
   theme_id!: number;
 
-  @ForeignKey(() => User)
-  @PrimaryKey
-  @Column({
-    type: DataType.TEXT,
+  @BelongsTo(() => User, {
+    foreignKey: 'user_id',
+    as: 'user',
   })
   user_id!: string;
 }

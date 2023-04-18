@@ -3,6 +3,7 @@ import { User } from './models/user';
 import { Topic } from './models/topic';
 import { Comment } from './models/comment';
 import { Usertheme } from './models/usertheme';
+import { Theme } from './models/theme';
 
 const {
   POSTGRES_USER,
@@ -20,7 +21,7 @@ export const sequelize = new Sequelize(
     host: POSTGRES_HOST,
     port: Number(POSTGRES_PORT),
     dialect: 'postgres',
-    models: [User, Topic, Comment, Usertheme],
+    models: [User, Topic, Comment, Usertheme, Theme],
   },
 );
 
