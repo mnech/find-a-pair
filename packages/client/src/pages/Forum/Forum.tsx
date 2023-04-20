@@ -1,82 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './forum.scss';
 import { useSelector } from 'react-redux';
+import { userDataSelector } from '../../selectors/profile';
+import ForumController from '../../controllers/ForumController';
 import { RootState } from '../../store';
+import { ITopic } from '../../models/Forum';
 
-const forums = {
-  // TODO api
-  category: {
-    title: 'Category title',
-    posts: [
-      {
-        title: 'Title',
-        description: 'Description',
-        count: '576',
-      },
-      {
-        title: 'Title2',
-        description: 'Description2',
-        count: '576',
-      },
-    ],
-  },
-  category2: {
-    title: 'Category2 title',
-    posts: [
-      {
-        title: 'Title',
-        description: 'Description',
-        count: '576',
-      },
-      {
-        title: 'Title2',
-        description: 'Description2',
-        count: '576',
-      },
-    ],
-  },
+const getAllTopics = async () => {
+  await ForumController.getAllTopics();
 };
 
 const Forum = () => {
-  const state = useSelector((state: RootState) => state.forum);
+  const userData = useSelector(userDataSelector);
+  const topicsData = useSelector((state: RootState) => state.forum.topicsData);
+  const [topicName, setTopicName] = useState<string>('');
+  const [topicNameError, setTopicNameError] = useState<string>('');
+
+  useEffect(() => {
+    getAllTopics();
+  }, []);
+
+  const handleChangeTopicName = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setTopicName(event.currentTarget.value);
+  };
+
+  const handleClickDelete = (id: number) => async () => {
+    console.log({ id });
+    await ForumController.deleteTopic(id);
+  };
+
+  const handleClickTopicCreate = async () => {
+    if (!topicNameError) {
+      setTopicNameError('Заполните значение');
+    } else {
+      await ForumController.createTopic({
+        user_id: userData.id,
+        title: topicName,
+      }).then(() => setTopicName(''));
+    }
+  };
   return (
     <div>
       <header className="border-bottom border-info p-4">Forum</header>
-
+      <div className="p-5 d-flex flex-sm-column align-items-center">
+        <input
+          type="text"
+          id="forumName"
+          className="form-control form-control-lg"
+          required
+          onChange={handleChangeTopicName}
+          value={topicName}
+          placeholder="Название"
+        />
+        <button
+          className="btn btn-primary w-20 mt-2"
+          onClick={handleClickTopicCreate}
+        >
+          Создать
+        </button>
+      </div>
       <div className="p-5">
-        {Object.values(forums).map((item) => {
+        {topicsData.map((topic: ITopic) => {
           return (
-            <div key={item.title} className="mt-4">
-              <div className="forum-category rounded-top">
-                <div className="p-3">{item.title}</div>
+            <div
+              key={topic.id}
+              className="p-3 forum-topic d-flex border-bottom bg-light"
+            >
+              <div className="d-flex flex-column flex-grow-1">
+                <span className="text-info fw-bold">
+                  <a href="#">{topic.title}</a>
+                </span>
+                <span className="text-muted">Автор: {topic.userName}</span>
               </div>
-
-              <div>
-                <div className="forum-head d-flex flex-row bg-dark text-light">
-                  <div className="p-3 flex-grow-1">Forums</div>
-                  <div className="p-3">Posts</div>
-                </div>
-
-                {item.posts.map((item) => {
-                  return (
-                    <div
-                      key={item.title}
-                      className="p-3 forum-topic d-flex border-bottom bg-light"
-                    >
-                      <div className="d-flex flex-column flex-grow-1">
-                        <span className="text-info fw-bold">
-                          <a href="#">{item.title}</a>
-                        </span>
-                        <span className="text-muted">{item.description}</span>
-                      </div>
-
-                      <div>
-                        <span className="center">{item.count}</span>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              <button
+                type="button"
+                className="btn btn-light"
+                onClick={handleClickDelete(topic.id)}
+              >
+                Удалить
+              </button>
             </div>
           );
         })}

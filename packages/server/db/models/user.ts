@@ -8,7 +8,7 @@ import {
 
 @Table({
   timestamps: false,
-  tableName: 'user',
+  tableName: 'users',
 })
 export class User extends Model<User> {
   @PrimaryKey
@@ -16,7 +16,7 @@ export class User extends Model<User> {
     type: DataType.INTEGER,
     allowNull: false,
   })
-  override id!: number;
+  user_id!: number;
 
   @Column({
     type: DataType.TEXT,

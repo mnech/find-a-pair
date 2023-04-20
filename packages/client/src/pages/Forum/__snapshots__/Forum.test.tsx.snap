@@ -9,183 +9,25 @@ exports[`Forum page renders correctly 1`] = `
       Forum
     </header>
     <div
-      class="p-5"
+      class="p-5 d-flex flex-sm-column align-items-center"
     >
-      <div
-        class="mt-4"
+      <input
+        class="form-control form-control-lg"
+        id="forumName"
+        placeholder="Название"
+        required=""
+        type="text"
+        value=""
+      />
+      <button
+        class="btn btn-primary w-20 mt-2"
       >
-        <div
-          class="forum-category rounded-top"
-        >
-          <div
-            class="p-3"
-          >
-            Category title
-          </div>
-        </div>
-        <div>
-          <div
-            class="forum-head d-flex flex-row bg-dark text-light"
-          >
-            <div
-              class="p-3 flex-grow-1"
-            >
-              Forums
-            </div>
-            <div
-              class="p-3"
-            >
-              Posts
-            </div>
-          </div>
-          <div
-            class="p-3 forum-topic d-flex border-bottom bg-light"
-          >
-            <div
-              class="d-flex flex-column flex-grow-1"
-            >
-              <span
-                class="text-info fw-bold"
-              >
-                <a
-                  href="#"
-                >
-                  Title
-                </a>
-              </span>
-              <span
-                class="text-muted"
-              >
-                Description
-              </span>
-            </div>
-            <div>
-              <span
-                class="center"
-              >
-                576
-              </span>
-            </div>
-          </div>
-          <div
-            class="p-3 forum-topic d-flex border-bottom bg-light"
-          >
-            <div
-              class="d-flex flex-column flex-grow-1"
-            >
-              <span
-                class="text-info fw-bold"
-              >
-                <a
-                  href="#"
-                >
-                  Title2
-                </a>
-              </span>
-              <span
-                class="text-muted"
-              >
-                Description2
-              </span>
-            </div>
-            <div>
-              <span
-                class="center"
-              >
-                576
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="mt-4"
-      >
-        <div
-          class="forum-category rounded-top"
-        >
-          <div
-            class="p-3"
-          >
-            Category2 title
-          </div>
-        </div>
-        <div>
-          <div
-            class="forum-head d-flex flex-row bg-dark text-light"
-          >
-            <div
-              class="p-3 flex-grow-1"
-            >
-              Forums
-            </div>
-            <div
-              class="p-3"
-            >
-              Posts
-            </div>
-          </div>
-          <div
-            class="p-3 forum-topic d-flex border-bottom bg-light"
-          >
-            <div
-              class="d-flex flex-column flex-grow-1"
-            >
-              <span
-                class="text-info fw-bold"
-              >
-                <a
-                  href="#"
-                >
-                  Title
-                </a>
-              </span>
-              <span
-                class="text-muted"
-              >
-                Description
-              </span>
-            </div>
-            <div>
-              <span
-                class="center"
-              >
-                576
-              </span>
-            </div>
-          </div>
-          <div
-            class="p-3 forum-topic d-flex border-bottom bg-light"
-          >
-            <div
-              class="d-flex flex-column flex-grow-1"
-            >
-              <span
-                class="text-info fw-bold"
-              >
-                <a
-                  href="#"
-                >
-                  Title2
-                </a>
-              </span>
-              <span
-                class="text-muted"
-              >
-                Description2
-              </span>
-            </div>
-            <div>
-              <span
-                class="center"
-              >
-                576
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+        Создать
+      </button>
     </div>
+    <div
+      class="p-5"
+    />
   </div>
 </div>
 `;
