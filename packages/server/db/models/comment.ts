@@ -7,7 +7,7 @@ import {
   CreatedAt,
   AutoIncrement,
   AllowNull,
-  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
 import { User } from './user';
 import { Topic } from './topic';
@@ -22,18 +22,16 @@ export class Comment extends Model<Comment> {
   @Column(DataType.INTEGER)
   override id!: number;
 
-  @AllowNull(false)
-  @ForeignKey(() => User)
-  @Column({
-    type: DataType.STRING,
+  @BelongsTo(() => User, {
+    foreignKey: 'user_id',
+    as: 'user',
   })
   user_id!: number;
 
-  @AllowNull(false)
-  @Column({
-    type: DataType.STRING,
+  @BelongsTo(() => Topic, {
+    foreignKey: 'topic_id',
+    as: 'topic',
   })
-  @ForeignKey(() => Topic)
   topic_id!: number;
 
   @AllowNull(false)

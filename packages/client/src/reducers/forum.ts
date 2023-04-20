@@ -1,11 +1,33 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IForumState } from '../models/Forum';
+import { TopicDb } from '../models/Db';
+
+const initialState: IForumState = {
+  topicsData: [],
+  error: null,
+  isLoading: false,
+};
+
+const apiMapper = (topic: TopicDb) => ({
+  ...topic,
+  userName: topic.user.userName,
+});
 
 const forumSlice = createSlice({
   name: 'Forum',
-  initialState: {},
-  reducers: {},
+  initialState: initialState,
+  reducers: {
+    setTopicsData(state, action) {
+      state.topicsData = action.payload.map(apiMapper);
+    },
+    setError(state, action) {
+      state.error = action.payload;
+    },
+    setLoading(state, action) {
+      state.isLoading = action.payload;
+    },
+  },
 });
 
-// export const { ..., ... } = forumSlice.actions; // TODO
-
+export const forumActions = forumSlice.actions;
 export const forumReducer = forumSlice.reducer;

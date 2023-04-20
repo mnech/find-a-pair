@@ -1,5 +1,5 @@
 import BaseAPI from '../BaseAPI';
-import { UserDbRequest } from '../../models/UserDb';
+import { UserDbRequest } from '../../models/Db';
 import { Methods } from '../consts';
 
 export default class UserDbApi extends BaseAPI {
