@@ -2,11 +2,13 @@ import Transport, { TRequest } from '../utils/Transport';
 
 export default abstract class BaseAPI {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
+  static DB_API_URL = 'db';
   protected endpoint: string;
   protected Transport: Transport = new Transport();
 
-  protected constructor(endpoint: string) {
-    this.endpoint = BaseAPI.API_URL + endpoint;
+  protected constructor(endpoint: string, isDbRequest?: boolean) {
+    const baseUrl = isDbRequest ? BaseAPI.DB_API_URL : BaseAPI.API_URL;
+    this.endpoint = baseUrl + endpoint;
   }
 
   protected request(req: TRequest) {

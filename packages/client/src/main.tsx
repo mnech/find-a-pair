@@ -8,7 +8,6 @@ import { store } from './store';
 import registerServiceWorker from './utils/registerSW';
 
 registerServiceWorker();
-
 ReactDOM.hydrateRoot(
   document.getElementById('root') as HTMLElement,
   <Provider store={store}>

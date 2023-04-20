@@ -1,11 +1,18 @@
 import { Table } from 'react-bootstrap';
 import { Pagination } from './components/Pagination';
-import './Leaderboard.scss';
-import { IUserScore } from '../../models/Leaderboard';
-import './Leaderboard.scss';
+import {
+  IUserScore,
+  limitPage,
+  ratingFieldName,
+  teamName,
+} from '../../models/Leaderboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store';
 import { leaderboardActions } from '../../reducers/leaderboard';
+import { useEffect } from 'react';
+
+import './Leaderboard.scss';
+import LeaderboardController from '../../controllers/LeaderboardController';
 
 export const Leaderboard = () => {
   const activePage = useSelector(
@@ -14,12 +21,12 @@ export const Leaderboard = () => {
   const data = useSelector((state: RootState) => state.leaderboard.data);
   const dispatch = useDispatch();
 
-  const renderRow = (row: IUserScore, idx: number): JSX.Element => {
+  const renderRow = ({ data }: IUserScore, idx: number): JSX.Element => {
     return (
-      <tr key={row.name}>
+      <tr key={idx + 1}>
         <td>{idx + 1}</td>
-        <td>{row.name}</td>
-        <td>{row.score}</td>
+        <td>{data.first_name}</td>
+        <td>{data[ratingFieldName]}</td>
       </tr>
     );
   };
@@ -27,6 +34,15 @@ export const Leaderboard = () => {
   const handleChangePage = (value: number) => {
     dispatch(leaderboardActions.setPage(value));
   };
+
+  useEffect(() => {
+    const cursor = (activePage - 1) * limitPage;
+    LeaderboardController.getTeamLeaderboard(teamName, {
+      ratingFieldName,
+      cursor,
+      limit: limitPage,
+    });
+  }, [activePage]);
 
   return (
     <div className="container-md overflow-auto mt-5 w-50 h-auto container">
@@ -41,7 +57,7 @@ export const Leaderboard = () => {
       >
         <thead>
           <tr>
-            <th>#</th>
+            <th>№</th>
             <th>Имя</th>
             <th>Рейтинг</th>
           </tr>

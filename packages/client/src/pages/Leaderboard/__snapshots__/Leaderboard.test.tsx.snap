@@ -16,7 +16,7 @@ exports[`Leaderboard renders correctly 1`] = `
       <thead>
         <tr>
           <th>
-            #
+            №
           </th>
           <th>
             Имя
@@ -26,52 +26,7 @@ exports[`Leaderboard renders correctly 1`] = `
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>
-            1
-          </td>
-          <td>
-            User
-          </td>
-          <td>
-            1
-          </td>
-        </tr>
-        <tr>
-          <td>
-            2
-          </td>
-          <td>
-            Jane
-          </td>
-          <td>
-            2
-          </td>
-        </tr>
-        <tr>
-          <td>
-            3
-          </td>
-          <td>
-            James
-          </td>
-          <td>
-            7
-          </td>
-        </tr>
-        <tr>
-          <td>
-            4
-          </td>
-          <td>
-            Luis
-          </td>
-          <td>
-            10
-          </td>
-        </tr>
-      </tbody>
+      <tbody />
     </table>
     <ul
       class="w-25 pagination pagination-sm"

@@ -1,3 +1,4 @@
+import { ATTEMPTS_COUNT } from './Game';
 import { GameView } from './GameView';
 import type { SquareT } from './GameView';
 
@@ -23,8 +24,9 @@ export class GameController extends GameView {
     ctx: CanvasRenderingContext2D | null,
     totalScore: number,
     setTotalScore: (totalScore: number) => void,
+    closeGame: () => void,
   ) {
-    super(canvas, ctx, totalScore, setTotalScore);
+    super(canvas, ctx, totalScore, setTotalScore, closeGame);
     this.mouseClick = this.mouseClick.bind(this);
     this.setEventClickStartGameAndSquares();
     this.drawButtonStartRestartGame(this.textStartGame);
@@ -149,6 +151,12 @@ export class GameController extends GameView {
           );
           this.attempts += 1;
           this.textAttempts();
+
+          //попытки закончились
+          if (this.attempts === ATTEMPTS_COUNT) {
+            this.setTotalScore(this.score);
+            this.closeGame();
+          }
         }
       }
     }
@@ -160,6 +168,7 @@ export class GameController extends GameView {
       this.textYouWin();
       this.textTotalScore();
       this.blockSquares = true;
+      this.closeGame();
     }
   }
 
