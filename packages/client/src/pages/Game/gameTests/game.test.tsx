@@ -1,6 +1,7 @@
 import { GameController } from '../GameController';
 import { setScore } from '../../../reducers/game';
 import { store } from '../../../store';
+import 'jest-canvas-mock';
 
 const canvas: HTMLCanvasElement | null = document.createElement('canvas');
 canvas.width = 500;

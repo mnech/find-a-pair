@@ -4,6 +4,7 @@ import { render } from '@testing-library/react';
 import { configureStore } from '@reduxjs/toolkit';
 import combineReducers from '../../reducers/index';
 import { Profile } from './index';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Profile page', () => {
   describe('should be rendered correctly Profile page', () => {
@@ -13,9 +14,11 @@ describe('Profile page', () => {
       });
 
       const { asFragment } = render(
-        <Provider store={store}>
-          <Profile />,
-        </Provider>,
+        <BrowserRouter>
+          <Provider store={store}>
+            <Profile />
+          </Provider>
+        </BrowserRouter>,
       );
       expect(asFragment()).toMatchSnapshot();
     });

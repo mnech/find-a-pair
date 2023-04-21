@@ -7,6 +7,7 @@ const FullScreen = () => {
   const [fullScreen, toggle] = useToggle(false);
 
   useEffect(() => {
+    if (!document.fullscreenElement) return;
     fullScreen
       ? document.documentElement.requestFullscreen()
       : document.exitFullscreen();
