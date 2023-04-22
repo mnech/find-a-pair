@@ -23,6 +23,7 @@
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.30.0",
     "sequelize-typescript": "^2.1.5",
+    "serialize-javascript": "^6.0.1",
     "vite": "4.2.1"
   },
   "devDependencies": {

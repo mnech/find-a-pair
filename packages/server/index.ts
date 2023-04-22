@@ -10,6 +10,8 @@ import * as path from 'path';
 import { createClientAndConnect } from './db/db';
 import ApiRouter from './routes/index';
 
+const serialize = require('serialize-javascript');
+
 dotenv.config();
 
 const isDev = () => process.env.NODE_ENV === 'development';
@@ -102,8 +104,9 @@ async function startServer() {
 
       const [initialState, appHtml] = await render(url);
 
-      const stateHtml = `<script>window.initialState = ${JSON.stringify(
+      const stateHtml = `<script>window.initialState = ${serialize(
         initialState,
+        { isJSON: true },
       )};</script>`;
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)
