@@ -21,3 +21,20 @@ export interface TopicDb {
 export interface User {
   userName: string;
 }
+
+export type CommentCreateRequest = {
+  user_id: number;
+  topic_id: number;
+  text: string;
+};
+
+export type CommentDeleteRequest = {
+  id: number;
+};
+
+export interface CommentDb {
+  id: number;
+  user: User;
+  text: string;
+  date: number;
+}

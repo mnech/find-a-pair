@@ -3,11 +3,12 @@ import { Avatar } from '../../../../components/Avatar';
 import './Message.scss';
 
 export type IMessage = {
+  id: number;
   userName: string;
   text: string;
-  date: string;
+  date: number;
 };
-const Message: React.FC<IMessage> = ({ userName, text, date }) => {
+const Message: React.FC<IMessage> = ({ id, userName, text, date }) => {
   return (
     <div className="wrapper">
       <div className="user">

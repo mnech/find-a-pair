@@ -10,12 +10,6 @@ export interface IForumState {
   isLoading: boolean;
 }
 
-export interface IForumResponse {
-  id: number;
-  title: string;
-  user: User;
-}
-
 export interface User {
   userName: string;
 }

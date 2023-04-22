@@ -5,6 +5,7 @@ export const routes = {
   signUp: '/sign-up',
   leaderboard: '/leaderboard',
   forum: '/forum',
+  comments: '/forum/:id',
   game: '/game',
   startGame: '/start-game',
   endGame: '/end-game',
