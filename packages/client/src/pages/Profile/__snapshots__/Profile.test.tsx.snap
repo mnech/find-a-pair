@@ -95,6 +95,5 @@ exports[`Profile page should be rendered correctly Profile page default 1`] = `
       </button>
     </footer>
   </div>
-  ,
 </DocumentFragment>
 `;

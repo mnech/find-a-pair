@@ -1,6 +1,6 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { Footer } from './index';
+import { BrowserRouter } from 'react-router-dom';
 
 describe('Footer profile component', () => {
   describe('should be rendered correctly Footer component', () => {
@@ -9,10 +9,12 @@ describe('Footer profile component', () => {
       const setIsEditPassword = jest.fn();
 
       const { asFragment } = render(
-        <Footer
-          setIsEditData={setIsEditData}
-          setIsEditPassword={setIsEditPassword}
-        />,
+        <BrowserRouter>
+          <Footer
+            setIsEditData={setIsEditData}
+            setIsEditPassword={setIsEditPassword}
+          />
+        </BrowserRouter>,
       );
       expect(asFragment()).toMatchSnapshot();
     });

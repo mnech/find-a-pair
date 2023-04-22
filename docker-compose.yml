@@ -1,28 +1,12 @@
 version: "3.9"
 
 services:
-  client:
-    container_name: find-a-pair-client
-    image: find-a-pair-client
-    build:
-      context: .
-      dockerfile: Dockerfile.client
-      args:
-        CLIENT_PORT: ${CLIENT_PORT}
-    restart: always
-    ports:
-      - "${CLIENT_PORT}:80"
-    environment:
-      - CLIENT_PORT=${CLIENT_PORT}
-      - SERVER_PORT=${SERVER_PORT}
-    networks:
-      - awesome
   server:
     container_name: find-a-pair-server
     image: find-a-pair-server
     build:
       context: .
-      dockerfile: Dockerfile.server
+      dockerfile: Dockerfile
       args:
         SERVER_PORT: ${SERVER_PORT}
     restart: always
@@ -61,11 +45,11 @@ services:
     image: dpage/pgadmin4:6.21
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: talanov175@mail.ru
-      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
       PGADMIN_LISTEN_PORT: 80
     ports:
-      - "8080:80"
+      - "${PGADMIN_PORT}:80"
     volumes:
       - pgadmin-data:/var/lib/pgadmin
     depends_on:
@@ -74,7 +58,6 @@ services:
       - awesome
 
 volumes:
-  db-data:
   pgadmin-data:
 
 networks:
