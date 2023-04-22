@@ -2,7 +2,7 @@ export interface IComments {
   id: number;
   userName: string;
   text: string;
-  date: number;
+  date: string;
 }
 
 export interface ICommentsState {

@@ -4,7 +4,6 @@ import { User } from '../db/models/user';
 import { Op } from 'sequelize';
 
 export const createComment: RequestHandler = async (req, res) => {
-  console.log('req.body', req.body);
   const topic = await Comment.create({
     ...req.body,
     user_id: Number(req.body.user_id),
@@ -15,7 +14,7 @@ export const createComment: RequestHandler = async (req, res) => {
 type TopicWithUser = Comment & { userName?: User['name'] };
 export const getAllComments: RequestHandler = async (req, res) => {
   const data: TopicWithUser[] = await Comment.findAll({
-    attributes: ['id', 'title', 'createdAt'],
+    attributes: ['id', 'text', ['createdAt', 'date']],
     include: [
       {
         model: User,

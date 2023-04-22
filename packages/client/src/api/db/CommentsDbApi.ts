@@ -8,8 +8,6 @@ export default class CommentsDbApi extends BaseAPI {
   }
 
   create(data: CommentCreateRequest) {
-    console.log('data: ', data);
-    console.log('endpoint: ', this.endpoint);
     return this.request({
       method: Methods.Post,
       url: `${this.endpoint}`,

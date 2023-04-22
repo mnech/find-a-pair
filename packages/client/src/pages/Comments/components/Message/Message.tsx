@@ -6,20 +6,20 @@ export type IMessage = {
   id: number;
   userName: string;
   text: string;
-  date: number;
+  date: string;
 };
 const Message: React.FC<IMessage> = ({ id, userName, text, date }) => {
   return (
     <div className="wrapper">
       <div className="user">
         <Avatar />
-        <p className="name">{userName}</p>
       </div>
       <div className="message">
+        <p className="name">{userName}</p>
         <p className="text">{text}</p>
       </div>
       <div className="date">
-        <p>{date}</p>
+        <p>{new Date(date).toLocaleString()}</p>
       </div>
     </div>
   );

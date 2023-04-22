@@ -4,32 +4,40 @@ import { useSelector } from 'react-redux';
 import CommentsController from '../../../../controllers/CommentsController';
 import { userDataSelector } from '../../../../selectors/profile';
 import './NewMessage.scss';
+import { RootState } from '../../../../store';
 
 const NewMessage: React.FC = () => {
   const userData = useSelector(userDataSelector);
+  const currentTopic = useSelector(
+    (state: RootState) => state.forum.currentTopic,
+  );
   const [isValid, setIsValid] = useState(false);
+  const [comment, setComment] = useState('');
 
-  const handleSubmit = (
+  const handleSubmit = async (
     event: React.SyntheticEvent<HTMLFormElement, Event>,
   ) => {
     event.stopPropagation();
     event.preventDefault();
-    if (!isValid) return;
+    if (!isValid || !currentTopic) return;
 
     const form = event.currentTarget;
 
     const data = Object.fromEntries(new FormData(form)) as { text: string };
 
-    CommentsController.createComment({
+    await CommentsController.createComment({
       text: data.text,
       user_id: userData.id,
-      topic_id: 1,
+      topic_id: currentTopic.id,
     });
+
+    setComment('');
   };
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.currentTarget;
     setIsValid(!!value);
+    setComment(value);
   };
 
   return (
@@ -39,6 +47,7 @@ const NewMessage: React.FC = () => {
           required
           type="text"
           name="text"
+          value={comment}
           placeholder="Your comment"
           isInvalid={!isValid}
           onChange={onChange}
