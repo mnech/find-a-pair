@@ -27,3 +27,9 @@ export const MUSIC_URL =
 export const REDIRECT_URI = `http://localhost:3001`;
 export const YANDEX_OAUTH =
   'https://oauth.yandex.ru/authorize?response_type=code';
+
+export enum Themes {
+  light = 0,
+  dark = 1,
+}
+  
