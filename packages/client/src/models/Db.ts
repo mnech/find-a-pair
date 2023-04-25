@@ -52,10 +52,6 @@ export type SetUserThemeRequest = {
   user_id: number;
 };
 
-export type GetUserThemeRequest = {
-  user_id: number;
-};
-
 export type ThemeDeleteRequest = {
   id: number;
 };

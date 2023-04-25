@@ -31,7 +31,7 @@ export const getAllThemes: RequestHandler = async (req, res) => {
 
 export const getUserTheme: RequestHandler = async (req, res) => {
   const usersTheme = await UserTheme.findOne({
-    where: { user_id: req.body.user_id },
+    where: { user_id: req.params.user_id },
   });
 
   const themeId = usersTheme?.theme_id;

@@ -13,7 +13,7 @@ export const themeRoutes = (router: Router) => {
   themeRouter.post('/', createTheme);
   themeRouter.delete('/', deleteTheme);
   themeRouter.get('/', getAllThemes);
-  themeRouter.get('/user_theme', getUserTheme);
+  themeRouter.get('/user_theme/:user_id', getUserTheme);
   themeRouter.put('/user_theme', updateUserTheme);
 
   router.use('/theme', themeRouter);

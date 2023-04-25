@@ -3,7 +3,6 @@ import {
   ThemeCreateRequest,
   UpdateUserThemeRequest,
   ThemeDeleteRequest,
-  GetUserThemeRequest,
 } from '../../models/Db';
 import { Methods } from '../consts';
 
@@ -28,10 +27,9 @@ export default class ThemeDbApi extends BaseAPI {
     });
   }
 
-  getUserTheme(data: GetUserThemeRequest) {
+  getUserTheme(user_id: number) {
     return this.request({
-      url: `${this.endpoint}/user_theme`,
-      data,
+      url: `${this.endpoint}/user_theme/${user_id}`,
     });
   }
 

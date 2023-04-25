@@ -2,24 +2,15 @@ import { useEffect } from 'react';
 import AppRouter from './components/router/AppRouter';
 import { useRedirectWithAuth } from './hooks/useRedirectWithAuth';
 import { useSelector } from 'react-redux';
-import { userDataSelector } from './selectors/profile';
 import { RootState } from './store';
 import ToggleTheme from './components/toggleTheme/toggleTheme';
-
+import { Themes } from './consts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/global.scss';
-import ThemeController from './controllers/ThemeController';
-import { Themes } from './consts';
 
 function App() {
-  const userData = useSelector(userDataSelector);
-  const user_id = userData.id;
   const theme_id = useSelector((state: RootState) => state.theme.idUserTheme);
-  const theme = Themes[theme_id];
-
-  const getUserTheme = async (user_id: number) => {
-    await ThemeController.getUserTheme(user_id);
-  };
+  const theme = Themes[theme_id || 0];
 
   useEffect(() => {
     const fetchServerData = async () => {
@@ -31,10 +22,6 @@ function App() {
 
     fetchServerData();
   }, []);
-
-  useEffect(() => {
-    getUserTheme(user_id);
-  }, [user_id]);
 
   useRedirectWithAuth();
 

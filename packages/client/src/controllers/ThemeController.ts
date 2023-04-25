@@ -21,7 +21,7 @@ class ThemeController {
 
   public async getUserTheme(user_id: number) {
     await this.request(async () => {
-      const response = await this.api.getUserTheme({ user_id });
+      const response = await this.api.getUserTheme(user_id);
       store.dispatch(themeActions.setUserTheme(response.data));
     });
   }
@@ -30,7 +30,7 @@ class ThemeController {
     await this.request(async () => {
       const { user_id, theme_id } = data;
       await this.api.updateUserTheme({ user_id, theme_id });
-      this.getUserTheme(user_id);
+      await this.getUserTheme(user_id);
     });
   }
 
