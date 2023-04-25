@@ -7,6 +7,8 @@ import moonIcon from '../../../public/moon.svg';
 import { userDataSelector } from '../../selectors/profile';
 import ThemeController from '../../controllers/ThemeController';
 
+import './toggleTheme.scss';
+
 const ToggleTheme = () => {
   const userData = useSelector(userDataSelector);
   const user_id = userData.id;
@@ -17,13 +19,21 @@ const ToggleTheme = () => {
 
   return (
     <div className="theme">
-      <Button onClick={() => toggleTheme(Themes.dark)}>
+      <Button
+        className="btn theme"
+        style={{ border: 'none', backgroundColor: 'transparent' }}
+        onClick={() => toggleTheme(Themes.dark)}
+      >
         Dark
-        <img src={moonIcon} alt="moon" />
+        <img src={moonIcon} alt="moon" className="img" />
       </Button>
-      <Button onClick={() => toggleTheme(Themes.light)}>
+      <Button
+        className="btn"
+        style={{ border: 'none', backgroundColor: 'transparent' }}
+        onClick={() => toggleTheme(Themes.light)}
+      >
         Light
-        <img src={sunIcon} alt="sun" />
+        <img src={sunIcon} alt="sun" className="img" />
       </Button>
     </div>
   );

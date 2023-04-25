@@ -5,7 +5,6 @@ import AuthController from '../../controllers/AuthController';
 import { SignupData } from '../../models/User';
 import { regexpTest } from '../../utils/validate';
 import { FormGroup } from '../../components/FormGroup';
-import './SignUp.scss';
 
 const fields: SignupData = {
   first_name: 'First name',
@@ -36,11 +35,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="d-flex w-100 sign-up">
+    <div className="container-sm mt-5">
       <Form
         noValidate
         onSubmit={onSubmit}
-        className="border rounded p-4 m-auto w-50"
+        className="row d-flex justify-content-center col-lg-4 offset-lg-4 shadow-sm p-5 rounded"
       >
         <h3 className="text-center">Sign up</h3>
         {Object.entries(fields).map(([key, name]) => {
@@ -64,7 +63,11 @@ const SignUp = () => {
             />
           );
         })}
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          className="btn btn-primary w-50 mb-2"
+        >
           Submit
         </Button>
       </Form>

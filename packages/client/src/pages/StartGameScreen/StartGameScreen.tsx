@@ -11,7 +11,7 @@ export const StartGameScreen = () => {
 
   return (
     <div className="start">
-      <div className="start__container">
+      <div className="start__container shadow-sm p-5 rounded">
         <p className="start__title">
           Кликай по карточкам, запоминай, что под ними изображено, и находи пары
           одинаковых картинок
@@ -25,7 +25,11 @@ export const StartGameScreen = () => {
         <Link to={routes.profile} className="start__link">
           Профиль
         </Link>
-        <Button variant="outline-primary" onClick={logout}>
+        <Button
+          className="btn"
+          style={{ border: 'none', backgroundColor: 'transparent' }}
+          onClick={logout}
+        >
           Выйти
         </Button>
       </div>

@@ -1,3 +1,6 @@
-.sign-up {
-  height: 100vh;
+.dark .sign-up {
+  input {
+    color: var(--color-white);
+    background-color: var(--color-dark);
+  }
 }

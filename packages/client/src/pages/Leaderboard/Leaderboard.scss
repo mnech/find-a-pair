@@ -4,3 +4,24 @@
   flex-direction: column;
   align-content: center;
 }
+
+.dark {
+  .leaderboard {
+    color: var(--color-white);
+
+    .leaderboard-cell {
+      color: var(--color-white);
+    }
+
+
+  }
+
+  .pagination {
+    li {
+      a {
+        color: var(--color-white);
+        background-color: var(--color-dark);
+      }
+    }
+  }
+}
