@@ -1,4 +1,4 @@
-import { paginationMax, paginationMin } from '../../../models/Leaderboard';
+import { paginationMax } from '../../../models/Leaderboard';
 import { Pagination as PaginationBase } from 'react-bootstrap';
 
 interface IProps {
