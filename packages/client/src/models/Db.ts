@@ -48,6 +48,10 @@ export type UpdateUserThemeRequest = {
   theme_id: number;
 };
 
+export type SetUserThemeRequest = {
+  user_id: number;
+};
+
 export type GetUserThemeRequest = {
   user_id: number;
 };

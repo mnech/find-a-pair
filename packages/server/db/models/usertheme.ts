@@ -5,7 +5,7 @@ import { Theme } from './theme';
 @Table({
   tableName: 'user_theme',
 })
-export class UserTheme extends Model<UserTheme> {
+export class UserTheme extends Model {
   @BelongsTo(() => Theme, {
     foreignKey: 'theme_id',
     as: 'theme',

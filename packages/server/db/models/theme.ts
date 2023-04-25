@@ -9,17 +9,20 @@ import {
 } from 'sequelize-typescript';
 
 @Table({
-  timestamps: false,
   tableName: 'theme',
 })
-export class Theme extends Model<Theme> {
-  @AutoIncrement
+export class Theme extends Model {
   @PrimaryKey
-  @Column(DataType.INTEGER)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
   override id!: number;
+
   @AllowNull(false)
   @Column({
     type: DataType.STRING,
+    allowNull: false,
   })
   name!: string;
 }

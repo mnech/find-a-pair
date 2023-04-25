@@ -29,6 +29,8 @@ export const createClientAndConnect = async (): Promise<void> => {
   try {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
+    await Theme.create({ id: 0, name: 'light' });
+    await Theme.create({ id: 1, name: 'dark' });
 
     console.log('Connected to the Postgres database!');
   } catch (e) {
