@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './forum.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import NavLink from 'react-bootstrap/NavLink';
+import { forumActions } from '../../reducers/forum';
 import { userDataSelector } from '../../selectors/profile';
 import ForumController from '../../controllers/ForumController';
 import { RootState } from '../../store';
 import { ITopic } from '../../models/Forum';
+import './forum.scss';
 
 const getAllTopics = async () => {
   await ForumController.getAllTopics();
@@ -15,6 +18,9 @@ const Forum = () => {
   const topicsData = useSelector((state: RootState) => state.forum.topicsData);
   const [topicName, setTopicName] = useState<string>('');
   const [topicNameError, setTopicNameError] = useState<string>('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAllTopics();
@@ -27,7 +33,6 @@ const Forum = () => {
   };
 
   const handleClickDelete = (id: number) => async () => {
-    console.log({ id });
     await ForumController.deleteTopic(id);
   };
 
@@ -41,6 +46,12 @@ const Forum = () => {
       }).then(() => setTopicName(''));
     }
   };
+
+  const handleClickTopic = (topic: ITopic) => {
+    dispatch(forumActions.setCurrentTopic(topic));
+    navigate(`${topic.id}`);
+  };
+
   return (
     <div>
       <header className="border-bottom border-info p-4">Forum</header>
@@ -70,7 +81,9 @@ const Forum = () => {
             >
               <div className="d-flex flex-column flex-grow-1">
                 <span className="text-info fw-bold">
-                  <a href="#">{topic.title}</a>
+                  <NavLink onClick={() => handleClickTopic(topic)}>
+                    {topic.title}
+                  </NavLink>
                 </span>
                 <span className="text-muted">Автор: {topic.userName}</span>
               </div>

@@ -4,6 +4,7 @@ import { TopicDb } from '../models/Db';
 
 const initialState: IForumState = {
   topicsData: [],
+  currentTopic: null,
   error: null,
   isLoading: false,
 };
@@ -19,6 +20,9 @@ const forumSlice = createSlice({
   reducers: {
     setTopicsData(state, action) {
       state.topicsData = action.payload.map(apiMapper);
+    },
+    setCurrentTopic(state, action) {
+      state.currentTopic = action.payload;
     },
     setError(state, action) {
       state.error = action.payload;

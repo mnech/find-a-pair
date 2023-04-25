@@ -14,7 +14,7 @@ export const createTopic: RequestHandler = async (req, res) => {
 type TopicWithUser = Topic & { userName?: User['name'] };
 export const getAllTopics: RequestHandler = async (req, res) => {
   const data: TopicWithUser[] = await Topic.findAll({
-    attributes: ['id', 'title', 'createdAt'],
+    attributes: ['id', 'title', ['createdAt', 'date']],
     include: [
       {
         model: User,

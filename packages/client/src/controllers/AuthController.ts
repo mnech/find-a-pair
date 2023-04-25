@@ -46,7 +46,7 @@ class AuthController {
             if (!responseExist.data) {
               await this.userDbApi.addUserDb({
                 id: response.data.id,
-                name: response.data.login,
+                name: response.data.first_name || response.data.login,
               });
             }
           });

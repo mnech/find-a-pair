@@ -3,9 +3,6 @@ import {
   Column,
   Table,
   DataType,
-  PrimaryKey,
-  CreatedAt,
-  AutoIncrement,
   AllowNull,
   BelongsTo,
 } from 'sequelize-typescript';
@@ -17,11 +14,6 @@ import { Topic } from './topic';
   updatedAt: false,
 })
 export class Comment extends Model<Comment> {
-  @AutoIncrement
-  @PrimaryKey
-  @Column(DataType.INTEGER)
-  override id!: number;
-
   @BelongsTo(() => User, {
     foreignKey: 'user_id',
     as: 'user',
@@ -39,13 +31,4 @@ export class Comment extends Model<Comment> {
     type: DataType.TEXT,
   })
   text!: string;
-
-  @AllowNull(false)
-  @Column({
-    type: DataType.STRING,
-  })
-  title!: string;
-
-  @CreatedAt
-  create_date!: Date;
 }

@@ -2,7 +2,7 @@ import Transport, { TRequest } from '../utils/Transport';
 
 export default abstract class BaseAPI {
   static API_URL = 'https://ya-praktikum.tech/api/v2';
-  static DB_API_URL = 'db';
+  static DB_API_URL = '/db';
   protected endpoint: string;
   protected Transport: Transport = new Transport();
 

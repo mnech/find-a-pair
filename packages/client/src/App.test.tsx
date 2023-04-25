@@ -1,8 +1,6 @@
 import App from './App';
 import { renderWithProviders } from './utils/configureStore';
 
-const appContent = 'Вот тут будет жить ваше приложение :)';
-
 // @ts-ignore
 global.fetch = jest.fn(() =>
   Promise.resolve({ json: () => Promise.resolve('hey') }),
