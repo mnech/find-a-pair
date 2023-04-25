@@ -2,7 +2,7 @@ import { Sequelize } from 'sequelize-typescript';
 import { User } from './models/user';
 import { Topic } from './models/topic';
 import { Comment } from './models/comment';
-import { Usertheme } from './models/usertheme';
+import { UserTheme } from './models/usertheme';
 import { Theme } from './models/theme';
 
 const {
@@ -21,7 +21,7 @@ export const sequelize = new Sequelize(
     host: POSTGRES_HOST,
     port: Number(POSTGRES_PORT),
     dialect: 'postgres',
-    models: [User, Topic, Comment, Usertheme, Theme],
+    models: [User, Topic, Comment, UserTheme, Theme],
   },
 );
 
