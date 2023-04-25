@@ -77,7 +77,7 @@ const Forum = () => {
           return (
             <div
               key={topic.id}
-              className="p-3 forum-topic d-flex border-bottom bg-light"
+              className="p-3 forum-topic d-flex border-bottom"
             >
               <div className="d-flex flex-column flex-grow-1">
                 <span className="text-info fw-bold">

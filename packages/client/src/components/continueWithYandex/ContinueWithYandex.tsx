@@ -52,7 +52,11 @@ const ContinueWithYandex = () => {
     }
   }, []);
 
-  return <Button onClick={signin}>Продолжить с Yandex</Button>;
+  return (
+    <Button onClick={signin} className="btn btn-primary w-75 mt-3 mb-3">
+      Продолжить с Yandex
+    </Button>
+  );
 };
 
 export default ContinueWithYandex;

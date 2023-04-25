@@ -39,7 +39,7 @@ function App() {
   useRedirectWithAuth();
 
   return (
-    <div className={theme}>
+    <div className={`app ${theme}`}>
       <ToggleTheme />
       <AppRouter />
     </div>
