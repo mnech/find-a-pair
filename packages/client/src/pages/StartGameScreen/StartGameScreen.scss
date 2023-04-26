@@ -29,6 +29,7 @@
     line-height: 22px;
     text-align: center;
     margin-bottom: 15px;
+    text-decoration: none;
 
     &_game {
       color: var(--primary);
@@ -38,5 +39,20 @@
       margin-bottom: 80px;
       text-decoration: none;
     }
+  }
+
+  .btn {
+    color: var(--color-black);
+    background-color: transparent;
+    text-decoration: none;
+  }
+}
+
+.dark .start {
+  .btn {
+    color: var(--color-white);
+    background-color: transparent;
+    border: none;
+    text-decoration: none;
   }
 }

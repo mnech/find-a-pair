@@ -25,11 +25,7 @@ export const StartGameScreen = () => {
         <Link to={routes.profile} className="start__link">
           Профиль
         </Link>
-        <Button
-          className="btn"
-          style={{ border: 'none', backgroundColor: 'transparent' }}
-          onClick={logout}
-        >
+        <Button className="btn btn-light" onClick={logout}>
           Выйти
         </Button>
       </div>

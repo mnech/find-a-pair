@@ -34,31 +34,21 @@ export const getUserTheme: RequestHandler = async (req, res) => {
     where: { user_id: req.params.user_id },
   });
 
-  const themeId = usersTheme?.theme_id;
-  return res.json(themeId);
+  return res.json(usersTheme);
 };
 
 export const updateUserTheme: RequestHandler = async (req, res) => {
-  const user_id = req.body.user_id;
+  const user_id = Number(req.body.user_id);
   const theme_id = Number(req.body.theme_id);
-  let theme;
 
-  const usersTheme = await UserTheme.findOne({
-    where: { user_id },
-  });
-
-  if (usersTheme?.theme_id) {
-    theme = await UserTheme.update(
-      { theme_id },
-      {
-        where: {
-          user_id,
-        },
+  const theme = await UserTheme.update(
+    { theme_id },
+    {
+      where: {
+        user_id,
       },
-    );
-  } else {
-    theme = await UserTheme.create({ ...req.body, user_id });
-  }
+    },
+  );
 
   return res.json(theme);
 };

@@ -20,16 +20,14 @@ const ToggleTheme = () => {
   return (
     <div className="theme">
       <Button
-        className="btn theme"
-        style={{ border: 'none', backgroundColor: 'transparent' }}
+        className="btn btn-outline-light theme-btn"
         onClick={() => toggleTheme(Themes.dark)}
       >
         Dark
         <img src={moonIcon} alt="moon" className="img" />
       </Button>
       <Button
-        className="btn"
-        style={{ border: 'none', backgroundColor: 'transparent' }}
+        className="btn btn-outline-light theme-btn"
         onClick={() => toggleTheme(Themes.light)}
       >
         Light

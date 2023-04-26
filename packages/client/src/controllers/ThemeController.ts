@@ -2,6 +2,7 @@ import { store } from '../store';
 import { themeActions } from '../reducers/theme';
 import ThemeDbApi from '../api/db/ThemeDbAPI';
 import { UpdateUserThemeRequest } from '../models/Db';
+import { Themes } from '../consts';
 
 class ThemeController {
   private readonly api = new ThemeDbApi();
@@ -22,7 +23,11 @@ class ThemeController {
   public async getUserTheme(user_id: number) {
     await this.request(async () => {
       const response = await this.api.getUserTheme(user_id);
-      store.dispatch(themeActions.setUserTheme(response.data));
+      if (response.data) {
+        store.dispatch(themeActions.setUserTheme(response.data.theme_id));
+      } else {
+        store.dispatch(themeActions.setUserTheme(Themes.light));
+      }
     });
   }
 
