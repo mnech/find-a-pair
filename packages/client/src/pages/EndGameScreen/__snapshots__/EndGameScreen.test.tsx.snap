@@ -3,7 +3,7 @@
 exports[`End Game renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="container-md mt-5 w-50 h-auto d-flex flex-column align-items-center"
+    class="container-md mt-5 w-50 h-auto d-flex flex-column align-items-center end"
   >
     <p
       class="endGameTitle"
@@ -16,25 +16,25 @@ exports[`End Game renders correctly 1`] = `
       Счёт: 0
     </p>
     <a
-      class="btn btn-primary"
+      class="start_link"
       href="/game"
     >
       Попробовать еще раз?
     </a>
     <a
-      class="link-primary"
+      class="link"
       href="/leaderboard"
     >
       Лидерборд
     </a>
     <a
-      class="link-primary"
+      class="link"
       href="/profile"
     >
       Профиль
     </a>
     <button
-      class="btn-link bg-white btn btn-primary"
+      class="btn btn-light btn btn-primary"
       type="button"
     >
       Выйти

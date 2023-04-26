@@ -6,7 +6,7 @@ exports[`Start game screen should render 1`] = `
     class="start"
   >
     <div
-      class="start__container"
+      class="start__container shadow-sm p-5 rounded"
     >
       <p
         class="start__title"
@@ -32,7 +32,7 @@ exports[`Start game screen should render 1`] = `
         Профиль
       </a>
       <button
-        class="btn btn-outline-primary"
+        class="btn btn-light btn btn-primary"
         type="button"
       >
         Выйти
