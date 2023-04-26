@@ -7,7 +7,6 @@ const FullScreen = () => {
   const [fullScreen, toggle] = useToggle(false);
 
   useEffect(() => {
-    if (!document.fullscreenElement) return;
     if (fullScreen) {
       document.documentElement.requestFullscreen();
     } else if (document.fullscreenElement !== null) {
