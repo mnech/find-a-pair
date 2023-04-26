@@ -25,8 +25,16 @@ class ThemeController {
       const response = await this.api.getUserTheme(user_id);
       if (response.data) {
         store.dispatch(themeActions.setUserTheme(response.data.theme_id));
+        localStorage.setItem('theme', response.data.theme_id);
       } else {
-        store.dispatch(themeActions.setUserTheme(Themes.light));
+        const theme = localStorage.getItem('theme');
+        if (theme) {
+          store.dispatch(
+            themeActions.setUserTheme(Themes[theme as unknown as Themes]),
+          );
+        } else {
+          store.dispatch(themeActions.setUserTheme(Themes.light));
+        }
       }
     });
   }

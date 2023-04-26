@@ -6,6 +6,8 @@ import { authActions } from '../reducers/auth';
 import { resetData, updateUser } from '../reducers/profile';
 import { UserStatusTypes } from '../models/Auth';
 import ThemeController from './ThemeController';
+import { themeActions } from '../reducers/theme';
+import { Themes } from '../consts';
 
 class AuthController {
   private readonly api = new AuthAPI();
@@ -53,10 +55,15 @@ class AuthController {
           });
         await ThemeController.getUserTheme(response.data.id);
       },
-      () =>
+      () => {
         store.dispatch(
           authActions.setUserLoadingStatus(UserStatusTypes.FAILURE),
-        ),
+        );
+        const theme = localStorage.getItem('theme');
+        if (theme) {
+          store.dispatch(themeActions.setUserTheme(JSON.parse(theme)));
+        }
+      },
     );
   }
 
