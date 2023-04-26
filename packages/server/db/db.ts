@@ -18,8 +18,8 @@ export const sequelize = new Sequelize(
   POSTGRES_USER || 'postgres',
   POSTGRES_PASSWORD || 'postgres',
   {
-    //host: POSTGRES_HOST,
-    //port: Number(POSTGRES_PORT),
+    host: POSTGRES_HOST,
+    port: Number(POSTGRES_PORT),
     dialect: 'postgres',
     models: [User, Topic, Comment, UserTheme, Theme],
   },
