@@ -38,3 +38,20 @@ export interface CommentDb {
   text: string;
   date: number;
 }
+
+export type ThemeCreateRequest = {
+  name: string;
+};
+
+export type UpdateUserThemeRequest = {
+  user_id: number;
+  theme_id: number;
+};
+
+export type SetUserThemeRequest = {
+  user_id: number;
+};
+
+export type ThemeDeleteRequest = {
+  id: number;
+};

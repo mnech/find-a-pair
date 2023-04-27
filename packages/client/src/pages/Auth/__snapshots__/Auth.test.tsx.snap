@@ -50,7 +50,7 @@ exports[`Auth renders correctly 1`] = `
         Войти
       </button>
       <button
-        class="btn btn-primary"
+        class="btn btn-primary w-75 mt-3 mb-3 btn btn-primary"
         type="button"
       >
         Продолжить с Yandex

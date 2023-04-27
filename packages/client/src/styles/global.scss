@@ -1,0 +1,25 @@
+:root {
+  --primary: #007bff;
+  --primary-light: #F9B44E;
+  --primary-dark: #2d343b;
+  --secondary: #ED611D;
+  --color-dark: #1e394a;
+  --color-white: #EDE8E8;
+  --color-grey: #e0e0e0;
+  --color-grey-dark: #b6b5b5;
+  --color-active: #f7d2ce;
+}
+
+.app {
+  height: 100vh;
+}
+
+.dark {
+  color: var(--color-white);
+  background-color: var(--primary-dark);
+
+  input {
+    color: var(--color-white);
+    background-color: var(--color-dark);
+  }
+}

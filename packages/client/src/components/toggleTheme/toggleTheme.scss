@@ -1,0 +1,27 @@
+.theme {
+  .btn {
+    color: var(--color-black);
+    background-color: transparent;
+    border: none;
+
+    .img {
+      margin-left: 5px;
+      width: 20px;
+    }
+  }
+
+  .btn:hover {
+    color: var(--secondary);
+    background-color: transparent;
+  }
+}
+
+.dark .theme {
+  .btn {
+    color: var(--color-white);
+  }
+
+  .btn:hover {
+    color: var(--secondary);
+  }
+}

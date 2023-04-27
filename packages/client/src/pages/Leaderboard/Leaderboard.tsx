@@ -24,9 +24,9 @@ export const Leaderboard = () => {
   const renderRow = ({ data }: IUserScore, idx: number): JSX.Element => {
     return (
       <tr key={idx + 1}>
-        <td>{idx + 1}</td>
-        <td>{data.first_name}</td>
-        <td>{data[ratingFieldName]}</td>
+        <td className="leaderboard-cell">{idx + 1}</td>
+        <td className="leaderboard-cell">{data.first_name}</td>
+        <td className="leaderboard-cell">{data[ratingFieldName]}</td>
       </tr>
     );
   };
@@ -53,7 +53,7 @@ export const Leaderboard = () => {
         hover
         variant="striped"
         size="md"
-        className="pb-3"
+        className="pb-3 leaderboard"
       >
         <thead>
           <tr>

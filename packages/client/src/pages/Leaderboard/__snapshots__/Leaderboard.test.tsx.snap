@@ -11,7 +11,7 @@ exports[`Leaderboard renders correctly 1`] = `
       LeaderBoard
     </div>
     <table
-      class="pb-3 table table-striped table-md table-striped table-bordered table-hover"
+      class="pb-3 leaderboard table table-striped table-md table-striped table-bordered table-hover"
     >
       <thead>
         <tr>

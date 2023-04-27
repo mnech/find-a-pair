@@ -15,3 +15,12 @@ button {
   font-size: 13px;
   text-shadow: 0 1px 1px hsl(195, 73%, 40%);
 }
+
+.forum-topic {
+  background-color: var(--color-grey);
+  border-radius: 5px;
+}
+
+.dark .forum-topic {
+  background-color: var(--color-dark);
+}
